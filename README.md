@@ -1,16 +1,16 @@
 ## **`Information for the Final Project Repository`**
 
-### **_`Title: ???`_**
+### **_`Title: JobSite`_**
 
 ---
 
-### **`Kelompok 0?:`**
+### **`Kelompok 9:`**
 
-- **Name???**
-- **Name???**
-- **Name???**
-- **Name???**
-- **Name???**
+- **Moch. Bagus Al Waly**
+- **Romi Putra Pamungkas**
+- **Nanang Wahyudi**
+- **Khaidar Ahsanur Rijal**
+- **Putri Maharani**
 
 ---
 
@@ -26,11 +26,11 @@
 
 _(silahkan edit sesuai kebutuhan, ex:)_
 
-- [Slide of Presentation](#)
-- [BPMN](#)
-- [Use Case](#)
-- [Entity Relational Diagram](#)
-- [Data Dummy](#)
+- [Slide of Presentation](https://www.canva.com/design/DAGGnWQokuM/IdGgG3oWWuHTNc-qY_glgQ/edit)
+- [BPMN](https://app.diagrams.net/#G1_8-nF7dVkk94xqKNV7zeqTE8zIRrY5yc#%7B%22pageId%22%3A%228x7bINVWqQYFwj2WuAJc%22%7D)
+- [Use Case](https://app.diagrams.net/#G1_8-nF7dVkk94xqKNV7zeqTE8zIRrY5yc#%7B%22pageId%22%3A%22yJuY1XwbEomQ7zo6m054%22%7D)
+- [Entity Relational Diagram](https://app.diagrams.net/#G1_8-nF7dVkk94xqKNV7zeqTE8zIRrY5yc#%7B%22pageId%22%3A%228GiINShNwGy8w4tJOCTD%22%7D)
+- [Data Dummy](https://docs.google.com/spreadsheets/d/17152ootdDfAxzGOw6fenF90qQJ15FRn-8ZgaGDYlj9w/edit?usp=sharing)
 - [Progress of Project](#)
 
 ---
