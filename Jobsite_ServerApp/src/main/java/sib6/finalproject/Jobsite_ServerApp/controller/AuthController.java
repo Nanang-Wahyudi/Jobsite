@@ -23,7 +23,7 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @PostMapping("/user")
+    @PostMapping("/register/user")
     public ResponseEntity<?> registerUser(HttpServletRequest servletRequest, @Valid @RequestBody RegisterRequest request) {
         Response response = Response.builder()
                     .url(servletRequest.getRequestURL().toString())
@@ -34,7 +34,7 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/admin")
+    @PostMapping("/register/admin")
     public ResponseEntity<?> registerAdmin(HttpServletRequest servletRequest, @Valid @RequestBody RegisterRequest request) {
         Response response = Response.builder()
                 .url(servletRequest.getRequestURL().toString())
@@ -45,7 +45,7 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/company")
+    @PostMapping("/register/company")
     public ResponseEntity<?> registerCompany(HttpServletRequest servletRequest, @Valid @RequestBody RegisterRequest request) {
         Response response = Response.builder()
                 .url(servletRequest.getRequestURL().toString())
