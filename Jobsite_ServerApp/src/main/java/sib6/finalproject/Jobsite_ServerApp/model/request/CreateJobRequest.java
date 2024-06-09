@@ -28,7 +28,7 @@ public class CreateJobRequest {
     @NotBlank(message = "Qualification is Mandatory")
     private String qualification;
 
-    @NotBlank(message = "Company Name is Mandatory")
-    private String companyName;
+    @NotBlank(message = "Username is Mandatory")
+    private String username;
 
 }
