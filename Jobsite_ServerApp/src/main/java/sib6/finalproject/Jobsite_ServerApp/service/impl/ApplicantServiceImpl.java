@@ -13,6 +13,7 @@ import sib6.finalproject.Jobsite_ServerApp.entity.Job;
 import sib6.finalproject.Jobsite_ServerApp.entity.User;
 import sib6.finalproject.Jobsite_ServerApp.entity.UserDetail;
 import sib6.finalproject.Jobsite_ServerApp.model.enums.StatusApplicantEnum;
+import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateStatusApplicantRequest;
 import sib6.finalproject.Jobsite_ServerApp.repository.ApplicantRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.JobRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.UserDetailRepository;
@@ -80,5 +81,24 @@ public class ApplicantServiceImpl implements ApplicantService {
         return "Applicant Successfully Applied";
     }
 
+    @Override
+    public String updateStatusApplicant(String applicantId, UpdateStatusApplicantRequest statusApplicantRequest) {
+        Applicant applicant = applicantRepository.findById(applicantId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Applicant Not Found with ID: " + applicantId));
+
+        if (statusApplicantRequest.getStatus() != null && !statusApplicantRequest.getStatus().isEmpty()) {
+            try {
+                StatusApplicantEnum status = StatusApplicantEnum.valueOf(statusApplicantRequest.getStatus().toUpperCase());
+                applicant.setStatus(status);
+                applicantRepository.save(applicant);
+            } catch (IllegalArgumentException e) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Status Value: " + statusApplicantRequest.getStatus());
+            }
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Status is required and cannot be empty");
+        }
+
+        return "Applicant Status Successfully Updated with ID: " + applicantId;
+    }
 
 }
