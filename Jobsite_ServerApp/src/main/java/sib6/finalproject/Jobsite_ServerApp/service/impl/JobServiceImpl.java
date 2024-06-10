@@ -41,7 +41,12 @@ public class JobServiceImpl implements JobService {
         Company company = companyRepository.findById(user.getCompany().getId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found with Username: " + jobRequest.getUsername()));
 
-        job.setType(JobTypeEnum.valueOf(jobRequest.getType().toUpperCase()));
+        try {
+            job.setType(JobTypeEnum.valueOf(jobRequest.getType().toUpperCase()));
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Type Value: " + jobRequest.getType());
+        }
+
         job.setCompany(company);
         job.setIsactive(Boolean.TRUE);
         job.setPostDate(new Date());
