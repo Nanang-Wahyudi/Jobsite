@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateStatusApplicantRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.response.Response;
 import sib6.finalproject.Jobsite_ServerApp.service.ApplicantService;
 
@@ -34,6 +35,18 @@ public class ApplicantController {
                 .url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())
                 .message(applicantService.createApplicant(file, jobId, username))
+                .build();
+        response.setTimestamp(new Date());
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/update-status/{applicantId}")
+    public ResponseEntity<?> updateStatusApplicant(HttpServletRequest servletRequest, @PathVariable("applicantId") String applicantId, @RequestBody UpdateStatusApplicantRequest statusApplicantRequest) {
+        Response response = Response.builder()
+                .url(servletRequest.getRequestURL().toString())
+                .status(HttpStatus.OK.toString())
+                .message(applicantService.updateStatusApplicant(applicantId, statusApplicantRequest))
                 .build();
         response.setTimestamp(new Date());
 
