@@ -42,7 +42,7 @@ public class UserDetailServiceImpl implements UserDetailService {
 
     @Override
     @Transactional
-    public String updateUserDetail(String username, UpdateUserDetailRequest userDetailRequest) throws IOException {
+    public String updateUserDetail(String username, UpdateUserDetailRequest userDetailRequest) {
         String imageUrl;
 
         User user = userRepository.findByUsername(username)
@@ -54,10 +54,17 @@ public class UserDetailServiceImpl implements UserDetailService {
             userDetail.setUser(user);
         }
 
-        Optional<MultipartFile> RequestPicture = Optional.ofNullable(userDetailRequest.getPicture());
-        if(RequestPicture .isPresent()) {
-            if(userDetail.getPicture() != null) cloudinaryService.deleteFile(userDetail.getPicture());
-            imageUrl = cloudinaryService.uploadFile(userDetailRequest.getPicture());
+        Optional<MultipartFile> requestPicture = Optional.ofNullable(userDetailRequest.getPicture());
+        if(requestPicture.isPresent()) {
+            if (!isImageFile(requestPicture.get())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid file type for picture. Only image files are allowed.");
+            }
+            try {
+                if(userDetail.getPicture() != null) cloudinaryService.deleteFile(userDetail.getPicture());
+                imageUrl = cloudinaryService.uploadFile(userDetailRequest.getPicture());
+            } catch (IOException e) {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error uploading picture: " + e.getMessage());
+            }
         } else{
             imageUrl=null;
         }
@@ -114,6 +121,11 @@ public class UserDetailServiceImpl implements UserDetailService {
         userDetailRepository.save(userDetail);
 
         return "Update User Detail Successfully with Name: " + userDetail.getName();
+    }
+
+    private boolean isImageFile(MultipartFile file) {
+        String contentType = file.getContentType();
+        return contentType != null && (contentType.startsWith("image/jpeg") || contentType.startsWith("image/png") || contentType.startsWith("image/gif"));
     }
 
 }
