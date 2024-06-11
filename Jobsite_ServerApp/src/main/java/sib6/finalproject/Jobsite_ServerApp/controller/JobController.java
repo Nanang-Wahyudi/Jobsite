@@ -3,11 +3,9 @@ package sib6.finalproject.Jobsite_ServerApp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sib6.finalproject.Jobsite_ServerApp.model.request.CreateJobRequest;
+import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateJobRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.response.Response;
 import sib6.finalproject.Jobsite_ServerApp.service.JobService;
 
@@ -31,6 +29,27 @@ public class JobController {
                 .build();
         response.setTimestamp(new Date());
 
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateJob(HttpServletRequest servletRequest,
+                                       @PathVariable String id, @Valid @RequestBody UpdateJobRequest updateJobRequest) {
+        Response response = Response.builder().url(servletRequest.getRequestURL().toString())
+                .status(HttpStatus.OK.toString())
+                .message(jobService.updateJob(updateJobRequest,id))
+                .build();
+        response.setTimestamp(new Date());
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteJob(HttpServletRequest servletRequest,@PathVariable String id) {
+        Response response = Response.builder().url(servletRequest.getRequestURL().toString())
+                .status(HttpStatus.OK.toString())
+                .message(jobService.delete(id))
+                .build();
+        response.setTimestamp(new Date());
         return ResponseEntity.ok(response);
     }
 
