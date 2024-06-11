@@ -10,7 +10,7 @@ public interface JobService {
 
     String createJob(CreateJobRequest jobRequest);
 
-    String updateJob(UpdateJobRequest updateJobRequest,String id);
+    String updateJob(UpdateJobRequest updateJobRequest, String username, String id);
 
-    String delete(String id);
+    String deleteJob(String id);
 }

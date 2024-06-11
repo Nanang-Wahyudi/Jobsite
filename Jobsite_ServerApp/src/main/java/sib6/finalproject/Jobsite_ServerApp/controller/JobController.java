@@ -32,22 +32,24 @@ public class JobController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{username}/{id}")
     public ResponseEntity<?> updateJob(HttpServletRequest servletRequest,
-                                       @PathVariable String id, @Valid @RequestBody UpdateJobRequest updateJobRequest) {
+                                       @PathVariable("username") String username,
+                                       @PathVariable("id") String id,
+                                       @Valid @RequestBody UpdateJobRequest updateJobRequest) {
         Response response = Response.builder().url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())
-                .message(jobService.updateJob(updateJobRequest,id))
+                .message(jobService.updateJob(updateJobRequest, username, id))
                 .build();
         response.setTimestamp(new Date());
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteJob(HttpServletRequest servletRequest,@PathVariable String id) {
         Response response = Response.builder().url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())
-                .message(jobService.delete(id))
+                .message(jobService.deleteJob(id))
                 .build();
         response.setTimestamp(new Date());
         return ResponseEntity.ok(response);

@@ -36,12 +36,11 @@ public class JobServiceImpl implements JobService {
     @Override
     @SuppressWarnings("null")
     public Job findById(String id) {
-        Job result = jobRepository.findById(id).orElseThrow(() ->
+        return jobRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
-                        "Job is not found!!!"
+                        "Job is Not Found with ID: " + id
                 ));
-        return result;
     }
 
     @Override
@@ -69,29 +68,44 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public String updateJob(UpdateJobRequest updateJobRequest,String id) {
-        this.findById(id);
-        Job job = modelMapper.map(updateJobRequest, Job.class);
+    public String updateJob(UpdateJobRequest updateJobRequest, String username, String id) {
+        Job job = this.findById(id);
 
-        User user = userRepository.findByUsername(updateJobRequest.getUsername())
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Not Found Username: " + updateJobRequest.getUsername()));
+                        "Not Found Username: " + username));
         Company company = companyRepository.findById(user.getCompany().getId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found with " +
-                        "Username: " + updateJobRequest.getUsername()));
-        job.setType(JobTypeEnum.valueOf(updateJobRequest.getType().toUpperCase()));
+                        "Username: " + username));
+
+        try {
+            job.setType(JobTypeEnum.valueOf(updateJobRequest.getType() != null && !updateJobRequest.getType().isEmpty()
+                    ? updateJobRequest.getType().toUpperCase() : job.getType().name()));
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Type Value: " + updateJobRequest.getType());
+        }
+        job.setTitle(updateJobRequest.getTitle() != null && !updateJobRequest.getTitle().isEmpty()
+                ? updateJobRequest.getTitle() : job.getTitle());
+        job.setSalary(updateJobRequest.getSalary() != null && !updateJobRequest.getSalary().isEmpty()
+                ? updateJobRequest.getSalary() : job.getSalary());
+        job.setDescription(updateJobRequest.getDescription() != null && !updateJobRequest.getDescription().isEmpty()
+                ? updateJobRequest.getDescription() : job.getDescription());
+        job.setQualification(updateJobRequest.getQualification() != null && !updateJobRequest.getQualification().isEmpty()
+                ? updateJobRequest.getQualification() : job.getQualification());
         job.setCompany(company);
         job.setIsactive(Boolean.TRUE);
         job.setPostDate(new Date());
+
         jobRepository.save(job);
-        return "Update Successfully with Job Title: "+updateJobRequest.getTitle();
+
+        return "Update Successfully with Job Title: " + job.getTitle();
     }
 
     @Override
-    public String delete(String id) {
+    public String deleteJob(String id) {
         Job job = this.findById(id);
         jobRepository.delete(job);
-        return "Delete Successfully with Job Title: "+job.getTitle();
+        return "Delete Successfully with Job Title: " + job.getTitle();
     }
 
 }
