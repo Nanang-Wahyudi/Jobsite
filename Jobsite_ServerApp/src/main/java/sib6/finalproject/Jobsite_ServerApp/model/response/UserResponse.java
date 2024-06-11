@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sib6.finalproject.Jobsite_ServerApp.entity.Skill;
 
 import java.util.List;
 
@@ -22,6 +21,6 @@ public class UserResponse {
 
     private String address;
 
-    private List<Skill> skills;
+    private List<SkillResponse> skillResponses;
 
 }

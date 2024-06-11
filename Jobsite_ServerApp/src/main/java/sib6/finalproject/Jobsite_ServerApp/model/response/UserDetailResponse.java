@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sib6.finalproject.Jobsite_ServerApp.entity.Education;
-import sib6.finalproject.Jobsite_ServerApp.entity.Skill;
 
 import java.util.List;
 
@@ -27,8 +25,8 @@ public class UserDetailResponse {
 
     private String address;
 
-    private List<Skill> skills;
+    private List<SkillResponse> skillResponses;
 
-    private List<Education> educations;
+    private List<EducationResponse> educationResponses;
 
 }
