@@ -8,7 +8,6 @@ public class JobsiteServerAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JobsiteServerAppApplication.class, args);
-		System.out.println("hello world");
 	}
 
 }

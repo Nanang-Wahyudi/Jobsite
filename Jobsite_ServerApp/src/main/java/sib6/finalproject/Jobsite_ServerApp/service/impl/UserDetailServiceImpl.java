@@ -1,5 +1,6 @@
 package sib6.finalproject.Jobsite_ServerApp.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,12 @@ import sib6.finalproject.Jobsite_ServerApp.entity.Education;
 import sib6.finalproject.Jobsite_ServerApp.entity.Skill;
 import sib6.finalproject.Jobsite_ServerApp.entity.User;
 import sib6.finalproject.Jobsite_ServerApp.entity.UserDetail;
+import sib6.finalproject.Jobsite_ServerApp.model.enums.RoleEnum;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateUserDetailRequest;
+import sib6.finalproject.Jobsite_ServerApp.model.response.EducationResponse;
+import sib6.finalproject.Jobsite_ServerApp.model.response.SkillResponse;
+import sib6.finalproject.Jobsite_ServerApp.model.response.UserDetailResponse;
+import sib6.finalproject.Jobsite_ServerApp.model.response.UserResponse;
 import sib6.finalproject.Jobsite_ServerApp.repository.EducationRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.SkillRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.UserDetailRepository;
@@ -20,7 +26,9 @@ import sib6.finalproject.Jobsite_ServerApp.service.media.CloudinaryService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailService {
@@ -39,6 +47,56 @@ public class UserDetailServiceImpl implements UserDetailService {
 
     @Autowired
     private CloudinaryService cloudinaryService;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Override
+    public List<UserResponse> getAllUser() {
+        List<UserDetail> userDetails = userDetailRepository.findAllByRoleName(RoleEnum.USER);
+        return userDetails.stream()
+                .map(userDetail -> {
+                    List<SkillResponse> skillResponses = userDetail.getSkills().stream()
+                            .map(this::toSkillResponse)
+                            .collect(Collectors.toList());
+
+                    return this.toUserResponse(userDetail, skillResponses);
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public UserDetailResponse getUserDetailById(String id) {
+        UserDetail userDetail = userDetailRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Detail Not Found with ID: " + id));
+
+        List<EducationResponse> educationResponses = userDetail.getEducations().stream()
+                .map(this::toEducationResponse)
+                .collect(Collectors.toList());
+
+        List<SkillResponse> skillResponses = userDetail.getSkills().stream()
+                .map(this::toSkillResponse)
+                .collect(Collectors.toList());
+
+        return this.toUserDetailResponse(userDetail, educationResponses, skillResponses);
+    }
+
+    @Override
+    public UserDetailResponse getUserDetailProfile(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found with Username: " + username));
+        UserDetail userDetail = user.getUserDetail();
+
+        List<EducationResponse> educationResponses = userDetail.getEducations().stream()
+                .map(this::toEducationResponse)
+                .collect(Collectors.toList());
+
+        List<SkillResponse> skillResponses = userDetail.getSkills().stream()
+                .map(this::toSkillResponse)
+                .collect(Collectors.toList());
+
+        return this.toUserDetailResponse(userDetail, educationResponses, skillResponses);
+    }
 
     @Override
     @Transactional
@@ -126,6 +184,35 @@ public class UserDetailServiceImpl implements UserDetailService {
     private boolean isImageFile(MultipartFile file) {
         String contentType = file.getContentType();
         return contentType != null && (contentType.startsWith("image/jpeg") || contentType.startsWith("image/png") || contentType.startsWith("image/gif"));
+    }
+
+    public UserDetailResponse toUserDetailResponse(UserDetail userDetail, List<EducationResponse> educationResponses, List<SkillResponse> skillResponses) {
+        UserDetailResponse userDetailResponse = new UserDetailResponse();
+        userDetailResponse.setUrlPicture(userDetail.getPicture());
+        userDetailResponse.setEducationResponses(educationResponses);
+        userDetailResponse.setSkillResponses(skillResponses);
+        modelMapper.map(userDetail, userDetailResponse);
+        return userDetailResponse;
+    }
+
+    public UserResponse toUserResponse(UserDetail userDetail, List<SkillResponse> skillResponses) {
+        UserResponse userResponse = new UserResponse();
+        userResponse.setUrlPicture(userDetail.getPicture());
+        userResponse.setSkillResponses(skillResponses);
+        modelMapper.map(userDetail, userResponse);
+        return userResponse;
+    }
+
+    public EducationResponse toEducationResponse(Education education) {
+        EducationResponse educationResponse = new EducationResponse();
+        modelMapper.map(education, educationResponse);
+        return educationResponse;
+    }
+
+    public SkillResponse toSkillResponse(Skill skill) {
+        SkillResponse skillResponse = new SkillResponse();
+        modelMapper.map(skill, skillResponse);
+        return skillResponse;
     }
 
 }

@@ -17,7 +17,6 @@ import sib6.finalproject.Jobsite_ServerApp.repository.UserRepository;
 import sib6.finalproject.Jobsite_ServerApp.service.JobService;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Service
 public class JobServiceImpl implements JobService {
