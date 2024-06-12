@@ -102,6 +102,14 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    public String updateStatusJob(String jobId) {
+        Job job = findById(jobId);
+        job.setIsactive(!job.getIsactive());
+        jobRepository.save(job);
+        return "Job Status Successfully Updated to: " + job.getIsactive() + ", with Job ID: " + jobId;
+    }
+
+    @Override
     public String deleteJob(String id) {
         Job job = this.findById(id);
         jobRepository.delete(job);

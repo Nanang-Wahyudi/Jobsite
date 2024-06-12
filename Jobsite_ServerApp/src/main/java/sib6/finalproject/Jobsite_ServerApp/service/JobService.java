@@ -12,5 +12,7 @@ public interface JobService {
 
     String updateJob(UpdateJobRequest updateJobRequest, String username, String id);
 
+    String updateStatusJob(String jobId);
+
     String deleteJob(String id);
 }
