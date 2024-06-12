@@ -45,6 +45,18 @@ public class JobController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("/update/status-job/{id}")
+    public ResponseEntity<?> updateStatusJob(HttpServletRequest servletRequest, @PathVariable String id) {
+        Response response = Response.builder()
+                .url(servletRequest.getRequestURL().toString())
+                .status(HttpStatus.OK.toString())
+                .message(jobService.updateStatusJob(id))
+                .build();
+        response.setTimestamp(new Date());
+
+        return ResponseEntity.ok(response);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteJob(HttpServletRequest servletRequest,@PathVariable String id) {
         Response response = Response.builder().url(servletRequest.getRequestURL().toString())
