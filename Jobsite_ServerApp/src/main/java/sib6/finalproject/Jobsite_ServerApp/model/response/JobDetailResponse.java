@@ -25,7 +25,7 @@ public class JobDetailResponse {
 
     private String postDate;
 
-    private Boolean is_active;
+    private Boolean Isactive;
 
     private CompanyResponse companyResponse;
 

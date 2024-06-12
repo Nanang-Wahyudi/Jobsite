@@ -1,5 +1,6 @@
 package sib6.finalproject.Jobsite_ServerApp.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import sib6.finalproject.Jobsite_ServerApp.entity.User;
 import sib6.finalproject.Jobsite_ServerApp.entity.UserDetail;
 import sib6.finalproject.Jobsite_ServerApp.model.enums.StatusApplicantEnum;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateStatusApplicantRequest;
+import sib6.finalproject.Jobsite_ServerApp.model.response.ApplicantResponse;
 import sib6.finalproject.Jobsite_ServerApp.repository.ApplicantRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.JobRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.UserDetailRepository;
@@ -38,6 +40,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 
     @Autowired
     private JobRepository jobRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
 
     @Override
     @Transactional
@@ -99,6 +105,16 @@ public class ApplicantServiceImpl implements ApplicantService {
         }
 
         return "Applicant Status Successfully Updated with ID: " + applicantId;
+    }
+
+
+    public ApplicantResponse toApplicantResponse(Applicant applicant) {
+        ApplicantResponse applicantResponse = new ApplicantResponse();
+        applicantResponse.setCompanyName(applicant.getJob().getCompany().getName());
+        applicantResponse.setNameUser(applicant.getUserDetail().getName());
+        applicantResponse.setTitleJob(applicant.getJob().getTitle());
+        modelMapper.map(applicant, applicantResponse);
+        return applicantResponse;
     }
 
 }
