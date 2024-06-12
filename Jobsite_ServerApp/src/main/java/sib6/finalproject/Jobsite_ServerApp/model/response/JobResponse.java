@@ -13,6 +13,10 @@ public class JobResponse {
 
     private String id;
 
+    private String UrlPicture;
+
+    private String companyName;
+
     private String title;
 
     private String type;
@@ -21,6 +25,6 @@ public class JobResponse {
 
     private String postDate;
 
-    private Boolean is_active;
+    private Boolean isactive;
 
 }

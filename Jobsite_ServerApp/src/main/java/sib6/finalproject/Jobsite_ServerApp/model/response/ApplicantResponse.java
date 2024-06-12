@@ -15,6 +15,8 @@ public class ApplicantResponse {
 
     private String nameUser;
 
+    private String companyName;
+
     private String titleJob;
 
     private String status;
