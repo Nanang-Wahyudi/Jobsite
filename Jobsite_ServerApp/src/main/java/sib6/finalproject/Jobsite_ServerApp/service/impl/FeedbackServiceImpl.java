@@ -1,5 +1,6 @@
 package sib6.finalproject.Jobsite_ServerApp.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -8,9 +9,13 @@ import sib6.finalproject.Jobsite_ServerApp.entity.Applicant;
 import sib6.finalproject.Jobsite_ServerApp.entity.Feedback;
 import sib6.finalproject.Jobsite_ServerApp.model.enums.StatusApplicantEnum;
 import sib6.finalproject.Jobsite_ServerApp.model.request.CreateFeedbackRequest;
+import sib6.finalproject.Jobsite_ServerApp.model.response.ApplicantResponse;
+import sib6.finalproject.Jobsite_ServerApp.model.response.FeedbackResponse;
 import sib6.finalproject.Jobsite_ServerApp.repository.ApplicantRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.FeedbackRepository;
 import sib6.finalproject.Jobsite_ServerApp.service.FeedbackService;
+
+import java.util.List;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
@@ -20,6 +25,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Autowired
     private ApplicantRepository applicantRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
 
     @Override
     public String createFeedback(String applicantId, String username, CreateFeedbackRequest feedbackRequest) {
@@ -41,5 +50,12 @@ public class FeedbackServiceImpl implements FeedbackService {
         return "Feedback Successfully Given to Job Name: " + applicant.getJob().getTitle() + " with Username: " + username;
     }
 
+
+    public FeedbackResponse toFeedbackResponse(Feedback feedback, List<ApplicantResponse> applicantResponses) {
+        FeedbackResponse feedbackResponse = new FeedbackResponse();
+        feedbackResponse.setApplicantResponses(applicantResponses);
+        modelMapper.map(feedback, feedbackResponse);
+        return feedbackResponse;
+    }
 
 }

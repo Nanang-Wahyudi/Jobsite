@@ -36,6 +36,16 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private ApplicantServiceImpl applicantServiceImpl;
+
+    @Autowired
+    private FeedbackServiceImpl feedbackServiceImpl;
+
+    @Autowired
+    private JobServiceImpl jobServiceImpl;
+
+
     @Override
     public List<CompanyResponse> getAllCompany() {
         List<Company> companies = companyRepository.findAllByRoleName(RoleEnum.COMPANY);
@@ -59,8 +69,8 @@ public class CompanyServiceImpl implements CompanyService {
                 List<Feedback> feedbacks = applicant.getFeedbacks();
 
                 for (Feedback feedback : feedbacks) {
-                    ApplicantResponse applicantResponse = this.toApplicantResponse(applicant);
-                    FeedbackResponse feedbackResponse = this.toFeedbackResponse(feedback, Collections.singletonList(applicantResponse));
+                    ApplicantResponse applicantResponse = applicantServiceImpl.toApplicantResponse(applicant);
+                    FeedbackResponse feedbackResponse = feedbackServiceImpl.toFeedbackResponse(feedback, Collections.singletonList(applicantResponse));
                     feedbackResponses.add(feedbackResponse);
                 }
             }
@@ -68,7 +78,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         List<JobResponse> jobResponses = company.getJobs().stream()
                 .filter(Job::getIsactive)
-                .map(this::toJobResponse)
+                .map(job -> jobServiceImpl.toJobResponse(job))
                 .collect(Collectors.toList());
 
         return this.toCompanyDetailResponse(company, feedbackResponses, jobResponses);
@@ -91,15 +101,15 @@ public class CompanyServiceImpl implements CompanyService {
                 List<Feedback> feedbacks = applicant.getFeedbacks();
 
                 for (Feedback feedback : feedbacks) {
-                    ApplicantResponse applicantResponse = this.toApplicantResponse(applicant);
-                    FeedbackResponse feedbackResponse = this.toFeedbackResponse(feedback, Collections.singletonList(applicantResponse));
+                    ApplicantResponse applicantResponse = applicantServiceImpl.toApplicantResponse(applicant);
+                    FeedbackResponse feedbackResponse = feedbackServiceImpl.toFeedbackResponse(feedback, Collections.singletonList(applicantResponse));
                     feedbackResponses.add(feedbackResponse);
                 }
             }
         }
 
         List<JobResponse> jobResponses = company.getJobs().stream()
-                .map(this::toJobResponse)
+                .map(job -> jobServiceImpl.toJobResponse(job))
                 .collect(Collectors.toList());
 
         return this.toCompanyDetailResponse(company, feedbackResponses, jobResponses);
@@ -160,6 +170,7 @@ public class CompanyServiceImpl implements CompanyService {
         return "Company Detail Successfully Updated with Username: " + username;
     }
 
+
     public CompanyResponse toCompanyResponse(Company company) {
         CompanyResponse companyResponse = new CompanyResponse();
         companyResponse.setUrlPicture(company.getPicture());
@@ -175,30 +186,6 @@ public class CompanyServiceImpl implements CompanyService {
         companyDetailResponse.setJobResponses(jobResponses);
         modelMapper.map(company, companyDetailResponse);
         return companyDetailResponse;
-    }
-
-    public ApplicantResponse toApplicantResponse(Applicant applicant) {
-        ApplicantResponse applicantResponse = new ApplicantResponse();
-        applicantResponse.setCompanyName(applicant.getJob().getCompany().getName());
-        applicantResponse.setNameUser(applicant.getUserDetail().getName());
-        applicantResponse.setTitleJob(applicant.getJob().getTitle());
-        modelMapper.map(applicant, applicantResponse);
-        return applicantResponse;
-    }
-
-    public FeedbackResponse toFeedbackResponse(Feedback feedback, List<ApplicantResponse> applicantResponses) {
-        FeedbackResponse feedbackResponse = new FeedbackResponse();
-        feedbackResponse.setApplicantResponses(applicantResponses);
-        modelMapper.map(feedback, feedbackResponse);
-        return feedbackResponse;
-    }
-
-    public JobResponse toJobResponse(Job job) {
-        JobResponse jobResponse = new JobResponse();
-        jobResponse.setUrlPicture(job.getCompany().getPicture());
-        jobResponse.setCompanyName(job.getCompany().getName());
-        modelMapper.map(job, jobResponse);
-        return jobResponse;
     }
 
     private boolean isImageFile(MultipartFile file) {

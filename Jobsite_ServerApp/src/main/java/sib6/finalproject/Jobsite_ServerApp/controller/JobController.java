@@ -20,6 +20,16 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
+    @GetMapping()
+    public ResponseEntity<?> getAllJob() {
+        return ResponseEntity.ok(jobService.getAllJob());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getJobDetailById(@PathVariable("id") String id) {
+        return ResponseEntity.ok(jobService.getJobDetailById(id));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> createJob(HttpServletRequest servletRequest, @Valid @RequestBody CreateJobRequest jobRequest) {
         Response response = Response.builder()

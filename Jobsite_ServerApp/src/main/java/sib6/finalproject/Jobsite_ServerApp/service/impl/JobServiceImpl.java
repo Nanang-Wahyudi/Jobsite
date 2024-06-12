@@ -2,6 +2,7 @@ package sib6.finalproject.Jobsite_ServerApp.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -11,12 +12,16 @@ import sib6.finalproject.Jobsite_ServerApp.entity.User;
 import sib6.finalproject.Jobsite_ServerApp.model.enums.JobTypeEnum;
 import sib6.finalproject.Jobsite_ServerApp.model.request.CreateJobRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateJobRequest;
+import sib6.finalproject.Jobsite_ServerApp.model.response.JobDetailResponse;
+import sib6.finalproject.Jobsite_ServerApp.model.response.JobResponse;
 import sib6.finalproject.Jobsite_ServerApp.repository.CompanyRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.JobRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.UserRepository;
 import sib6.finalproject.Jobsite_ServerApp.service.JobService;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -33,6 +38,11 @@ public class JobServiceImpl implements JobService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Lazy
+    @Autowired
+    private CompanyServiceImpl companyServiceImpl;
+
+
     @Override
     @SuppressWarnings("null")
     public Job findById(String id) {
@@ -41,6 +51,21 @@ public class JobServiceImpl implements JobService {
                         HttpStatus.NOT_FOUND,
                         "Job is Not Found with ID: " + id
                 ));
+    }
+
+    @Override
+    public List<JobResponse> getAllJob() {
+        List<Job> jobs = jobRepository.findAll();
+        return jobs.stream()
+                .filter(Job::getIsactive)
+                .map(this::toJobResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public JobDetailResponse getJobDetailById(String id) {
+        Job job = findById(id);
+        return toJobDetailResponse(job, job.getCompany());
     }
 
     @Override
@@ -114,6 +139,22 @@ public class JobServiceImpl implements JobService {
         Job job = this.findById(id);
         jobRepository.delete(job);
         return "Delete Successfully with Job Title: " + job.getTitle();
+    }
+
+
+    public JobResponse toJobResponse(Job job) {
+        JobResponse jobResponse = new JobResponse();
+        jobResponse.setUrlPicture(job.getCompany().getPicture());
+        jobResponse.setCompanyName(job.getCompany().getName());
+        modelMapper.map(job, jobResponse);
+        return jobResponse;
+    }
+
+    public JobDetailResponse toJobDetailResponse(Job job, Company company) {
+        JobDetailResponse jobDetailResponse = new JobDetailResponse();
+        jobDetailResponse.setCompanyResponse(companyServiceImpl.toCompanyResponse(company));
+        modelMapper.map(job, jobDetailResponse);
+        return jobDetailResponse;
     }
 
 }
