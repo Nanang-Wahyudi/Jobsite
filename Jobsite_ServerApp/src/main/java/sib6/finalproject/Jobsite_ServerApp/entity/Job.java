@@ -45,7 +45,7 @@ public class Job {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @OneToMany(mappedBy = "job")
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     private List<Applicant> applicants;
 
 

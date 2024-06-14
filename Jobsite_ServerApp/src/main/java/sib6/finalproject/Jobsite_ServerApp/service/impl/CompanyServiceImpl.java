@@ -170,6 +170,16 @@ public class CompanyServiceImpl implements CompanyService {
         return "Company Detail Successfully Updated with Username: " + username;
     }
 
+    @Override
+    public String deleteCompanyByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found with Username: " + username));
+        Company company = user.getCompany();
+
+        companyRepository.delete(company);
+        return "Delete Company Successfully with Username: " + username;
+    }
+
 
     public CompanyResponse toCompanyResponse(Company company) {
         CompanyResponse companyResponse = new CompanyResponse();

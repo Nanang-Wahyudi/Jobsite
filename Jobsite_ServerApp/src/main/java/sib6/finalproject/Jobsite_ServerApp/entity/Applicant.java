@@ -42,7 +42,7 @@ public class Applicant {
     @JoinColumn(name = "user_detail_id")
     private UserDetail userDetail;
 
-    @OneToMany(mappedBy = "applicant")
+    @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
     private List<Feedback> feedbacks;
 
 

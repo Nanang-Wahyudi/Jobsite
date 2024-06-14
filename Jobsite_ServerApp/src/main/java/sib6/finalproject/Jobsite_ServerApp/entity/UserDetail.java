@@ -54,10 +54,10 @@ public class UserDetail {
     )
     private List<Skill> skills;
 
-    @OneToMany(mappedBy = "userDetail")
+    @OneToMany(mappedBy = "userDetail", cascade = CascadeType.ALL)
     List<Applicant> applicants;
 
-    @OneToMany(mappedBy = "userDetail")
+    @OneToMany(mappedBy = "userDetail", cascade = CascadeType.ALL)
     List<Feedback> feedbacks;
 
 }

@@ -182,6 +182,16 @@ public class UserDetailServiceImpl implements UserDetailService {
         return "Update User Detail Successfully with Name: " + userDetail.getName();
     }
 
+    @Override
+    public String deleteUserByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found with Username: " + username));
+        UserDetail userDetail = user.getUserDetail();
+
+        userDetailRepository.delete(userDetail);
+        return "Delete User Successfully with Username: " + username;
+    }
+
 
     private boolean isImageFile(MultipartFile file) {
         String contentType = file.getContentType();

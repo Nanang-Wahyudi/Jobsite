@@ -60,4 +60,17 @@ public class UserDetailController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Delete user account based on login username")
+    @DeleteMapping("/delete/{username}")
+    public ResponseEntity<?> deleteUserByUsername(HttpServletRequest servletRequest, @PathVariable("username") String username) {
+        Response response = Response.builder()
+                .url(servletRequest.getRequestURL().toString())
+                .status(HttpStatus.OK.toString())
+                .message(userDetailService.deleteUserByUsername(username))
+                .build();
+        response.setTimestamp(new Date());
+
+        return ResponseEntity.ok(response);
+    }
+
 }
