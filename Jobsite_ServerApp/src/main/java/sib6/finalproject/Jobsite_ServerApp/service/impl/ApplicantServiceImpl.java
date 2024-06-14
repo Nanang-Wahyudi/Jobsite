@@ -15,7 +15,7 @@ import sib6.finalproject.Jobsite_ServerApp.entity.User;
 import sib6.finalproject.Jobsite_ServerApp.entity.UserDetail;
 import sib6.finalproject.Jobsite_ServerApp.model.enums.StatusApplicantEnum;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateStatusApplicantRequest;
-import sib6.finalproject.Jobsite_ServerApp.model.response.ApplicantResponse;
+import sib6.finalproject.Jobsite_ServerApp.model.response.*;
 import sib6.finalproject.Jobsite_ServerApp.repository.ApplicantRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.JobRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.UserDetailRepository;
@@ -24,7 +24,9 @@ import sib6.finalproject.Jobsite_ServerApp.service.ApplicantService;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
@@ -44,6 +46,44 @@ public class ApplicantServiceImpl implements ApplicantService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private JobServiceImpl jobServiceImpl;
+
+    @Autowired
+    private UserDetailServiceImpl userDetailServiceImpl;
+
+
+    @Override
+    public Applicant findById(String id) {
+        return applicantRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Applicant Not Found with ID: " + id));
+    }
+
+    @Override
+    public List<ApplicantResponse> getAllApplicant() {
+        List<Applicant> applicants = applicantRepository.findAll();
+        return applicants.stream()
+                .map(this::toApplicantResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ApplicantDetailResponse getApplicantById(String id) {
+        Applicant applicant = this.findById(id);
+
+        Job job = applicant.getJob();
+        JobResponse jobResponse = jobServiceImpl.toJobResponse(job);
+
+        UserDetail userDetail = applicant.getUserDetail();
+
+        List<SkillResponse> skillResponses = userDetail.getSkills().stream()
+                .map(skill -> userDetailServiceImpl.toSkillResponse(skill))
+                .collect(Collectors.toList());
+
+        UserResponse userResponse = userDetailServiceImpl.toUserResponse(userDetail, skillResponses);
+
+        return this.toApplicantDetailResponse(applicant, jobResponse, userResponse);
+    }
 
     @Override
     @Transactional
@@ -115,6 +155,14 @@ public class ApplicantServiceImpl implements ApplicantService {
         applicantResponse.setTitleJob(applicant.getJob().getTitle());
         modelMapper.map(applicant, applicantResponse);
         return applicantResponse;
+    }
+
+    public ApplicantDetailResponse toApplicantDetailResponse(Applicant applicant, JobResponse jobResponse, UserResponse userResponse) {
+        ApplicantDetailResponse applicantDetailResponse = new ApplicantDetailResponse();
+        applicantDetailResponse.setJobResponse(jobResponse);
+        applicantDetailResponse.setUserResponse(userResponse);
+        modelMapper.map(applicant, applicantDetailResponse);
+        return applicantDetailResponse;
     }
 
 }
