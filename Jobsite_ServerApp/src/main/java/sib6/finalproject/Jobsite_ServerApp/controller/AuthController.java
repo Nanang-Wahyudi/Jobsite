@@ -1,5 +1,6 @@
 package sib6.finalproject.Jobsite_ServerApp.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+
+    @Operation(summary = "Register for User")
     @PostMapping("/register/user")
     public ResponseEntity<?> registerUser(HttpServletRequest servletRequest, @Valid @RequestBody RegisterRequest request) {
         Response response = Response.builder()
@@ -34,6 +37,7 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Register for Admin")
     @PostMapping("/register/admin")
     public ResponseEntity<?> registerAdmin(HttpServletRequest servletRequest, @Valid @RequestBody RegisterRequest request) {
         Response response = Response.builder()
@@ -45,6 +49,7 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Register for Company")
     @PostMapping("/register/company")
     public ResponseEntity<?> registerCompany(HttpServletRequest servletRequest, @Valid @RequestBody RegisterRequest request) {
         Response response = Response.builder()

@@ -51,6 +51,7 @@ public class UserDetailServiceImpl implements UserDetailService {
     @Autowired
     private ModelMapper modelMapper;
 
+
     @Override
     public List<UserResponse> getAllUser() {
         List<UserDetail> userDetails = userDetailRepository.findAllByRoleName(RoleEnum.USER);
@@ -181,6 +182,7 @@ public class UserDetailServiceImpl implements UserDetailService {
         return "Update User Detail Successfully with Name: " + userDetail.getName();
     }
 
+
     private boolean isImageFile(MultipartFile file) {
         String contentType = file.getContentType();
         return contentType != null && (contentType.startsWith("image/jpeg") || contentType.startsWith("image/png") || contentType.startsWith("image/gif"));
@@ -205,6 +207,7 @@ public class UserDetailServiceImpl implements UserDetailService {
 
     public EducationResponse toEducationResponse(Education education) {
         EducationResponse educationResponse = new EducationResponse();
+        educationResponse.setInstansiName(education.getName());
         modelMapper.map(education, educationResponse);
         return educationResponse;
     }
