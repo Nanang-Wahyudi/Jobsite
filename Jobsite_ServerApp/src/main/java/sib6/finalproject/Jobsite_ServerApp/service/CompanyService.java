@@ -16,4 +16,6 @@ public interface CompanyService {
 
     String updateCompanyDetail(String username, UpdateCompanyDetailRequest companyDetailRequest);
 
+    String deleteCompanyByUsername(String username);
+
 }

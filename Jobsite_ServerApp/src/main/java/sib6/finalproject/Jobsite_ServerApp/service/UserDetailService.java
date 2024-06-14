@@ -16,4 +16,6 @@ public interface UserDetailService {
 
     String updateUserDetail(String username, UpdateUserDetailRequest userDetailRequest);
 
+    String deleteUserByUsername(String username);
+
 }
