@@ -1,7 +1,9 @@
 package sib6.finalproject.Jobsite_ServerApp.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +22,9 @@ public class ApplicantController {
     @Autowired
     private ApplicantService applicantService;
 
-    @PostMapping("/create/{jobId}")
+
+    @Operation(summary = "Apply to a job")
+    @PostMapping(value = "/create/{jobId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createApplicant(
             HttpServletRequest servletRequest,
             @RequestParam("file") MultipartFile file,
@@ -41,6 +45,7 @@ public class ApplicantController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Update job status. Make sure you enter the following appropriate Status PROCESSED (default), ACCEPTED, REJECTED")
     @PutMapping("/update-status/{applicantId}")
     public ResponseEntity<?> updateStatusApplicant(HttpServletRequest servletRequest, @PathVariable("applicantId") String applicantId, @RequestBody UpdateStatusApplicantRequest statusApplicantRequest) {
         Response response = Response.builder()
