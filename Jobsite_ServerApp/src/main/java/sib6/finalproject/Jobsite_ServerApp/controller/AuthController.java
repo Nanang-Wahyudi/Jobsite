@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sib6.finalproject.Jobsite_ServerApp.model.enums.RoleEnum;
+import sib6.finalproject.Jobsite_ServerApp.model.request.LoginRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.request.RegisterRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.response.Response;
 import sib6.finalproject.Jobsite_ServerApp.service.AuthService;
@@ -59,6 +60,12 @@ public class AuthController {
                 .build();
         response.setTimestamp(new Date());
         return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "Login for all role")
+    @PostMapping("/login")
+    public ResponseEntity<?> login (@Valid @RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 
 }
