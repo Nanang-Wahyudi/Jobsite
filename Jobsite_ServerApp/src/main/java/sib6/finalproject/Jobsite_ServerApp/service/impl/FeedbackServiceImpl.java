@@ -15,6 +15,7 @@ import sib6.finalproject.Jobsite_ServerApp.repository.ApplicantRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.FeedbackRepository;
 import sib6.finalproject.Jobsite_ServerApp.service.FeedbackService;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,6 +43,7 @@ public class FeedbackServiceImpl implements FeedbackService {
                     .applicant(applicant)
                     .userDetail(applicant.getUserDetail())
                     .build();
+            feedback.setPostDate(new Date());
             feedbackRepository.save(feedback);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable To Provide Feedback, As You Have Not Yet Applied And Been Accepted For The Job");

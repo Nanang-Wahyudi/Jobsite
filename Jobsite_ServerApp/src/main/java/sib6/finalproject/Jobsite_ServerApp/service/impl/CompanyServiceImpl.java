@@ -16,8 +16,8 @@ import sib6.finalproject.Jobsite_ServerApp.service.CompanyService;
 import sib6.finalproject.Jobsite_ServerApp.service.media.CloudinaryService;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,26 +59,17 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found with ID: " + id));
 
-        List<Job> jobs = company.getJobs();
-        List<FeedbackResponse> feedbackResponses = new ArrayList<>();
-
-        for (Job job : jobs) {
-            List<Applicant> applicants = job.getApplicants();
-
-            for (Applicant applicant : applicants) {
-                List<Feedback> feedbacks = applicant.getFeedbacks();
-
-                for (Feedback feedback : feedbacks) {
-                    ApplicantResponse applicantResponse = applicantServiceImpl.toApplicantResponse(applicant);
-                    FeedbackResponse feedbackResponse = feedbackServiceImpl.toFeedbackResponse(feedback, Collections.singletonList(applicantResponse));
-                    feedbackResponses.add(feedbackResponse);
-                }
-            }
-        }
+        List<FeedbackResponse> feedbackResponses = company.getJobs().stream()
+                .flatMap(job -> job.getApplicants().stream())
+                .flatMap(applicant -> applicant.getFeedbacks().stream()
+                        .map(feedback -> feedbackServiceImpl.toFeedbackResponse(feedback, Collections.singletonList(applicantServiceImpl.toApplicantResponse(applicant)))))
+                .sorted(Comparator.comparing(FeedbackResponse::getPostDate).reversed())
+                .collect(Collectors.toList());
 
         List<JobResponse> jobResponses = company.getJobs().stream()
-                .filter(Job::getIsactive)
-                .map(job -> jobServiceImpl.toJobResponse(job))
+                .filter(Job::getIsActive)
+                .sorted(Comparator.comparing(Job::getPostDate).reversed())
+                .map(jobServiceImpl::toJobResponse)
                 .collect(Collectors.toList());
 
         return this.toCompanyDetailResponse(company, feedbackResponses, jobResponses);
@@ -91,25 +82,16 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findById(user.getCompany().getId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found with ID: " + user.getCompany().getId()));
 
-        List<Job> jobs = company.getJobs();
-        List<FeedbackResponse> feedbackResponses = new ArrayList<>();
-
-        for (Job job : jobs) {
-            List<Applicant> applicants = job.getApplicants();
-
-            for (Applicant applicant : applicants) {
-                List<Feedback> feedbacks = applicant.getFeedbacks();
-
-                for (Feedback feedback : feedbacks) {
-                    ApplicantResponse applicantResponse = applicantServiceImpl.toApplicantResponse(applicant);
-                    FeedbackResponse feedbackResponse = feedbackServiceImpl.toFeedbackResponse(feedback, Collections.singletonList(applicantResponse));
-                    feedbackResponses.add(feedbackResponse);
-                }
-            }
-        }
+        List<FeedbackResponse> feedbackResponses = company.getJobs().stream()
+                .flatMap(job -> job.getApplicants().stream())
+                .flatMap(applicant -> applicant.getFeedbacks().stream()
+                        .map(feedback -> feedbackServiceImpl.toFeedbackResponse(feedback, Collections.singletonList(applicantServiceImpl.toApplicantResponse(applicant)))))
+                .sorted(Comparator.comparing(FeedbackResponse::getPostDate).reversed())
+                .collect(Collectors.toList());
 
         List<JobResponse> jobResponses = company.getJobs().stream()
-                .map(job -> jobServiceImpl.toJobResponse(job))
+                .sorted(Comparator.comparing(Job::getPostDate).reversed())
+                .map(jobServiceImpl::toJobResponse)
                 .collect(Collectors.toList());
 
         return this.toCompanyDetailResponse(company, feedbackResponses, jobResponses);

@@ -58,7 +58,7 @@ public class JobServiceImpl implements JobService {
     public List<JobResponse> getAllJob() {
         List<Job> jobs = jobRepository.findAll();
         return jobs.stream()
-                .filter(Job::getIsactive)
+                .filter(Job::getIsActive)
                 .sorted(Comparator.comparing(Job::getPostDate).reversed())
                 .map(this::toJobResponse)
                 .collect(Collectors.toList());
@@ -86,7 +86,7 @@ public class JobServiceImpl implements JobService {
         }
 
         job.setCompany(company);
-        job.setIsactive(Boolean.TRUE);
+        job.setIsActive(Boolean.TRUE);
         job.setPostDate(new Date());
 
         jobRepository.save(job);
@@ -120,7 +120,7 @@ public class JobServiceImpl implements JobService {
         job.setQualification(updateJobRequest.getQualification() != null && !updateJobRequest.getQualification().isEmpty()
                 ? updateJobRequest.getQualification() : job.getQualification());
         job.setCompany(company);
-        job.setIsactive(Boolean.TRUE);
+        job.setIsActive(Boolean.TRUE);
         job.setPostDate(new Date());
 
         jobRepository.save(job);
@@ -131,9 +131,9 @@ public class JobServiceImpl implements JobService {
     @Override
     public String updateStatusJob(String jobId) {
         Job job = findById(jobId);
-        job.setIsactive(!job.getIsactive());
+        job.setIsActive(!job.getIsActive());
         jobRepository.save(job);
-        return "Job Status Successfully Updated to: " + job.getIsactive() + ", with Job ID: " + jobId;
+        return "Job Status Successfully Updated to: " + job.getIsActive() + ", with Job ID: " + jobId;
     }
 
     @Override

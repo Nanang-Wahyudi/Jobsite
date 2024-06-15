@@ -32,6 +32,7 @@ public class Company {
 
     private String banner;
 
+    @Lob
     private String description;
 
     private String address;
