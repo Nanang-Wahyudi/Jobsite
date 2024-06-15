@@ -88,6 +88,20 @@ public class ApplicantServiceImpl implements ApplicantService {
     }
 
     @Override
+    public List<ApplicantResponse> getAllApplicantHistoryUser(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found with Username: " + username));
+        UserDetail userDetail = user.getUserDetail();
+
+        List<Applicant> applicants = userDetail.getApplicants();
+
+        return applicants.stream()
+                .sorted(Comparator.comparing(Applicant::getApplicantDate).reversed())
+                .map(this::toApplicantResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     @Transactional
     public String createApplicant(MultipartFile file, String jobId, String username) throws IOException {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
