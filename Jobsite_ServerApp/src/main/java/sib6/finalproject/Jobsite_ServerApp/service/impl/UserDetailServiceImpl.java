@@ -145,21 +145,17 @@ public class UserDetailServiceImpl implements UserDetailService {
             userDetail.setSkills(new ArrayList<>());
         }
 
-        if (userDetailRequest.getInstansiName() != null && !userDetailRequest.getInstansiName().isEmpty()) {
-            Education existingEducation = educationRepository.findByName(userDetailRequest.getInstansiName());
-            if (existingEducation == null) {
-                Education newEducation = Education.builder()
-                        .name(userDetailRequest.getInstansiName())
-                        .major(userDetailRequest.getMajor())
-                        .avgScore(userDetailRequest.getAvgScore())
-                        .build();
-                educationRepository.save(newEducation);
-                userDetail.getEducations().add(newEducation);
-            } else {
-                if (!userDetail.getEducations().contains(existingEducation)) {
-                    userDetail.getEducations().add(existingEducation);
-                }
-            }
+        if (userDetailRequest.getInstansiName() != null && !userDetailRequest.getInstansiName().isEmpty() &&
+            userDetailRequest.getMajor() != null && !userDetailRequest.getMajor().isEmpty() &&
+            userDetailRequest.getAvgScore() != null && !userDetailRequest.getAvgScore().isEmpty()) {
+
+            Education newEducation = Education.builder()
+                    .name(userDetailRequest.getInstansiName())
+                    .major(userDetailRequest.getMajor())
+                    .avgScore(userDetailRequest.getAvgScore())
+                    .build();
+            educationRepository.save(newEducation);
+            userDetail.getEducations().add(newEducation);
         }
 
         if (userDetailRequest.getSkillName() != null && !userDetailRequest.getSkillName().isEmpty()) {
