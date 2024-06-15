@@ -16,6 +16,8 @@ public interface ApplicantService {
 
     ApplicantDetailResponse getApplicantById(String id);
 
+    List<ApplicantResponse> getAllApplicantHistoryUser(String username);
+
     String createApplicant(MultipartFile file, String jobId, String username) throws Exception;
 
     String updateStatusApplicant(String applicantId, UpdateStatusApplicantRequest statusApplicantRequest);

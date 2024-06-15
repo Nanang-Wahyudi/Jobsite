@@ -31,7 +31,7 @@ public class ApplicantController {
     private ApplicantService applicantService;
 
 
-    @Operation(summary = "Display all applicants")
+    @Operation(summary = "Display all applicants base on username company")
     @PreAuthorize("hasAuthority('READ_COMPANY')")
     @GetMapping()
     public ResponseEntity<?> getAllApplicant() {
@@ -65,6 +65,14 @@ public class ApplicantController {
         applicantDetailResponse.setUrlDownloadCv(downloadUrl);
 
         return ResponseEntity.ok(applicantDetailResponse);
+    }
+
+    @Operation(summary = "Display all applicants history based on username")
+    @PreAuthorize("hasAuthority('READ_USER')")
+    @GetMapping("/history")
+    public ResponseEntity<?> getAllApplicantHistoryUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ResponseEntity.ok(applicantService.getAllApplicantHistoryUser(username));
     }
 
     @Operation(summary = "Apply to a job")
