@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateCompanyDetailRequest;
@@ -43,16 +44,18 @@ public class CompanyController {
 
     @Operation(summary = "Display company data based on the logged in company username")
     @PreAuthorize("hasAuthority('READ_COMPANY')")
-    @GetMapping("/profile/{username}")
-    public ResponseEntity<?> getCompanyDetailProfile(@PathVariable("username") String username) {
+    @GetMapping("/profile")
+    public ResponseEntity<?> getCompanyDetailProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         CompanyDetailResponse companyDetailResponses = companyService.getCompanyDetailProfile(username);
         return ResponseEntity.ok(companyDetailResponses);
     }
 
     @Operation(summary = "Update company profile based on logged-in company username")
     @PreAuthorize("hasAuthority('UPDATE_COMPANY')")
-    @PutMapping(value = "/update/{username}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> updateCompanyDetail(HttpServletRequest servletRequest, @PathVariable("username") String username, @Valid @ModelAttribute UpdateCompanyDetailRequest companyDetailRequest, BindingResult result) {
+    @PutMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> updateCompanyDetail(HttpServletRequest servletRequest, @Valid @ModelAttribute UpdateCompanyDetailRequest companyDetailRequest, BindingResult result) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Response response = Response.builder()
                 .url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())
@@ -65,8 +68,9 @@ public class CompanyController {
 
     @Operation(summary = "Delete company account based on login username")
     @PreAuthorize("hasAuthority('DELETE_COMPANY')")
-    @DeleteMapping("/delete/{username}")
-    public ResponseEntity<?> deleteCompanyByUsername(HttpServletRequest servletRequest, @PathVariable("username") String username) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteCompanyByUsername(HttpServletRequest servletRequest) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Response response = Response.builder()
                 .url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -71,13 +72,13 @@ public class ApplicantController {
     public ResponseEntity<?> createApplicant(
             HttpServletRequest servletRequest,
             @RequestParam("file") MultipartFile file,
-            @RequestParam("username") String username,
             @PathVariable("jobId") String jobId) throws Exception {
 
         if (file.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No file provided");
         }
 
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Response response = Response.builder()
                 .url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())

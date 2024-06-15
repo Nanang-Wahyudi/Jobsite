@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateUserDetailRequest;
@@ -43,16 +44,18 @@ public class UserDetailController {
 
     @Operation(summary = "Display user data based on the logged in username")
     @PreAuthorize("hasAuthority('READ_USER')")
-    @GetMapping("/profile/{username}")
-    public ResponseEntity<?> getUserDetailProfile(@PathVariable("username") String username) {
+    @GetMapping("/profile")
+    public ResponseEntity<?> getUserDetailProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         UserDetailResponse userDetailResponse = userDetailService.getUserDetailProfile(username);
         return ResponseEntity.ok(userDetailResponse);
     }
 
     @Operation(summary = "Update user profile based on logged-in username")
     @PreAuthorize("hasAuthority('UPDATE_USER')")
-    @PutMapping(value = "/update/{username}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> updateUserDetail(HttpServletRequest servletRequest, @PathVariable("username") String username, @Valid @ModelAttribute UpdateUserDetailRequest userDetailRequest, BindingResult result) {
+    @PutMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> updateUserDetail(HttpServletRequest servletRequest, @Valid @ModelAttribute UpdateUserDetailRequest userDetailRequest, BindingResult result) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Response response = Response.builder()
                 .url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())
@@ -65,8 +68,9 @@ public class UserDetailController {
 
     @Operation(summary = "Delete user account based on login username")
     @PreAuthorize("hasAuthority('DELETE_USER')")
-    @DeleteMapping("/delete/{username}")
-    public ResponseEntity<?> deleteUserByUsername(HttpServletRequest servletRequest, @PathVariable("username") String username) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUserByUsername(HttpServletRequest servletRequest) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Response response = Response.builder()
                 .url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())

@@ -16,7 +16,7 @@ public interface JobService {
 
     JobDetailResponse getJobDetailById(String id);
 
-    String createJob(CreateJobRequest jobRequest);
+    String createJob(String username, CreateJobRequest jobRequest);
 
     String updateJob(UpdateJobRequest updateJobRequest, String username, String id);
 
