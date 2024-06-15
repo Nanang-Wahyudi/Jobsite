@@ -30,15 +30,17 @@ public class Job {
     @Enumerated(EnumType.STRING)
     private JobTypeEnum type;
 
+    @Lob
     private String description;
 
+    @Lob
     private String qualification;
 
     private String salary;
 
     private String postDate;
 
-    private Boolean Isactive;
+    private Boolean isActive;
 
 
     @ManyToOne

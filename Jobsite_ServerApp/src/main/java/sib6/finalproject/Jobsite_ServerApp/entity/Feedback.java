@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Builder
 @AllArgsConstructor
@@ -23,7 +25,10 @@ public class Feedback {
 
     private Integer rating;
 
+    @Lob
     private String comment;
+
+    private String postDate;
 
 
     @ManyToOne
@@ -33,5 +38,11 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name = "applicant_id")
     private Applicant applicant;
+
+
+    public void setPostDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.postDate = dateFormat.format(date);
+    }
 
 }

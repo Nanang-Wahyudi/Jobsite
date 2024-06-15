@@ -29,6 +29,7 @@ public class UserDetail {
     @Column(unique = true)
     private String email;
 
+    @Lob
     private String description;
 
     private String address;
