@@ -19,6 +19,7 @@ import sib6.finalproject.Jobsite_ServerApp.repository.JobRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.UserRepository;
 import sib6.finalproject.Jobsite_ServerApp.service.JobService;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,6 +59,7 @@ public class JobServiceImpl implements JobService {
         List<Job> jobs = jobRepository.findAll();
         return jobs.stream()
                 .filter(Job::getIsactive)
+                .sorted(Comparator.comparing(Job::getPostDate).reversed())
                 .map(this::toJobResponse)
                 .collect(Collectors.toList());
     }
