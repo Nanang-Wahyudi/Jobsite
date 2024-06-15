@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import sib6.finalproject.Jobsite_ServerApp.model.request.CreateJobRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateJobRequest;
@@ -39,10 +40,11 @@ public class JobController {
     @PreAuthorize("hasAuthority('CREATE_COMPANY')")
     @PostMapping("/create")
     public ResponseEntity<?> createJob(HttpServletRequest servletRequest, @Valid @RequestBody CreateJobRequest jobRequest) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Response response = Response.builder()
                 .url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())
-                .message(jobService.createJob(jobRequest))
+                .message(jobService.createJob(username, jobRequest))
                 .build();
         response.setTimestamp(new Date());
 
@@ -51,11 +53,11 @@ public class JobController {
 
     @Operation(summary = "updating jobs. Ensure that you enter the job type from the following options FULLTIME, PARTTIME, CONTRACT, when updating the job type.")
     @PreAuthorize("hasAuthority('UPDATE_COMPANY')")
-    @PutMapping("/update/{username}/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> updateJob(HttpServletRequest servletRequest,
-                                       @PathVariable("username") String username,
                                        @PathVariable("id") String id,
                                        @Valid @RequestBody UpdateJobRequest updateJobRequest) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Response response = Response.builder().url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())
                 .message(jobService.updateJob(updateJobRequest, username, id))

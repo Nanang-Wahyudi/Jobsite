@@ -69,13 +69,13 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public String createJob(CreateJobRequest jobRequest) {
+    public String createJob(String username, CreateJobRequest jobRequest) {
         Job job = modelMapper.map(jobRequest, Job.class);
 
-        User user = userRepository.findByUsername(jobRequest.getUsername())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found Username: " + jobRequest.getUsername()));
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found Username: " + username));
         Company company = companyRepository.findById(user.getCompany().getId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found with Username: " + jobRequest.getUsername()));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found with Username: " + username));
 
         try {
             job.setType(JobTypeEnum.valueOf(jobRequest.getType().toUpperCase()));
