@@ -35,7 +35,8 @@ public class ApplicantController {
     @PreAuthorize("hasAuthority('READ_COMPANY')")
     @GetMapping()
     public ResponseEntity<?> getAllApplicant() {
-        return ResponseEntity.ok(applicantService.getAllApplicant());
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ResponseEntity.ok(applicantService.getAllApplicant(username));
     }
 
     @Operation(summary = "download cv files from applicants based on applicant ID")

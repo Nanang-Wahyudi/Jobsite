@@ -12,7 +12,7 @@ public interface ApplicantService {
 
     Applicant findById(String id);
 
-    List<ApplicantResponse> getAllApplicant();
+    List<ApplicantResponse> getAllApplicant(String username);
 
     ApplicantDetailResponse getApplicantById(String id);
 

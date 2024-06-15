@@ -9,23 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-import sib6.finalproject.Jobsite_ServerApp.entity.Applicant;
-import sib6.finalproject.Jobsite_ServerApp.entity.Job;
-import sib6.finalproject.Jobsite_ServerApp.entity.User;
-import sib6.finalproject.Jobsite_ServerApp.entity.UserDetail;
+import sib6.finalproject.Jobsite_ServerApp.entity.*;
 import sib6.finalproject.Jobsite_ServerApp.model.enums.StatusApplicantEnum;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateStatusApplicantRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.response.*;
-import sib6.finalproject.Jobsite_ServerApp.repository.ApplicantRepository;
-import sib6.finalproject.Jobsite_ServerApp.repository.JobRepository;
-import sib6.finalproject.Jobsite_ServerApp.repository.UserDetailRepository;
-import sib6.finalproject.Jobsite_ServerApp.repository.UserRepository;
+import sib6.finalproject.Jobsite_ServerApp.repository.*;
 import sib6.finalproject.Jobsite_ServerApp.service.ApplicantService;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,9 +52,19 @@ public class ApplicantServiceImpl implements ApplicantService {
     }
 
     @Override
-    public List<ApplicantResponse> getAllApplicant() {
-        List<Applicant> applicants = applicantRepository.findAll();
-        return applicants.stream()
+    public List<ApplicantResponse> getAllApplicant(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found with Username: " + username));
+        Company company = user.getCompany();
+
+        List<Applicant> allApplicants = new ArrayList<>();
+
+        for (Job job : company.getJobs()) {
+            allApplicants.addAll(job.getApplicants());
+        }
+
+        return allApplicants.stream()
+                .sorted(Comparator.comparing(Applicant::getApplicantDate).reversed())
                 .map(this::toApplicantResponse)
                 .collect(Collectors.toList());
     }
