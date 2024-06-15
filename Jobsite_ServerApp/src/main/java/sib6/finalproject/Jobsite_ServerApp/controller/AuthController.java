@@ -4,13 +4,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 import sib6.finalproject.Jobsite_ServerApp.model.enums.RoleEnum;
+import sib6.finalproject.Jobsite_ServerApp.model.request.ForgotPasswordRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.request.LoginRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.request.RegisterRequest;
+import sib6.finalproject.Jobsite_ServerApp.model.request.UpdatePasswordRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.response.Response;
 import sib6.finalproject.Jobsite_ServerApp.service.AuthService;
 
@@ -66,6 +67,32 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login (@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
+    }
+
+    @Operation(summary = "Updated password based on username login")
+    @PreAuthorize("hasAnyAuthority('UPDATE_ADMIN', 'UPDATE_USER', 'UPDATE_COMPANY')")
+    @PutMapping("/update-password")
+    public ResponseEntity<?> updatePassword(HttpServletRequest servletRequest, @Valid @RequestBody UpdatePasswordRequest updatePasswordRequest) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Response response = Response.builder()
+                .url(servletRequest.getRequestURL().toString())
+                .status(HttpStatus.OK.toString())
+                .message(authService.updatePassword(username, updatePasswordRequest))
+                .build();
+        response.setTimestamp(new Date());
+        return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "Forgot password")
+    @PutMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(HttpServletRequest servletRequest, @Valid @RequestBody ForgotPasswordRequest forgotPasswordRequest) {
+        Response response = Response.builder()
+                .url(servletRequest.getRequestURL().toString())
+                .status(HttpStatus.OK.toString())
+                .message(authService.forgotPassword(forgotPasswordRequest))
+                .build();
+        response.setTimestamp(new Date());
+        return ResponseEntity.ok(response);
     }
 
 }
