@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sib6.finalproject.Jobsite_ServerApp.model.request.CreateJobRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateJobRequest;
@@ -35,6 +36,7 @@ public class JobController {
     }
 
     @Operation(summary = "Create and post Job Vacancies. Make sure you enter the job type from the following options FULLTIME, PARTTIME, CONTRACT")
+    @PreAuthorize("hasAuthority('CREATE_COMPANY')")
     @PostMapping("/create")
     public ResponseEntity<?> createJob(HttpServletRequest servletRequest, @Valid @RequestBody CreateJobRequest jobRequest) {
         Response response = Response.builder()
@@ -48,6 +50,7 @@ public class JobController {
     }
 
     @Operation(summary = "updating jobs. Ensure that you enter the job type from the following options FULLTIME, PARTTIME, CONTRACT, when updating the job type.")
+    @PreAuthorize("hasAuthority('UPDATE_COMPANY')")
     @PutMapping("/update/{username}/{id}")
     public ResponseEntity<?> updateJob(HttpServletRequest servletRequest,
                                        @PathVariable("username") String username,
@@ -62,6 +65,7 @@ public class JobController {
     }
 
     @Operation(summary = "Update the job status, if the job is not to be displayed anymore and update again if the job is to be displayed")
+    @PreAuthorize("hasAuthority('UPDATE_COMPANY')")
     @PutMapping("/update/status-job/{id}")
     public ResponseEntity<?> updateStatusJob(HttpServletRequest servletRequest, @PathVariable String id) {
         Response response = Response.builder()
@@ -75,6 +79,7 @@ public class JobController {
     }
 
     @Operation(summary = "Delete job based on Job ID")
+    @PreAuthorize("hasAuthority('DELETE_COMPANY')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteJob(HttpServletRequest servletRequest,@PathVariable String id) {
         Response response = Response.builder().url(servletRequest.getRequestURL().toString())

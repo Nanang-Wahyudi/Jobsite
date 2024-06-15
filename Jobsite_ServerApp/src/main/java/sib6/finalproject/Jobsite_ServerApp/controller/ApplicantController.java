@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,12 +31,14 @@ public class ApplicantController {
 
 
     @Operation(summary = "Display all applicants")
+    @PreAuthorize("hasAuthority('READ_COMPANY')")
     @GetMapping()
     public ResponseEntity<?> getAllApplicant() {
         return ResponseEntity.ok(applicantService.getAllApplicant());
     }
 
     @Operation(summary = "download cv files from applicants based on applicant ID")
+    @PreAuthorize("hasAuthority('READ_COMPANY')")
     @GetMapping("/file-download/{id}")
     public ResponseEntity<Resource> downloadFile(@PathVariable("id") String id) {
         Applicant applicant = applicantService.findById(id);
@@ -49,6 +52,7 @@ public class ApplicantController {
     }
 
     @Operation(summary = "Display applicants based on applicant ID")
+    @PreAuthorize("hasAuthority('READ_COMPANY')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getApplicantById(@PathVariable("id") String id) {
         ApplicantDetailResponse applicantDetailResponse = applicantService.getApplicantById(id);
@@ -62,6 +66,7 @@ public class ApplicantController {
     }
 
     @Operation(summary = "Apply to a job")
+    @PreAuthorize("hasAuthority('CREATE_USER')")
     @PostMapping(value = "/create/{jobId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createApplicant(
             HttpServletRequest servletRequest,
@@ -84,6 +89,7 @@ public class ApplicantController {
     }
 
     @Operation(summary = "Update job status. Make sure you enter the following appropriate Status PROCESSED (default), ACCEPTED, REJECTED")
+    @PreAuthorize("hasAuthority('UPDATE_COMPANY')")
     @PutMapping("/update-status/{applicantId}")
     public ResponseEntity<?> updateStatusApplicant(HttpServletRequest servletRequest, @PathVariable("applicantId") String applicantId, @RequestBody UpdateStatusApplicantRequest statusApplicantRequest) {
         Response response = Response.builder()
