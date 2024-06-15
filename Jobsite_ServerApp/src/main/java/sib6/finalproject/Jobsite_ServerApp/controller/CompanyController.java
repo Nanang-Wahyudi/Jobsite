@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateCompanyDetailRequest;
@@ -41,6 +42,7 @@ public class CompanyController {
     }
 
     @Operation(summary = "Display company data based on the logged in company username")
+    @PreAuthorize("hasAuthority('READ_COMPANY')")
     @GetMapping("/profile/{username}")
     public ResponseEntity<?> getCompanyDetailProfile(@PathVariable("username") String username) {
         CompanyDetailResponse companyDetailResponses = companyService.getCompanyDetailProfile(username);
@@ -48,6 +50,7 @@ public class CompanyController {
     }
 
     @Operation(summary = "Update company profile based on logged-in company username")
+    @PreAuthorize("hasAuthority('UPDATE_COMPANY')")
     @PutMapping(value = "/update/{username}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> updateCompanyDetail(HttpServletRequest servletRequest, @PathVariable("username") String username, @Valid @ModelAttribute UpdateCompanyDetailRequest companyDetailRequest, BindingResult result) {
         Response response = Response.builder()
@@ -61,6 +64,7 @@ public class CompanyController {
     }
 
     @Operation(summary = "Delete company account based on login username")
+    @PreAuthorize("hasAuthority('DELETE_COMPANY')")
     @DeleteMapping("/delete/{username}")
     public ResponseEntity<?> deleteCompanyByUsername(HttpServletRequest servletRequest, @PathVariable("username") String username) {
         Response response = Response.builder()
