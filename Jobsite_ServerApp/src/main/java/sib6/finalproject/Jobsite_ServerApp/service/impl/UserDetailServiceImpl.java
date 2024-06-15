@@ -1,5 +1,6 @@
 package sib6.finalproject.Jobsite_ServerApp.service.impl;
 
+import org.apache.commons.text.WordUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,6 +52,12 @@ public class UserDetailServiceImpl implements UserDetailService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private EducationServiceImpl educationServiceImpl;
+
+    @Autowired
+    private SkillServiceImpl skillServiceImpl;
+
 
     @Override
     public List<UserResponse> getAllUser() {
@@ -58,7 +65,7 @@ public class UserDetailServiceImpl implements UserDetailService {
         return userDetails.stream()
                 .map(userDetail -> {
                     List<SkillResponse> skillResponses = userDetail.getSkills().stream()
-                            .map(this::toSkillResponse)
+                            .map(skill -> skillServiceImpl.toSkillResponse(skill))
                             .collect(Collectors.toList());
 
                     return this.toUserResponse(userDetail, skillResponses);
@@ -72,11 +79,11 @@ public class UserDetailServiceImpl implements UserDetailService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Detail Not Found with ID: " + id));
 
         List<EducationResponse> educationResponses = userDetail.getEducations().stream()
-                .map(this::toEducationResponse)
+                .map(education -> educationServiceImpl.toEducationResponse(education))
                 .collect(Collectors.toList());
 
         List<SkillResponse> skillResponses = userDetail.getSkills().stream()
-                .map(this::toSkillResponse)
+                .map(skill -> skillServiceImpl.toSkillResponse(skill))
                 .collect(Collectors.toList());
 
         return this.toUserDetailResponse(userDetail, educationResponses, skillResponses);
@@ -89,11 +96,11 @@ public class UserDetailServiceImpl implements UserDetailService {
         UserDetail userDetail = user.getUserDetail();
 
         List<EducationResponse> educationResponses = userDetail.getEducations().stream()
-                .map(this::toEducationResponse)
+                .map(education -> educationServiceImpl.toEducationResponse(education))
                 .collect(Collectors.toList());
 
         List<SkillResponse> skillResponses = userDetail.getSkills().stream()
-                .map(this::toSkillResponse)
+                .map(skill -> skillServiceImpl.toSkillResponse(skill))
                 .collect(Collectors.toList());
 
         return this.toUserDetailResponse(userDetail, educationResponses, skillResponses);
@@ -162,7 +169,7 @@ public class UserDetailServiceImpl implements UserDetailService {
             Skill existingSkill = skillRepository.findByName(userDetailRequest.getSkillName());
             if (existingSkill == null) {
                 Skill newSkill = Skill.builder()
-                        .name(userDetailRequest.getSkillName())
+                        .name(WordUtils.capitalizeFully(userDetailRequest.getSkillName()))
                         .build();
                 skillRepository.save(newSkill);
                 userDetail.getSkills().add(newSkill);
@@ -209,19 +216,6 @@ public class UserDetailServiceImpl implements UserDetailService {
         userResponse.setSkillResponses(skillResponses);
         modelMapper.map(userDetail, userResponse);
         return userResponse;
-    }
-
-    public EducationResponse toEducationResponse(Education education) {
-        EducationResponse educationResponse = new EducationResponse();
-        educationResponse.setInstansiName(education.getName());
-        modelMapper.map(education, educationResponse);
-        return educationResponse;
-    }
-
-    public SkillResponse toSkillResponse(Skill skill) {
-        SkillResponse skillResponse = new SkillResponse();
-        modelMapper.map(skill, skillResponse);
-        return skillResponse;
     }
 
 }
