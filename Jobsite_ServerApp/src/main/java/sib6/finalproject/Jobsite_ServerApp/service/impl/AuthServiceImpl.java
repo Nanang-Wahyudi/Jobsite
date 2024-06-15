@@ -19,8 +19,10 @@ import sib6.finalproject.Jobsite_ServerApp.entity.Role;
 import sib6.finalproject.Jobsite_ServerApp.entity.User;
 import sib6.finalproject.Jobsite_ServerApp.entity.UserDetail;
 import sib6.finalproject.Jobsite_ServerApp.model.enums.RoleEnum;
+import sib6.finalproject.Jobsite_ServerApp.model.request.ForgotPasswordRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.request.LoginRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.request.RegisterRequest;
+import sib6.finalproject.Jobsite_ServerApp.model.request.UpdatePasswordRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.response.LoginResponse;
 import sib6.finalproject.Jobsite_ServerApp.repository.CompanyRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.RoleRepository;
@@ -28,10 +30,7 @@ import sib6.finalproject.Jobsite_ServerApp.repository.UserDetailRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.UserRepository;
 import sib6.finalproject.Jobsite_ServerApp.service.AuthService;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -150,6 +149,39 @@ public class AuthServiceImpl implements AuthService {
                     .authorities(roles)
                     .build();
         }
+    }
+
+    @Override
+    public String updatePassword(String username, UpdatePasswordRequest updatePasswordRequest) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found"));
+
+        if (!passwordEncoder.matches(updatePasswordRequest.getPassword(), user.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Current Password");
+        }
+        if (!Objects.equals(updatePasswordRequest.getNewPassword(), updatePasswordRequest.getRepeatNewPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New Passwords Do Not Match");
+        }
+
+        user.setPassword(passwordEncoder.encode(updatePasswordRequest.getNewPassword()));
+        userRepository.save(user);
+
+        return "Updated Password Successfully with Username: " + username;
+    }
+
+    @Override
+    public String forgotPassword(ForgotPasswordRequest forgotPasswordRequest) {
+        User user = userRepository.findByUsername(forgotPasswordRequest.getUsername())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found with Username: " + forgotPasswordRequest.getUsername()));
+
+        if (!Objects.equals(forgotPasswordRequest.getNewPassword(), forgotPasswordRequest.getRepeatNewPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New Passwords Do Not Match");
+        }
+
+        user.setPassword(passwordEncoder.encode(forgotPasswordRequest.getNewPassword()));
+        userRepository.save(user);
+
+        return "Updated Password Successfully with Username: " + forgotPasswordRequest.getUsername();
     }
 
 }
