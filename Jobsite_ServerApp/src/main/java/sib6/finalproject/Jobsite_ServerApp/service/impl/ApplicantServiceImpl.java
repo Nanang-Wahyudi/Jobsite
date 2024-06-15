@@ -44,6 +44,9 @@ public class ApplicantServiceImpl implements ApplicantService {
     @Autowired
     private UserDetailServiceImpl userDetailServiceImpl;
 
+    @Autowired
+    private SkillServiceImpl skillServiceImpl;
+
 
     @Override
     public Applicant findById(String id) {
@@ -79,7 +82,7 @@ public class ApplicantServiceImpl implements ApplicantService {
         UserDetail userDetail = applicant.getUserDetail();
 
         List<SkillResponse> skillResponses = userDetail.getSkills().stream()
-                .map(skill -> userDetailServiceImpl.toSkillResponse(skill))
+                .map(skill -> skillServiceImpl.toSkillResponse(skill))
                 .collect(Collectors.toList());
 
         UserResponse userResponse = userDetailServiceImpl.toUserResponse(userDetail, skillResponses);
