@@ -127,6 +127,13 @@ public class ApplicantServiceImpl implements ApplicantService {
         Job job = jobRepository.findById(jobId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Job Not Found with ID: " + jobId));
 
+        List<Applicant> existingApplicants = applicantRepository.findByUserDetailAndJob(userDetail, job);
+        boolean hasActiveApplication = existingApplicants.stream()
+                .anyMatch(applicant -> !applicant.getStatus().equals(StatusApplicantEnum.REJECTED));
+        if (hasActiveApplication) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You have already applied for this job");
+        }
+
         Applicant applicant = Applicant.builder()
                 .cv(file.getBytes())
                 .status(StatusApplicantEnum.PROCESSED)

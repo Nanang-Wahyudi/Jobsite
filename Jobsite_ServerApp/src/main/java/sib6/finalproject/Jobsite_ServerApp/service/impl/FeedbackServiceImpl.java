@@ -37,19 +37,24 @@ public class FeedbackServiceImpl implements FeedbackService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Applicant Not Found with ID: " + applicantId));
 
         if (applicant.getStatus().equals(StatusApplicantEnum.ACCEPTED) && applicant.getUserDetail().getUser().getUsername().equals(username)) {
-            Feedback feedback = Feedback.builder()
-                    .rating(feedbackRequest.getRating())
-                    .comment(feedbackRequest.getComment())
-                    .applicant(applicant)
-                    .userDetail(applicant.getUserDetail())
-                    .build();
-            feedback.setPostDate(new Date());
-            feedbackRepository.save(feedback);
+            boolean feedbackExists = feedbackRepository.existsByApplicantAndUserDetail(applicant, applicant.getUserDetail());
+
+            if (!feedbackExists) {
+                Feedback feedback = Feedback.builder()
+                        .rating(feedbackRequest.getRating())
+                        .comment(feedbackRequest.getComment())
+                        .applicant(applicant)
+                        .userDetail(applicant.getUserDetail())
+                        .build();
+                feedback.setPostDate(new Date());
+                feedbackRepository.save(feedback);
+                return "Feedback Successfully Given to Job Name: " + applicant.getJob().getTitle() + " with Username: " + username;
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Feedback Already Given For This Job");
+            }
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable To Provide Feedback, As You Have Not Yet Applied And Been Accepted For The Job");
         }
-
-        return "Feedback Successfully Given to Job Name: " + applicant.getJob().getTitle() + " with Username: " + username;
     }
 
 
