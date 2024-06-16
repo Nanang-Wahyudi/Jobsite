@@ -1,6 +1,5 @@
 package sib6.finalproject.Jobsite_ServerApp.service.impl;
 
-import org.apache.commons.text.WordUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -169,7 +168,7 @@ public class UserDetailServiceImpl implements UserDetailService {
             Skill existingSkill = skillRepository.findByName(userDetailRequest.getSkillName());
             if (existingSkill == null) {
                 Skill newSkill = Skill.builder()
-                        .name(WordUtils.capitalizeFully(userDetailRequest.getSkillName()))
+                        .name(capitalizeWords(userDetailRequest.getSkillName()))
                         .build();
                 skillRepository.save(newSkill);
                 userDetail.getSkills().add(newSkill);
@@ -216,6 +215,27 @@ public class UserDetailServiceImpl implements UserDetailService {
         userResponse.setSkillResponses(skillResponses);
         modelMapper.map(userDetail, userResponse);
         return userResponse;
+    }
+
+    public static String capitalizeWords(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        String[] words = str.split("\\s+");
+        StringBuilder capitalizedWords = new StringBuilder();
+
+        for (String word : words) {
+            if (word.length() > 1 && (word.toUpperCase().equals(word) || !word.toLowerCase().equals(word))) {
+                capitalizedWords.append(word);
+            } else {
+                capitalizedWords.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1).toLowerCase());
+            }
+            capitalizedWords.append(" ");
+        }
+
+        return capitalizedWords.toString().trim();
     }
 
 }
