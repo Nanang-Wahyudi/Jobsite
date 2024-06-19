@@ -55,6 +55,14 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public List<CompanyAdminResponse> getAllCompanyForAdmin() {
+        List<Company> companies = companyRepository.findAllByRoleName(RoleEnum.COMPANY);
+        return companies.stream()
+                .map(this::toCompanyAdminResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public CompanyDetailResponse getCompanyDetailById(String id) {
         Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found with ID: " + id));
@@ -162,6 +170,15 @@ public class CompanyServiceImpl implements CompanyService {
         return "Delete Company Successfully with Username: " + username;
     }
 
+    @Override
+    public String deleteCompanyByIdForAdmin(String id) {
+        Company company = companyRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found with ID: " + id));
+
+        companyRepository.delete(company);
+        return "Delete Company Successfully with ID: " + id;
+    }
+
 
     public CompanyResponse toCompanyResponse(Company company) {
         CompanyResponse companyResponse = new CompanyResponse();
@@ -178,6 +195,14 @@ public class CompanyServiceImpl implements CompanyService {
         companyDetailResponse.setJobResponses(jobResponses);
         modelMapper.map(company, companyDetailResponse);
         return companyDetailResponse;
+    }
+
+    public CompanyAdminResponse toCompanyAdminResponse(Company company) {
+        CompanyAdminResponse companyAdminResponse = new CompanyAdminResponse();
+        companyAdminResponse.setUrlPicture(company.getPicture());
+        companyAdminResponse.setUsername(company.getUser().getUsername());
+        modelMapper.map(company, companyAdminResponse);
+        return companyAdminResponse;
     }
 
     private boolean isImageFile(MultipartFile file) {

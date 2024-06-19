@@ -1,6 +1,7 @@
 package sib6.finalproject.Jobsite_ServerApp.service;
 
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateCompanyDetailRequest;
+import sib6.finalproject.Jobsite_ServerApp.model.response.CompanyAdminResponse;
 import sib6.finalproject.Jobsite_ServerApp.model.response.CompanyDetailResponse;
 import sib6.finalproject.Jobsite_ServerApp.model.response.CompanyResponse;
 
@@ -10,6 +11,8 @@ public interface CompanyService {
 
     List<CompanyResponse> getAllCompany();
 
+    List<CompanyAdminResponse> getAllCompanyForAdmin();
+
     CompanyDetailResponse getCompanyDetailById(String id);
 
     CompanyDetailResponse getCompanyDetailProfile(String username);
@@ -17,5 +20,7 @@ public interface CompanyService {
     String updateCompanyDetail(String username, UpdateCompanyDetailRequest companyDetailRequest);
 
     String deleteCompanyByUsername(String username);
+
+    String deleteCompanyByIdForAdmin(String id);
 
 }

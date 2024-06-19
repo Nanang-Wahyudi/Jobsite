@@ -13,10 +13,7 @@ import sib6.finalproject.Jobsite_ServerApp.entity.User;
 import sib6.finalproject.Jobsite_ServerApp.entity.UserDetail;
 import sib6.finalproject.Jobsite_ServerApp.model.enums.RoleEnum;
 import sib6.finalproject.Jobsite_ServerApp.model.request.UpdateUserDetailRequest;
-import sib6.finalproject.Jobsite_ServerApp.model.response.EducationResponse;
-import sib6.finalproject.Jobsite_ServerApp.model.response.SkillResponse;
-import sib6.finalproject.Jobsite_ServerApp.model.response.UserDetailResponse;
-import sib6.finalproject.Jobsite_ServerApp.model.response.UserResponse;
+import sib6.finalproject.Jobsite_ServerApp.model.response.*;
 import sib6.finalproject.Jobsite_ServerApp.repository.EducationRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.SkillRepository;
 import sib6.finalproject.Jobsite_ServerApp.repository.UserDetailRepository;
@@ -69,6 +66,14 @@ public class UserDetailServiceImpl implements UserDetailService {
 
                     return this.toUserResponse(userDetail, skillResponses);
                 })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserAdminResponse> getAllUserForAdmin() {
+        List<UserDetail> userDetails = userDetailRepository.findAllByRoleName(RoleEnum.USER);
+        return userDetails.stream()
+                .map(this::toUserAdminResponse)
                 .collect(Collectors.toList());
     }
 
@@ -194,6 +199,15 @@ public class UserDetailServiceImpl implements UserDetailService {
         return "Delete User Successfully with Username: " + username;
     }
 
+    @Override
+    public String deleteUserByIdForAdmin(String id) {
+        UserDetail userDetail = userDetailRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Detail Not Found with ID: " + id));
+
+        userDetailRepository.delete(userDetail);
+        return "Delete User Successfully with ID: " + id;
+    }
+
 
     private boolean isImageFile(MultipartFile file) {
         String contentType = file.getContentType();
@@ -215,6 +229,14 @@ public class UserDetailServiceImpl implements UserDetailService {
         userResponse.setSkillResponses(skillResponses);
         modelMapper.map(userDetail, userResponse);
         return userResponse;
+    }
+
+    public UserAdminResponse toUserAdminResponse(UserDetail userDetail) {
+        UserAdminResponse userAdminResponse = new UserAdminResponse();
+        userAdminResponse.setUrlPicture(userDetail.getPicture());
+        userAdminResponse.setUsername(userDetail.getUser().getUsername());
+        modelMapper.map(userDetail, userAdminResponse);
+        return userAdminResponse;
     }
 
     public static String capitalizeWords(String str) {
