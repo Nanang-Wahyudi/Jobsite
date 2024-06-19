@@ -35,6 +35,13 @@ public class CompanyController {
         return ResponseEntity.ok(companyResponses);
     }
 
+    @Operation(summary = "Display all companies for Admin")
+    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    @GetMapping("/admin")
+    public ResponseEntity<?> getAllCompanyForAdmin() {
+        return ResponseEntity.ok(companyService.getAllCompanyForAdmin());
+    }
+
     @Operation(summary = "Display companies based on company ID")
     @GetMapping("/{id}")
     public ResponseEntity<?> getCompanyDetailById(@PathVariable("id") String id) {
@@ -75,6 +82,20 @@ public class CompanyController {
                 .url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())
                 .message(companyService.deleteCompanyByUsername(username))
+                .build();
+        response.setTimestamp(new Date());
+
+        return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "Delete company account based on ID for Admin")
+    @PreAuthorize("hasAuthority('DELETE_ADMIN')")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteCompanyByIdForAdmin(HttpServletRequest servletRequest, @PathVariable("id") String id) {
+        Response response = Response.builder()
+                .url(servletRequest.getRequestURL().toString())
+                .status(HttpStatus.OK.toString())
+                .message(companyService.deleteCompanyByIdForAdmin(id))
                 .build();
         response.setTimestamp(new Date());
 

@@ -9,24 +9,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class JobResponse {
+public class CompanyAdminResponse {
 
     private String id;
 
-    private String UrlPicture;
+    private String urlPicture;
 
-    private String companyName;
+    private String username;
+
+    private String name;
+
+    private String email;
 
     private String address;
-
-    private String title;
-
-    private String type;
-
-    private String salary;
-
-    private String postDate;
-
-    private Boolean isActive;
 
 }

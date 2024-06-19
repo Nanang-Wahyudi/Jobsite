@@ -17,6 +17,7 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("JOB-SITE OPEN API")
                         .description(
+                                "<b>Pastikan anda login terlebih dahulu sebelum menggunakan semua fitur, agar endpoint mendapatkan data username anda</b>" +
                                 "<br><br> <b>USER</b>: <br>" +
                                 "GET /api/user<br>" +
                                 "GET /api/user/{id}<br>" +
@@ -25,9 +26,13 @@ public class SwaggerConfig {
                                 "GET /api/job/{id}<br>" +
                                 "GET /api/company<br>" +
                                 "GET /api/company/{id}<br>" +
+                                "GET /api/applicant/history<br>" +
+                                "GET /api/skill/delete/{id}<br>" +
                                 "POST /api/applicant/create/{jobId}<br>" +
                                 "POST /api/feedback/create/{applicantId}<br>" +
                                 "PUT /api/user/update<br>" +
+                                "PUT /api/education/update/{id}<br>" +
+                                "PUT /api/education/delete/{id}<br>" +
                                 "DELETE /api/user/delete<br>" +
 
                                 "<br><b>COMPANY:</b><br>" +
@@ -38,6 +43,9 @@ public class SwaggerConfig {
                                 "GET /api/user/{id}<br>" +
                                 "GET /api/job<br>" +
                                 "GET /api/job/{id}<br>" +
+                                "GET /api/applicant<br>" +
+                                "GET /api/applicant/{id}<br>" +
+                                "GET /api/applicant/file-download/{id}<br>" +
                                 "POST /api/job/create<br>" +
                                 "PUT /api/applicant/update-status/{id}<br>" +
                                 "PUT /api/job/update/{id}<br>" +
@@ -47,12 +55,13 @@ public class SwaggerConfig {
                                 "DELETE /api/company/delete<br>" +
 
                                 "<br><b>ADMIN: </b> <br>" +
-                                "GET /api/company<br>" +
+                                "GET /api/company/admin<br>" +
                                 "GET /api/company/{id}<br>" +
-                                "GET /api/user<br>" +
+                                "GET /api/user/admin<br>" +
                                 "GET /api/user/{id}<br>" +
                                 "DELETE /api/user/delete<br>" +
-                                "DELETE /api/company/delete<br>" +
+                                "DELETE /api/user/delete/{id}<br>" +
+                                "DELETE /api/company/delete/{id}<br>" +
 
                                 "<br><b>ALL PERMIT: </b> <br>" +
                                 "POST /api/auth/login<br>" +

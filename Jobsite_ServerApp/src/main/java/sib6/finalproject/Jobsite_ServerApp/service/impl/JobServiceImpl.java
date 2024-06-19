@@ -148,6 +148,7 @@ public class JobServiceImpl implements JobService {
         JobResponse jobResponse = new JobResponse();
         jobResponse.setUrlPicture(job.getCompany().getPicture());
         jobResponse.setCompanyName(job.getCompany().getName());
+        jobResponse.setAddress(job.getCompany().getAddress());
         modelMapper.map(job, jobResponse);
         return jobResponse;
     }

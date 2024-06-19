@@ -35,6 +35,13 @@ public class UserDetailController {
         return ResponseEntity.ok(userResponse);
     }
 
+    @Operation(summary = "Display all Users for Admin")
+    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    @GetMapping("/admin")
+    public ResponseEntity<?> getAllUserForAdmin() {
+        return ResponseEntity.ok(userDetailService.getAllUserForAdmin());
+    }
+
     @Operation(summary = "Display users based on user ID")
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserDetailById(@PathVariable("id") String id) {
@@ -66,8 +73,8 @@ public class UserDetailController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Delete user account based on login username")
-    @PreAuthorize("hasAuthority('DELETE_USER')")
+    @Operation(summary = "Delete user account based on login username for Admin & User")
+    @PreAuthorize("hasAnyAuthority('DELETE_USER', 'DELETE_ADMIN')")
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUserByUsername(HttpServletRequest servletRequest) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -75,6 +82,20 @@ public class UserDetailController {
                 .url(servletRequest.getRequestURL().toString())
                 .status(HttpStatus.OK.toString())
                 .message(userDetailService.deleteUserByUsername(username))
+                .build();
+        response.setTimestamp(new Date());
+
+        return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "Delete user account based on ID for Admin")
+    @PreAuthorize("hasAuthority('DELETE_ADMIN')")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUserByIdForAdmin(HttpServletRequest servletRequest, @PathVariable("id") String id) {
+        Response response = Response.builder()
+                .url(servletRequest.getRequestURL().toString())
+                .status(HttpStatus.OK.toString())
+                .message(userDetailService.deleteUserByIdForAdmin(id))
                 .build();
         response.setTimestamp(new Date());
 
