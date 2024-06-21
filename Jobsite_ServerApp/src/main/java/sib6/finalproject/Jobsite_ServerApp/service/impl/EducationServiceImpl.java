@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import sib6.finalproject.Jobsite_ServerApp.entity.Education;
 import sib6.finalproject.Jobsite_ServerApp.entity.UserDetail;
@@ -26,6 +27,7 @@ public class EducationServiceImpl implements EducationService {
     private UserDetailRepository userDetailRepository;
 
 
+    @Transactional
     @Override
     public String updateEducation(String id, UpdateEducationRequest updateEducationRequest) {
         Education education = educationRepository.findById(id)
@@ -42,6 +44,7 @@ public class EducationServiceImpl implements EducationService {
         return "Updated Education Successfully with ID: " + id;
     }
 
+    @Transactional
     @Override
     public String deleteEducation(String id) {
         Education education = educationRepository.findById(id)

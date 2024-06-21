@@ -55,6 +55,7 @@ public class UserDetailServiceImpl implements UserDetailService {
     private SkillServiceImpl skillServiceImpl;
 
 
+    @Transactional(readOnly = true)
     @Override
     public List<UserResponse> getAllUser() {
         List<UserDetail> userDetails = userDetailRepository.findAllByRoleName(RoleEnum.USER);
@@ -69,6 +70,7 @@ public class UserDetailServiceImpl implements UserDetailService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UserAdminResponse> getAllUserForAdmin() {
         List<UserDetail> userDetails = userDetailRepository.findAllByRoleName(RoleEnum.USER);
@@ -77,6 +79,7 @@ public class UserDetailServiceImpl implements UserDetailService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public UserDetailResponse getUserDetailById(String id) {
         UserDetail userDetail = userDetailRepository.findById(id)
@@ -93,6 +96,7 @@ public class UserDetailServiceImpl implements UserDetailService {
         return this.toUserDetailResponse(userDetail, educationResponses, skillResponses);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public UserDetailResponse getUserDetailProfile(String username) {
         User user = userRepository.findByUsername(username)
@@ -189,6 +193,7 @@ public class UserDetailServiceImpl implements UserDetailService {
         return "Update User Detail Successfully with Name: " + userDetail.getName();
     }
 
+    @Transactional
     @Override
     public String deleteUserByUsername(String username) {
         User user = userRepository.findByUsername(username)
@@ -199,6 +204,7 @@ public class UserDetailServiceImpl implements UserDetailService {
         return "Delete User Successfully with Username: " + username;
     }
 
+    @Transactional
     @Override
     public String deleteUserByIdForAdmin(String id) {
         UserDetail userDetail = userDetailRepository.findById(id)

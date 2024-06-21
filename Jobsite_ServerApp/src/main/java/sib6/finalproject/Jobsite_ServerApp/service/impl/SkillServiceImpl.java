@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import sib6.finalproject.Jobsite_ServerApp.entity.Skill;
 import sib6.finalproject.Jobsite_ServerApp.entity.User;
@@ -30,6 +31,7 @@ public class SkillServiceImpl implements SkillService {
     private SkillRepository skillRepository;
 
 
+    @Transactional
     @Override
     public String deleteSkill(String id, String username) {
         User user = userRepository.findByUsername(username)

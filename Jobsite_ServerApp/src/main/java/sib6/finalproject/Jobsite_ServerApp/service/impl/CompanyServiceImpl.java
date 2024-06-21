@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import sib6.finalproject.Jobsite_ServerApp.entity.*;
@@ -46,6 +47,7 @@ public class CompanyServiceImpl implements CompanyService {
     private JobServiceImpl jobServiceImpl;
 
 
+    @Transactional(readOnly = true)
     @Override
     public List<CompanyResponse> getAllCompany() {
         List<Company> companies = companyRepository.findAllByRoleName(RoleEnum.COMPANY);
@@ -54,6 +56,7 @@ public class CompanyServiceImpl implements CompanyService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<CompanyAdminResponse> getAllCompanyForAdmin() {
         List<Company> companies = companyRepository.findAllByRoleName(RoleEnum.COMPANY);
@@ -62,6 +65,7 @@ public class CompanyServiceImpl implements CompanyService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public CompanyDetailResponse getCompanyDetailById(String id) {
         Company company = companyRepository.findById(id)
@@ -83,6 +87,7 @@ public class CompanyServiceImpl implements CompanyService {
         return this.toCompanyDetailResponse(company, feedbackResponses, jobResponses);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public CompanyDetailResponse getCompanyDetailProfile(String username) {
         User user = userRepository.findByUsername(username)
@@ -105,6 +110,7 @@ public class CompanyServiceImpl implements CompanyService {
         return this.toCompanyDetailResponse(company, feedbackResponses, jobResponses);
     }
 
+    @Transactional
     @Override
     public String updateCompanyDetail(String username, UpdateCompanyDetailRequest companyDetailRequest) {
         String pictureUrl = null, bannerUrl = null;
@@ -160,6 +166,7 @@ public class CompanyServiceImpl implements CompanyService {
         return "Company Detail Successfully Updated with Username: " + username;
     }
 
+    @Transactional
     @Override
     public String deleteCompanyByUsername(String username) {
         User user = userRepository.findByUsername(username)
@@ -170,6 +177,7 @@ public class CompanyServiceImpl implements CompanyService {
         return "Delete Company Successfully with Username: " + username;
     }
 
+    @Transactional
     @Override
     public String deleteCompanyByIdForAdmin(String id) {
         Company company = companyRepository.findById(id)

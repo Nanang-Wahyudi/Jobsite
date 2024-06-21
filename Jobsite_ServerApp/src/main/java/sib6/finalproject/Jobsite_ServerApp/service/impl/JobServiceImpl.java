@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import sib6.finalproject.Jobsite_ServerApp.entity.Company;
 import sib6.finalproject.Jobsite_ServerApp.entity.Job;
@@ -44,6 +45,7 @@ public class JobServiceImpl implements JobService {
     private CompanyServiceImpl companyServiceImpl;
 
 
+    @Transactional(readOnly = true)
     @Override
     @SuppressWarnings("null")
     public Job findById(String id) {
@@ -54,6 +56,7 @@ public class JobServiceImpl implements JobService {
                 ));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<JobResponse> getAllJob() {
         List<Job> jobs = jobRepository.findAll();
@@ -64,12 +67,14 @@ public class JobServiceImpl implements JobService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public JobDetailResponse getJobDetailById(String id) {
         Job job = findById(id);
         return toJobDetailResponse(job, job.getCompany());
     }
 
+    @Transactional
     @Override
     public String createJob(String username, CreateJobRequest jobRequest) {
         Job job = modelMapper.map(jobRequest, Job.class);
@@ -94,6 +99,7 @@ public class JobServiceImpl implements JobService {
         return "Create Successfully with Job Title: " + jobRequest.getTitle();
     }
 
+    @Transactional
     @Override
     public String updateJob(UpdateJobRequest updateJobRequest, String username, String id) {
         Job job = this.findById(id);
@@ -128,6 +134,7 @@ public class JobServiceImpl implements JobService {
         return "Update Successfully with Job Title: " + job.getTitle();
     }
 
+    @Transactional
     @Override
     public String updateStatusJob(String jobId) {
         Job job = findById(jobId);
@@ -136,6 +143,7 @@ public class JobServiceImpl implements JobService {
         return "Job Status Successfully Updated to: " + job.getIsActive() + ", with Job ID: " + jobId;
     }
 
+    @Transactional
     @Override
     public String deleteJob(String id) {
         Job job = this.findById(id);
