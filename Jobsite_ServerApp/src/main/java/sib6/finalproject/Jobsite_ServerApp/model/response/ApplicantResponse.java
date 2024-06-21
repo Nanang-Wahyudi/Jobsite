@@ -13,6 +13,8 @@ public class ApplicantResponse {
 
     private String id;
 
+    private String urlPicture;
+
     private String nameUser;
 
     private String companyName;
