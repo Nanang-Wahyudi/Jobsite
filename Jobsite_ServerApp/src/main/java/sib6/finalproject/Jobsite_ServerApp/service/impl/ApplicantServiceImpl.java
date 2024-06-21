@@ -100,7 +100,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
         return applicants.stream()
                 .sorted(Comparator.comparing(Applicant::getApplicantDate).reversed())
-                .map(this::toApplicantResponse)
+                .map(this::toApplicantHistoryResponse)
                 .collect(Collectors.toList());
     }
 
@@ -176,6 +176,17 @@ public class ApplicantServiceImpl implements ApplicantService {
 
     public ApplicantResponse toApplicantResponse(Applicant applicant) {
         ApplicantResponse applicantResponse = new ApplicantResponse();
+        applicantResponse.setUrlPicture(applicant.getUserDetail().getPicture());
+        applicantResponse.setCompanyName(applicant.getJob().getCompany().getName());
+        applicantResponse.setNameUser(applicant.getUserDetail().getName());
+        applicantResponse.setTitleJob(applicant.getJob().getTitle());
+        modelMapper.map(applicant, applicantResponse);
+        return applicantResponse;
+    }
+
+    public ApplicantResponse toApplicantHistoryResponse(Applicant applicant) {
+        ApplicantResponse applicantResponse = new ApplicantResponse();
+        applicantResponse.setUrlPicture(applicant.getJob().getCompany().getPicture());
         applicantResponse.setCompanyName(applicant.getJob().getCompany().getName());
         applicantResponse.setNameUser(applicant.getUserDetail().getName());
         applicantResponse.setTitleJob(applicant.getJob().getTitle());

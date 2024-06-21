@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/main}"
+>
+<head>
+    <title>Dream Job - Applicant Detail</title>
+</head>
+<body>
+    
+    <div layout:fragment="content" class="container-xxl bg-white p-0">
+        <!-- Header Start -->
+        <div class="container-xxl py-5 bg-dark page-header mb-5">
+            <div class="container my-5 pt-5 pb-4">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Applicant Detail</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb text-uppercase">
+                        <li class="breadcrumb-item"><a th:href="@{/applicant}">Applicant</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Applicant Detail</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Header End -->
+
+
+        <!-- Job Detail Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="row gy-5 gx-4">
+                    <div class="col-lg-8">
+                        <div class="d-flex align-items-center mb-5">
+                            <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="100">
+                            <div class="text-start ps-4">
+                                <h3 class="mb-3">Nona Swanson</h3>
+                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 mb-5">
+                            <h4 class="mb-3">Capabilities Possessed</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Java</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>JavaScript</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>MySQL</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Spring Boot</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>API</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Object Oriented Programming</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Virtual Private Server</p>
+                            
+                            <a class="btn btn-primary" th:href="@{/talent/detail}">View Detail</a>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-5">
+                            <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show p-0 active">
+                                        <div class="job-item p-4 mb-4">
+                                            <div class="row g-4">
+                                                <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
+                                                    <div class="text-start ps-4">
+                                                        <h5>Software Engineer</h5>
+                                                        <p>Metrodata Academy</p>
+                                                        <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
+                                                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                                                        <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                                    <div class="d-flex mb-3">
+                                                        <a class="btn btn-primary" th:href="@{/job/detail}">View Detail</a>
+                                                    </div>
+                                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>            
+                        </div>
+
+                        <div class="mb-5">
+                            <!-- <h4 class="mb-3">Capabilities Possessed</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Java</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>JavaScript</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>MySQL</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Spring Boot</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>API</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Object Oriented Programming</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Virtual Private Server</p> -->
+                        </div>
+                    </div>
+        
+                    <div class="col-lg-4">
+                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                            <h4 class="mb-4">Applicant Summary</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Applicant Date: 01 Jan, 2045</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Status: PROCESSED</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><a href="">Download CV</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Job Detail End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+</body>
+</html>
