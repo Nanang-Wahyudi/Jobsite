@@ -25,4 +25,9 @@ public class UserController {
         return "/user/user-detail";
     }
 
+    @GetMapping("/profile/update")
+    public String userProfileUpdate() {
+        return "/user/update-profile";
+    }
+
 }
