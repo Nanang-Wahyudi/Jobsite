@@ -25,4 +25,9 @@ public class CompanyController {
         return "/company/company-detail";
     }
 
+    @GetMapping("/profile/update")
+    public String companyProfileUpdate() {
+        return "/company/update-profile";
+    }
+
 }
