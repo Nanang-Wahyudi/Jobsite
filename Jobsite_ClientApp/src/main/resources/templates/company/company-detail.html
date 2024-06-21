@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/main}"
+>
+<head>
+    <title>Dream Job - Company Detail</title>
+</head>
+<body>
+    
+    <div layout:fragment="content" class="container-xxl bg-white p-0">
+        <!-- Header Start -->
+        <div class="container-xxl py-5 bg-dark page-header mb-5">
+            <div class="container my-5 pt-5 pb-4">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Company Detail</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb text-uppercase">
+                        <li class="breadcrumb-item"><a th:href="@{/company}">Company</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Detail</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Header End -->
+
+
+        <!-- Profile Start -->
+        <div class="container pb-5">
+            <h3 class="mb-4 wow fadeInUp" data-wow-delay="0.1s">PROFILE</h3>
+            <div class="tab-class wow fadeInUp" data-wow-delay="0.3s">
+                <div class="tab-content">
+                    <div class="tab-pane fade show p-0 active">
+                        <div class="job-item p-4 mb-4">
+                            <img class="img-fluid" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718843247/lzotq8fdhemmnk4ktug9.jpg" alt="">
+                            <div class="text-center mt-2">
+                                <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718843109/oyfjh7rawiv0qifs4xsv.jpg" alt="" width="200">
+                            </div>
+                            <div class="pt-3 text-center">
+                                <h3>PT Metrodata Electronics Tbk</h3>
+                                <p class="fs-5 mb-0">Jakarta Barat, Indonesia</p>
+                                <p class="fs-6 mb-0">metrodata@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="mb-4 mt-5 wow fadeInUp" data-wow-delay="0.1s">ABOUT</h3>
+            <div class="tab-class wow fadeInUp" data-wow-delay="0.3s">
+                <div class="tab-content">
+                    <div class="tab-pane fade show p-0 active">
+                        <div class="job-item p-4 mb-4">
+                            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae quisquam ullam voluptatibus possimus sapiente id soluta temporibus nulla neque, doloribus, illum ex odit reiciendis unde officia ratione! Modi fuga amet nihil optio ex et, assumenda, nulla ipsa, animi sint doloremque aspernatur. Explicabo soluta assumenda molestiae adipisci optio odio dolore delectus, quos neque at odit, ipsum ducimus pariatur vel suscipit aliquam dolorem maxime ab laborum eos a sed laudantium iusto! Doloremque, sunt! Nostrum quas commodi temporibus blanditiis. Sapiente exercitationem dolore nesciunt sequi facilis adipisci quas dolores mollitia illo, officia repellat molestias. Consectetur labore et impedit mollitia asperiores officiis nisi iste.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="wow fadeInUp mb-4 mt-5" data-wow-delay="0.1s">JOB</h3>
+            <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                <div class="tab-content">
+                    <div class="tab-pane fade show p-0 active">
+                        <div class="job-item p-4 mb-4">
+                            <div class="row g-4">
+                                <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
+                                    <div class="text-start ps-4">
+                                        <h5>Software Engineer</h5>
+                                        <p>Metrodata Academy</p>
+                                        <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
+                                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                                        <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                    <div class="d-flex mb-3">
+                                        <a class="btn btn-primary" href="">Apply Now</a>
+                                    </div>
+                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-item p-4 mb-4">
+                            <div class="row g-4">
+                                <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
+                                    <div class="text-start ps-4">
+                                        <h5>Wordpress Developer</h5>
+                                        <p>Metrodata Academy</p>
+                                        <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
+                                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                                        <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                    <div class="d-flex mb-3">
+                                        <a class="btn btn-primary" href="">Apply Now</a>
+                                    </div>
+                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="mb-4 mt-5 wow fadeInUp" data-wow-delay="0.1s">FEEDBACK</h3>
+            <div class="tab-class wow fadeInUp" data-wow-delay="0.3s">
+                <div class="tab-content">
+                    <div class="tab-pane fade show p-0 active">
+                        <div class="job-item p-4 mb-4">
+                            <div class="row g-4">
+                                <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="100">
+                                    <div class="text-start ps-4">
+                                        <h5>Nona Swanson</h5>
+                                        <p>Software Engineer</p>
+                                        <span class="text-truncate me-3"><i class="bi bi-building text-primary me-2"></i>PT Metrodata Electronics Tbk</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                    <div class="d-flex mb-3">
+                                        <span class="fa fa-star text-warning"></span>
+                                        <span class="fa fa-star text-warning"></span>
+                                        <span class="fa fa-star text-warning"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
+                                </div>
+                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit delectus quia incidunt praesentium. Earum expedita, provident temporibus quidem architecto corrupti soluta, tenetur nihil ipsam neque eveniet dolorum ut vitae quas aspernatur porro sit. Libero deserunt pariatur iste! Illo quae sit harum debitis ipsum unde, quis fugiat placeat similique deserunt fugit deleniti eum vitae ut optio aliquam, ex veniam pariatur delectus sed neque aliquid ducimus omnis. Optio doloribus nostrum dolor tempore dicta adipisci earum. Dignissimos, earum accusantium! Libero praesentium repellendus doloremque assumenda velit quisquam? Quia iste totam, tempora vitae amet nisi sed expedita magnam, quos laborum praesentium harum ut, aliquid fuga?</p>
+                            </div>
+                        </div>
+                        <div class="job-item p-4 mb-4">
+                            <div class="row g-4">
+                                <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="100">
+                                    <div class="text-start ps-4">
+                                        <h5>Nona Swanson</h5>
+                                        <p>Software Engineer</p>
+                                        <span class="text-truncate me-3"><i class="bi bi-building text-primary me-2"></i>PT Metrodata Electronics Tbk</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                    <div class="d-flex mb-3">
+                                        <span class="fa fa-star text-warning"></span>
+                                        <span class="fa fa-star text-warning"></span>
+                                        <span class="fa fa-star text-warning"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
+                                </div>
+                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit delectus quia incidunt praesentium. Earum expedita, provident temporibus quidem architecto corrupti soluta, tenetur nihil ipsam neque eveniet dolorum ut vitae quas aspernatur porro sit. Libero deserunt pariatur iste! Illo quae sit harum debitis ipsum unde, quis fugiat placeat similique deserunt fugit deleniti eum vitae ut optio aliquam, ex veniam pariatur delectus sed neque aliquid ducimus omnis. Optio doloribus nostrum dolor tempore dicta adipisci earum. Dignissimos, earum accusantium! Libero praesentium repellendus doloremque assumenda velit quisquam? Quia iste totam, tempora vitae amet nisi sed expedita magnam, quos laborum praesentium harum ut, aliquid fuga?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Profile End -->
+    </div>    
+
+</body>
+</html>
