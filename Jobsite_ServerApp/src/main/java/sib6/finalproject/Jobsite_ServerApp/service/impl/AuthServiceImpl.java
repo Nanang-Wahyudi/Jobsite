@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import sib6.finalproject.Jobsite_ServerApp.entity.Company;
 import sib6.finalproject.Jobsite_ServerApp.entity.Role;
@@ -61,6 +62,7 @@ public class AuthServiceImpl implements AuthService {
     private PasswordEncoder passwordEncoder;
 
 
+    @Transactional
     @Override
     public String register(RegisterRequest request, RoleEnum roleName) {
         if (userRepository.findByUsername(request.getUsername()).isPresent()) {
@@ -106,6 +108,7 @@ public class AuthServiceImpl implements AuthService {
         return "Registered Successfully with Username: " + request.getUsername();
     }
 
+    @Transactional
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
         UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(
@@ -151,6 +154,7 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
+    @Transactional
     @Override
     public String updatePassword(String username, UpdatePasswordRequest updatePasswordRequest) {
         User user = userRepository.findByUsername(username)
@@ -169,6 +173,7 @@ public class AuthServiceImpl implements AuthService {
         return "Updated Password Successfully with Username: " + username;
     }
 
+    @Transactional
     @Override
     public String forgotPassword(ForgotPasswordRequest forgotPasswordRequest) {
         User user = userRepository.findByUsername(forgotPasswordRequest.getUsername())

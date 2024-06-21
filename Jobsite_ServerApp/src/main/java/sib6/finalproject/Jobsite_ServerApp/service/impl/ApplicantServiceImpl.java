@@ -48,12 +48,14 @@ public class ApplicantServiceImpl implements ApplicantService {
     private SkillServiceImpl skillServiceImpl;
 
 
+    @Transactional(readOnly = true)
     @Override
     public Applicant findById(String id) {
         return applicantRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Applicant Not Found with ID: " + id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<ApplicantResponse> getAllApplicant(String username) {
         User user = userRepository.findByUsername(username)
@@ -72,6 +74,7 @@ public class ApplicantServiceImpl implements ApplicantService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public ApplicantDetailResponse getApplicantById(String id) {
         Applicant applicant = this.findById(id);
@@ -90,6 +93,7 @@ public class ApplicantServiceImpl implements ApplicantService {
         return this.toApplicantDetailResponse(applicant, jobResponse, userResponse);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<ApplicantResponse> getAllApplicantHistoryUser(String username) {
         User user = userRepository.findByUsername(username)
@@ -153,6 +157,7 @@ public class ApplicantServiceImpl implements ApplicantService {
         return "Applicant Successfully Applied";
     }
 
+    @Transactional
     @Override
     public String updateStatusApplicant(String applicantId, UpdateStatusApplicantRequest statusApplicantRequest) {
         Applicant applicant = applicantRepository.findById(applicantId)
