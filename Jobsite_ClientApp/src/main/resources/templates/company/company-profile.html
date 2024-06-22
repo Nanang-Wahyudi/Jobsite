@@ -61,7 +61,7 @@
             
             <div class="wow fadeInUp d-flex justify-content-between mb-4 mt-5" data-wow-delay="0.1s">
                 <h3>JOB</h3>
-                <a href="" class="btn btn-outline-primary">Add Job</a>
+                <a th:href="@{/job/add}" class="btn btn-outline-primary">Add Job</a>
             </div>
             <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
                 <div class="tab-content">
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                     <div class="d-flex mb-3">
-                                        <a class="btn btn-light btn-square me-3" href="" title="Update Job"><i class="bi bi-pencil-square text-primary"></i></a>
+                                        <a class="btn btn-light btn-square me-3" th:href="@{/job/update}" title="Update Job"><i class="bi bi-pencil-square text-primary"></i></a>
                                         <a class="btn btn-light btn-square me-3" href="" title="Delete Job"><i class="bi bi-x-square text-danger"></i></a>
                                     </div>
                                     <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
