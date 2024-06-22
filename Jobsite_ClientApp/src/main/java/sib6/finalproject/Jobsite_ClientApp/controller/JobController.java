@@ -20,4 +20,14 @@ public class JobController {
         return "/job/job-detail";
     }
 
+    @GetMapping("/add")
+    public String createJob() {
+        return "/job/job-add";
+    }
+
+    @GetMapping("/update")
+    public String updateJob() {
+        return "/job/job-update";
+    }
+
 }
