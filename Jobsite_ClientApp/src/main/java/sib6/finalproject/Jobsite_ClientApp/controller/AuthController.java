@@ -26,4 +26,14 @@ public class AuthController {
         return "/auth/register-admin";
     }
 
+    @GetMapping("/forgot-password")
+    public String forgotPassword() {
+        return "/auth/forgot-password";
+    }
+
+    @GetMapping("/update-password")
+    public String updatePassword() {
+        return "/auth/update-password";
+    }
+
 }

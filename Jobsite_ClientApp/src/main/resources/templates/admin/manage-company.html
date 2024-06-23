@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/main}"
+>
+<head>
+    <title>Dream Job - Manage Company</title>
+</head>
+<body>
+    
+    <div layout:fragment="content" class="container-xxl bg-white p-0">
+        <!-- Header Start -->
+        <div class="container-xxl py-5 bg-dark page-header mb-5">
+            <div class="container my-5 pt-5 pb-4">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Manage Company</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb text-uppercase">
+                        <li class="breadcrumb-item text-white active" aria-current="page">Manage Company</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Header End -->
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-11">
+                <h3 class="mb-4 mt-4 wow fadeInUp" data-wow-delay="0.1s">Table Company</h3>
+                <div class="tab-class wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show p-0 active">
+                            <div class="job-item p-4 mb-5">
+                                <div style="overflow-x: auto;">
+                                    <table class="table table-responsive-sm table-responsive-md table-hover table-bordered mb-0 text-center" style="font-size: 14px;">
+                                        <thead class="table-success">
+                                            <tr>
+                                                <th scope="col" width="50">No</th>
+                                                <th scope="col" width="150">Profile Picture</th>
+                                                <th scope="col" width="180">Username</th>
+                                                <th scope="col" width="300">Name</th>
+                                                <th scope="col" width="300">Email</th>
+                                                <th scope="col" width="500">Address</th>
+                                                <th scope="col" width="200">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>
+                                                    <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="60">
+                                                </td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-outline-primary" th:href="@{/company/detail}">Detail</a>
+                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>
+                                                    <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="60">
+                                                </td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-outline-primary" th:href="@{/company/detail}">Detail</a>
+                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>
+                                                    <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="60">
+                                                </td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-outline-primary" th:href="@{/company/detail}">Detail</a>
+                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <td>
+                                                    <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="60">
+                                                </td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-outline-primary" th:href="@{/company/detail}">Detail</a>
+                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>     
+
+</body>
+</html>
