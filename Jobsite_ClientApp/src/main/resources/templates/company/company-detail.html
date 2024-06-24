@@ -31,14 +31,14 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show p-0 active">
                         <div class="job-item p-4 mb-4">
-                            <img class="img-fluid" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718843247/lzotq8fdhemmnk4ktug9.jpg" alt="">
+                            <img class="img-fluid" th:src="${companyDetail.urlBanner}" alt="">
                             <div class="text-center mt-2">
-                                <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718843109/oyfjh7rawiv0qifs4xsv.jpg" alt="" width="200">
+                                <img th:src="${companyDetail.urlPicture}" alt="" width="200">
                             </div>
                             <div class="pt-3 text-center">
-                                <h3>PT Metrodata Electronics Tbk</h3>
-                                <p class="fs-5 mb-0">Jakarta Barat, Indonesia</p>
-                                <p class="fs-6 mb-0">metrodata@gmail.com</p>
+                                <h3 th:text="${companyDetail.name}"></h3>
+                                <p class="fs-5 mb-0" th:text="${companyDetail.address}"></p>
+                                <p class="fs-6 mb-0" th:text="${companyDetail.email}"></p>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show p-0 active">
                         <div class="job-item p-4 mb-4">
-                            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae quisquam ullam voluptatibus possimus sapiente id soluta temporibus nulla neque, doloribus, illum ex odit reiciendis unde officia ratione! Modi fuga amet nihil optio ex et, assumenda, nulla ipsa, animi sint doloremque aspernatur. Explicabo soluta assumenda molestiae adipisci optio odio dolore delectus, quos neque at odit, ipsum ducimus pariatur vel suscipit aliquam dolorem maxime ab laborum eos a sed laudantium iusto! Doloremque, sunt! Nostrum quas commodi temporibus blanditiis. Sapiente exercitationem dolore nesciunt sequi facilis adipisci quas dolores mollitia illo, officia repellat molestias. Consectetur labore et impedit mollitia asperiores officiis nisi iste.</p>
+                            <p class="mb-0" th:text="${companyDetail.description}"></p>
                         </div>
                     </div>
                 </div>
@@ -60,43 +60,23 @@
             <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
                 <div class="tab-content">
                     <div class="tab-pane fade show p-0 active">
-                        <div class="job-item p-4 mb-4">
+                        <div th:each="job : ${companyDetail.jobResponses}" class="job-item p-4 mb-4">
                             <div class="row g-4">
                                 <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
+                                    <img class="flex-shrink-0 img-fluid rounded" th:src="${job.urlPicture}" alt="" width="100">
                                     <div class="text-start ps-4">
-                                        <h5>Software Engineer</h5>
-                                        <p>Metrodata Academy</p>
-                                        <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                        <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+                                        <h5 th:text="${job.title}"></h5>
+                                        <p th:text="${job.companyName}"></p>
+                                        <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i><span th:text="${job.address}"></span></span>
+                                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i><span th:text="${job.type}"></span></span>
+                                        <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i><span th:text="${job.salary}"></span></span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                     <div class="d-flex mb-3">
-                                        <a class="btn btn-primary" href="">Apply Now</a>
+                                        <a class="btn btn-primary" th:href="@{'/job/detail/' + ${job.id}}">Apply Now</a>
                                     </div>
-                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="job-item p-4 mb-4">
-                            <div class="row g-4">
-                                <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
-                                    <div class="text-start ps-4">
-                                        <h5>Wordpress Developer</h5>
-                                        <p>Metrodata Academy</p>
-                                        <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                        <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                    <div class="d-flex mb-3">
-                                        <a class="btn btn-primary" href="">Apply Now</a>
-                                    </div>
-                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
+                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: <span th:text="${job.postDate}"></span></small>
                                 </div>
                             </div>
                         </div>
@@ -108,50 +88,25 @@
             <div class="tab-class wow fadeInUp" data-wow-delay="0.3s">
                 <div class="tab-content">
                     <div class="tab-pane fade show p-0 active">
-                        <div class="job-item p-4 mb-4">
+                        <div th:each="feedback : ${companyDetail.feedbackResponses}" class="job-item p-4 mb-4">
                             <div class="row g-4">
                                 <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="100">
+                                    <img class="flex-shrink-0 img-fluid rounded" th:src="${feedback.applicantResponse.urlPicture}" alt="" width="100">
                                     <div class="text-start ps-4">
-                                        <h5>Nona Swanson</h5>
-                                        <p>Software Engineer</p>
-                                        <span class="text-truncate me-3"><i class="bi bi-building text-primary me-2"></i>PT Metrodata Electronics Tbk</span>
+                                        <h5 th:text="${feedback.applicantResponse.nameUser}"></h5>
+                                        <p th:text="${feedback.applicantResponse.titleJob}"></p>
+                                        <span class="text-truncate me-3"><i class="bi bi-building text-primary me-2"></i><span th:text="${feedback.applicantResponse.companyName}"></span></span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                     <div class="d-flex mb-3">
-                                        <span class="fa fa-star text-warning"></span>
-                                        <span class="fa fa-star text-warning"></span>
-                                        <span class="fa fa-star text-warning"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
+                                        <span th:each="star : ${#numbers.sequence(1, feedback.rating)}" class="fa fa-star text-warning"></span>
+                                        <span th:each="star : ${#numbers.sequence(feedback.rating + 1, 5)}" class="fa fa-star"></span>
                                     </div>
-                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
+
+                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: <span th:text="${feedback.postDate}"></span></small>
                                 </div>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit delectus quia incidunt praesentium. Earum expedita, provident temporibus quidem architecto corrupti soluta, tenetur nihil ipsam neque eveniet dolorum ut vitae quas aspernatur porro sit. Libero deserunt pariatur iste! Illo quae sit harum debitis ipsum unde, quis fugiat placeat similique deserunt fugit deleniti eum vitae ut optio aliquam, ex veniam pariatur delectus sed neque aliquid ducimus omnis. Optio doloribus nostrum dolor tempore dicta adipisci earum. Dignissimos, earum accusantium! Libero praesentium repellendus doloremque assumenda velit quisquam? Quia iste totam, tempora vitae amet nisi sed expedita magnam, quos laborum praesentium harum ut, aliquid fuga?</p>
-                            </div>
-                        </div>
-                        <div class="job-item p-4 mb-4">
-                            <div class="row g-4">
-                                <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="100">
-                                    <div class="text-start ps-4">
-                                        <h5>Nona Swanson</h5>
-                                        <p>Software Engineer</p>
-                                        <span class="text-truncate me-3"><i class="bi bi-building text-primary me-2"></i>PT Metrodata Electronics Tbk</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                    <div class="d-flex mb-3">
-                                        <span class="fa fa-star text-warning"></span>
-                                        <span class="fa fa-star text-warning"></span>
-                                        <span class="fa fa-star text-warning"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
-                                </div>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit delectus quia incidunt praesentium. Earum expedita, provident temporibus quidem architecto corrupti soluta, tenetur nihil ipsam neque eveniet dolorum ut vitae quas aspernatur porro sit. Libero deserunt pariatur iste! Illo quae sit harum debitis ipsum unde, quis fugiat placeat similique deserunt fugit deleniti eum vitae ut optio aliquam, ex veniam pariatur delectus sed neque aliquid ducimus omnis. Optio doloribus nostrum dolor tempore dicta adipisci earum. Dignissimos, earum accusantium! Libero praesentium repellendus doloremque assumenda velit quisquam? Quia iste totam, tempora vitae amet nisi sed expedita magnam, quos laborum praesentium harum ut, aliquid fuga?</p>
+                                <p th:text="${feedback.comment}"></p>
                             </div>
                         </div>
                     </div>

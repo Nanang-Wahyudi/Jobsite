@@ -23,87 +23,24 @@
         <!-- Header End -->
 
 
-        <!-- Talent Start -->
+        <!-- Company Start -->
         <div class="container-xxl py-5">
             <div class="container">
                 <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore Company</h1>
                 <div class="row g-4">
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" th:href="@{/company/detail}">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
+                    <div th:each="company : ${companies}" class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
+                        <a class="cat-item rounded p-4 text-center" th:href="@{'/company/detail/' + ${company.id}}">
+                            <img th:src="${company.urlPicture}"
+                                width="130"    
                                 class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                   <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                   <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                   <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                   <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
+                            <h5 class="mb-3" th:text="${company.name}"></h5>
+                            <p class="mb-0" th:text="${company.address}"></p>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Talents End -->
+        <!-- Company End -->
 
 
         <!-- Back to Top -->
