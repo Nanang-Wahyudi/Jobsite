@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Default meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
     <title>Dream Job</title>
 
     <!-- Favicon -->
@@ -48,5 +54,11 @@
 
     <!-- Template Javascript -->
     <script src="/js/main.js"></script>
+
+    <!-- Add CSRF Token -->
+    <script src="/js/security/addCSRFToken.js"></script>
+
+    <!-- JS Local -->
+    <div layout:fragment="script"></div>
 </body>
 </html>

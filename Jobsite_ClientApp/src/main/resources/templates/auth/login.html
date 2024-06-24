@@ -26,27 +26,29 @@
                 <div class="col-lg-6">
                     <div class="card2 card border-0 px-4 py-5">
                         <h3 class="text-center text-success mb-4">LOGIN</h3>
-                        <div class="row px-3">
-                            <label class="mb-1"><h6 class="mb-0 text-sm">Username</h6></label>
-                            <input class="mb-4" type="text" id="username" placeholder="Enter a valid Username">
-                        </div>
-                        <div class="row px-3">
-                            <label class="mb-1"><h6 class="mb-0 text-sm">Password</h6></label>
-                            <input class="mb-2" type="password" id="password" placeholder="Enter Password">
-                        </div>
-                        <div class="row px-3 mb-4">
-                            <div class="custom-control custom-checkbox custom-control-inline">
-                                <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> 
-                                <label for="chk1" class="custom-control-label text-sm">Show Password</label>
+                        <form th:action="@{/login}" th:method="POST" th:object="${loginRequest}">
+                            <div class="row px-3">
+                                <label class="mb-1"><h6 class="mb-0 text-sm">Username</h6></label>
+                                <input class="mb-4" type="text" id="username" th:field="*{username}" placeholder="Enter a valid Username">
                             </div>
-                            <a th:href="@{/forgot-password}" class="ml-auto mb-0 text-sm">Forgot Password?</a>
-                        </div>
-                        <div class="row mb-3 px-3">
-                            <button type="submit" class="btn btn-outline-success text-center">Login</button>
-                        </div>
-                        <div class="row mb-4 px-3">
-                            <small class="font-weight-bold">Don't have an account? <a class="text-danger" th:href="@{/register}">Register</a></small>
-                        </div>
+                            <div class="row px-3">
+                                <label class="mb-1"><h6 class="mb-0 text-sm">Password</h6></label>
+                                <input class="mb-2" type="password" id="password" th:field="*{password}" placeholder="Enter Password">
+                            </div>
+                            <div class="row px-3 mb-4">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input id="showPassword" type="checkbox" class="custom-control-input"> 
+                                    <label for="showPassword" class="custom-control-label text-sm">Show Password</label>
+                                </div>
+                                <a th:href="@{/forgot-password}" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+                            </div>
+                            <div class="row mb-3 px-3">
+                                <button type="submit" class="btn btn-outline-success text-center">Login</button>
+                            </div>
+                            <div class="row mb-4 px-3">
+                                <small class="font-weight-bold">Don't have an account? <a class="text-danger" th:href="@{/register}">Register</a></small>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -67,5 +69,8 @@
     <!-- CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS Local -->
+     <script src="/js/showPassword.js"></script>
 </body>
 </html>
