@@ -1,4 +1,4 @@
-package sib6.finalproject.Jobsite_ServerApp.model.response;
+package sib6.finalproject.Jobsite_ClientApp.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

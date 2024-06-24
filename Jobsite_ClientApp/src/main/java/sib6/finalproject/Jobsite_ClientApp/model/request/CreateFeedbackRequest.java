@@ -1,4 +1,4 @@
-package sib6.finalproject.Jobsite_ServerApp.model.response;
+package sib6.finalproject.Jobsite_ClientApp.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,16 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FeedbackResponse {
-
-    private String id;
+public class CreateFeedbackRequest {
 
     private Integer rating;
 
     private String comment;
-
-    private String postDate;
-
-    private ApplicantResponse applicantResponse;
 
 }

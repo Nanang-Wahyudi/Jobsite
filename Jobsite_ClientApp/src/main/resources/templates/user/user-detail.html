@@ -32,12 +32,12 @@
                     <div class="tab-pane fade show p-0 active">
                         <div class="job-item p-4 mb-4">
                              <div class="text-center">
-                                <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="200">
+                                <img th:src="${userDetail.urlPicture}" alt="" width="150">
                             </div>
                             <div class="pt-4 text-center">
-                                <h3>Nona Swanson</h3>
-                                <p class="fs-5 mb-0">Amerika</p>
-                                <p class="fs-6 mb-0">swanson@gmail.com</p>
+                                <h3 th:text="${userDetail.name}"></h3>
+                                <p class="fs-5 mb-0" th:text="${userDetail.address}"></p>
+                                <p class="fs-6 mb-0" th:text="${userDetail.email}"></p>
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show p-0 active">
                         <div class="job-item p-4 mb-4">
-                            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae quisquam ullam voluptatibus possimus sapiente id soluta temporibus nulla neque, doloribus, illum ex odit reiciendis unde officia ratione! Modi fuga amet nihil optio ex et, assumenda, nulla ipsa, animi sint doloremque aspernatur. Explicabo soluta assumenda molestiae adipisci optio odio dolore delectus, quos neque at odit, ipsum ducimus pariatur vel suscipit aliquam dolorem maxime ab laborum eos a sed laudantium iusto! Doloremque, sunt! Nostrum quas commodi temporibus blanditiis. Sapiente exercitationem dolore nesciunt sequi facilis adipisci quas dolores mollitia illo, officia repellat molestias. Consectetur labore et impedit mollitia asperiores officiis nisi iste.</p>
+                            <p class="mb-0" th:text="${userDetail.description}"></p>
                         </div>
                     </div>
                 </div>
@@ -59,28 +59,13 @@
             <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
                 <div class="tab-content">
                     <div class="tab-pane fade show p-0 active">
-                        <div class="job-item p-4 mb-4">
+                        <div th:each="education : ${userDetail.educationResponses}" class="job-item p-4 mb-4">
                             <div class="row g-4">
                                 <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718810428/vejkopvzywaijaibnz6y.jpg" alt="" width="100">
                                     <div class="text-start ps-4">
-                                        <h5>Universitas Negeri Amerika</h5>
-                                        <span class="text-truncate me-3"><i class="bi bi-award text-primary me-2"></i>Teknik Informatika</span>
-                                        <span class="text-truncate me-3"><i class="bi bi-journal-text text-primary me-2"></i>3.50 / 4.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade show p-0 active">
-                        <div class="job-item p-4 mb-4">
-                            <div class="row g-4">
-                                <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718810428/vejkopvzywaijaibnz6y.jpg" alt="" width="100">
-                                    <div class="text-start ps-4">
-                                        <h5>SMA Negeri 1 Amerika</h5>
-                                        <span class="text-truncate me-3"><i class="bi bi-award text-primary me-2"></i>IPA</span>
-                                        <span class="text-truncate me-3"><i class="bi bi-journal-text text-primary me-2"></i>85 / 100</span>
+                                        <h5 th:text="${education.instansiName}"></h5>
+                                        <span class="text-truncate me-3"><i class="bi bi-award text-primary me-2"></i><span th:text="${education.major}"></span></span>
+                                        <span class="text-truncate me-3"><i class="bi bi-journal-text text-primary me-2"></i><span th:text="${education.avgScore}"></span></span>
                                     </div>
                                 </div>
                             </div>
@@ -94,13 +79,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show p-0 active">
                         <div class="job-item p-4 mb-4">
-                            <div class="btn btn-sm btn-primary me-2 mt-2">Java</div>
-                            <div class="btn btn-sm btn-primary me-2 mt-2">JavaScript</div>
-                            <div class="btn btn-sm btn-primary me-2 mt-2">MySQL</div>
-                            <div class="btn btn-sm btn-primary me-2 mt-2">Spring Boot</div>
-                            <div class="btn btn-sm btn-primary me-2 mt-2">API</div>
-                            <div class="btn btn-sm btn-primary me-2 mt-2">Object Oriented Programming</div>
-                            <div class="btn btn-sm btn-primary me-2 mt-2">Virtual Private Server</div>
+                            <div class="btn btn-sm btn-primary me-2 mt-2" th:each="skill : ${userDetail.skillResponses}" th:text="${skill.name}"></div>
                         </div>
                     </div>
                 </div>

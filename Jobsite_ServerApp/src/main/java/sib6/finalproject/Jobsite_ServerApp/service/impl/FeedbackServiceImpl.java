@@ -60,9 +60,9 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
 
-    public FeedbackResponse toFeedbackResponse(Feedback feedback, List<ApplicantResponse> applicantResponses) {
+    public FeedbackResponse toFeedbackResponse(Feedback feedback, ApplicantResponse applicantResponses) {
         FeedbackResponse feedbackResponse = new FeedbackResponse();
-        feedbackResponse.setApplicantResponses(applicantResponses);
+        feedbackResponse.setApplicantResponse(applicantResponses);
         modelMapper.map(feedback, feedbackResponse);
         return feedbackResponse;
     }

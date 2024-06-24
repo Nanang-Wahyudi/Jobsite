@@ -46,87 +46,24 @@
         </div>
         <!-- Carousel End -->
 
-        <!-- Category Start -->
+        <!-- Company Start -->
         <div class="container-xxl py-5">
             <div class="container">
                 <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore Companies</h1>
                 <div class="row g-4">
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" th:href="@{/company/detail}">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
+                    <div th:each="company : ${companies}" class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
+                        <a class="cat-item rounded p-4 text-center" th:href="@{'/company/detail/' + ${company.id}}">
+                            <img th:src="${company.urlPicture}"
+                                width="130"    
                                 class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                   <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                   <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                   <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
-                        </a>
-                    </div>
-                   <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex flex-column align-items-center justify-content-center" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4 text-center" href="">
-                            <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg"
-                                width="150"    
-                                class="mb-4 rounded-circle">
-                            <h5 class="mb-3">PT Metrodata Electronics Tbk</h5>
-                            <p class="mb-0">Jakarta Barat, Indonesia</p>
+                            <h5 class="mb-3" th:text="${company.name}"></h5>
+                            <p class="mb-0" th:text="${company.address}"></p>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Category End -->
+        <!-- Company End -->
 
 
         <!-- About Start -->
@@ -169,103 +106,23 @@
                 <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
                     <div class="tab-content">
                         <div class="tab-pane fade show p-0 active">
-                            <div class="job-item p-4 mb-4">
+                            <div th:each="job : ${jobs}" class="job-item p-4 mb-4">
                                 <div class="row g-4">
                                     <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
+                                        <img class="flex-shrink-0 img-fluid rounded" th:src="${job.urlPicture}" alt="" width="100">
                                         <div class="text-start ps-4">
-                                            <h5>Software Engineer</h5>
-                                            <p>Metrodata Academy</p>
-                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+                                            <h5 th:text="${job.title}"></h5>
+                                            <p th:text="${job.companyName}"></p>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i><span th:text="${job.address}"></span></span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i><span th:text="${job.type}"></span></span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i><span th:text="${job.salary}"></span></span>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
-                                            <a class="btn btn-primary" th:href="@{/job/detail}">Apply Now</a>
+                                            <a class="btn btn-primary" th:href="@{'/job/detail/' + ${job.id}}">Apply Now</a>
                                         </div>
-                                       <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-item p-4 mb-4">
-                                <div class="row g-4">
-                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
-                                        <div class="text-start ps-4">
-                                            <h5>Marketing Manager</h5>
-                                            <p>Metrodata Academy</p>
-                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                        <div class="d-flex mb-3">
-                                            <a class="btn btn-primary" th:href="@{/job/detail}">Apply Now</a>
-                                        </div>
-                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-item p-4 mb-4">
-                                <div class="row g-4">
-                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
-                                        <div class="text-start ps-4">
-                                            <h5>Product Designer</h5>
-                                            <p>Metrodata Academy</p>
-                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                        <div class="d-flex mb-3">
-                                            <a class="btn btn-primary" th:href="@{/job/detail}">Apply Now</a>
-                                        </div>
-                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-item p-4 mb-4">
-                                <div class="row g-4">
-                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
-                                        <div class="text-start ps-4">
-                                            <h5>Creative Director</h5>
-                                            <p>Metrodata Academy</p>
-                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                        <div class="d-flex mb-3">
-                                            <a class="btn btn-primary" th:href="@{/job/detail}">Apply Now</a>
-                                        </div>
-                                       <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-item p-4 mb-4">
-                                <div class="row g-4">
-                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
-                                        <div class="text-start ps-4">
-                                            <h5>Wordpress Developer</h5>
-                                            <p>Metrodata Academy</p>
-                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                        <div class="d-flex mb-3">
-                                            <a class="btn btn-primary" th:href="@{/job/detail}">Apply Now</a>
-                                        </div>
-                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: 01 Jan, 2045</small>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: <span th:text="${job.postDate}"></span></small>
                                     </div>
                                 </div>
                             </div>

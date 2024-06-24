@@ -74,7 +74,7 @@ public class CompanyServiceImpl implements CompanyService {
         List<FeedbackResponse> feedbackResponses = company.getJobs().stream()
                 .flatMap(job -> job.getApplicants().stream())
                 .flatMap(applicant -> applicant.getFeedbacks().stream()
-                        .map(feedback -> feedbackServiceImpl.toFeedbackResponse(feedback, Collections.singletonList(applicantServiceImpl.toApplicantResponse(applicant)))))
+                        .map(feedback -> feedbackServiceImpl.toFeedbackResponse(feedback, applicantServiceImpl.toApplicantResponse(applicant))))
                 .sorted(Comparator.comparing(FeedbackResponse::getPostDate).reversed())
                 .collect(Collectors.toList());
 
@@ -98,7 +98,7 @@ public class CompanyServiceImpl implements CompanyService {
         List<FeedbackResponse> feedbackResponses = company.getJobs().stream()
                 .flatMap(job -> job.getApplicants().stream())
                 .flatMap(applicant -> applicant.getFeedbacks().stream()
-                        .map(feedback -> feedbackServiceImpl.toFeedbackResponse(feedback, Collections.singletonList(applicantServiceImpl.toApplicantResponse(applicant)))))
+                        .map(feedback -> feedbackServiceImpl.toFeedbackResponse(feedback, applicantServiceImpl.toApplicantResponse(applicant))))
                 .sorted(Comparator.comparing(FeedbackResponse::getPostDate).reversed())
                 .collect(Collectors.toList());
 
