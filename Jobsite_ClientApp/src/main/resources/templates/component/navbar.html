@@ -22,6 +22,36 @@
                 <a th:href="@{/talent}" class="nav-item nav-link" th:classappend="${isActive} == 'talent' ? 'active' : ''">Talent</a>
                 <a th:href="@{/job}" class="nav-item nav-link" th:classappend="${isActive} == 'job' ? 'active' : ''">Job</a>
                 <a th:href="@{/company}" class="nav-item nav-link" th:classappend="${isActive} == 'company' ? 'active' : ''">Company</a>
+                <a th:href="@{/applicant-history}" class="nav-item nav-link" th:classappend="${isActive} == 'history' ? 'active' : ''" sec:authorize="hasRole('ROLE_USER')">Applicant History</a>
+                <a th:href="@{/applicant}" class="nav-item nav-link" th:classappend="${isActive} == 'applicant' ? 'active' : ''" sec:authorize="hasRole('ROLE_COMPANY')">Applicant</a>
+                <div class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" th:classappend="${isActive} == 'manage' ? 'active' : ''">Manage</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a th:href="@{/manage-talent}" class="dropdown-item">Manage Talent</a>
+                        <a th:href="@{/manage-company}" class="dropdown-item">Manage Company</a>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-warning text-white rounded-0 py-4 px-lg-5 d-none d-lg-block dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Setting
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" th:href="@{/talent/profile}" sec:authorize="hasRole('ROLE_USER')">Profile</a></li>
+                    <li><a class="dropdown-item" th:href="@{/company/profile}" sec:authorize="hasRole('ROLE_COMPANY')">Profile</a></li>
+                    <li><a class="dropdown-item" th:href="@{/update-password}">Update Password</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form th:action="@{/logout}" th:method="POST">
+                            <button class="btn btn-warning text-white btn-sm ms-3 mt-2" type="submit">Logout</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form>
+                            <button class="btn btn-danger btn-sm ms-3 mt-2" type="submit">Delete Account</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
             <a th:href="@{/login}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Login<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
