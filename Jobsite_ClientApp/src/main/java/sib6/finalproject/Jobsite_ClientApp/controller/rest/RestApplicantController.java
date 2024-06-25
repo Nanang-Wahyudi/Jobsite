@@ -8,11 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import sib6.finalproject.Jobsite_ClientApp.model.request.UpdateStatusApplicantRequest;
+import sib6.finalproject.Jobsite_ClientApp.model.response.ApplicantDetailResponse;
 import sib6.finalproject.Jobsite_ClientApp.model.response.ApplicantResponse;
 import sib6.finalproject.Jobsite_ClientApp.service.ApplicantService;
 
@@ -34,4 +38,11 @@ public class RestApplicantController {
         return applicantService.downloadCv(id);
     }
 
+    @PutMapping("/status/{id}")
+    public ApplicantDetailResponse updateApplicantStatus(
+        @PathVariable("id") String id, 
+        @RequestBody UpdateStatusApplicantRequest statusApplicantRequest) {
+
+        return applicantService.updateApplicantStatus(id, statusApplicantRequest);
+    }
 }
