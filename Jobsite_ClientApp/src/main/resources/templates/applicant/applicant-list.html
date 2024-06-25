@@ -30,60 +30,22 @@
                 <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
                     <div class="tab-content">
                         <div class="tab-pane fade show p-0 active">
-                            <div class="job-item p-4 mb-4">
+                            <div th:each="applicant : ${applicants}" class="job-item p-4 mb-4">
                                 <div class="row g-4">
                                     <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="100">
+                                        <img class="flex-shrink-0 img-fluid rounded" th:src="${applicant.urlPicture}" alt="" width="100">
                                         <div class="text-start ps-4">
-                                            <h5>Nona Swanson</h5>
-                                            <p>Software Engineering</p>
-                                            <span class="text-truncate me-3"><i class="bi bi-building text-primary me-2"></i>PT Metrodata Electronics Tbk</span>
+                                            <h5 th:text="${applicant.nameUser}"></h5>
+                                            <p th:text="${applicant.titleJob}"></p>
+                                            <span class="text-truncate me-3"><i class="bi bi-building text-primary me-2"></i><span th:text="${applicant.companyName}"></span></span>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
-                                            <a th:href="@{/applicant/detail}" class="btn btn-sm btn-info me-2">Detail</a>
-                                            <div class="btn btn-sm btn-primary pe-none">PROCESSED</div>
+                                            <a th:href="@{'/applicant/detail/' + ${applicant.id}}" class="btn btn-sm btn-info me-2">Detail</a>
+                                            <div class="btn btn-sm btn-primary pe-none" th:text="${applicant.status}"></div>
                                         </div>
-                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Applicant Date: 01 Jan, 2045</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-item p-4 mb-4">
-                                <div class="row g-4">
-                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="100">
-                                        <div class="text-start ps-4">
-                                            <h5>Nona Swanson</h5>
-                                            <p>Software Engineering</p>
-                                            <span class="text-truncate me-3"><i class="bi bi-building text-primary me-2"></i>PT Metrodata Electronics Tbk</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                        <div class="d-flex mb-3">
-                                            <a href="" class="btn btn-sm btn-info me-2">Detail</a>
-                                            <div class="btn btn-sm btn-primary">PROCESSED</div>
-                                        </div>
-                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Applicant Date: 01 Jan, 2045</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-item p-4 mb-4">
-                                <div class="row g-4">
-                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="100">
-                                        <div class="text-start ps-4">
-                                            <h5>Nona Swanson</h5>
-                                            <p>Software Engineering</p>
-                                            <span class="text-truncate me-3"><i class="bi bi-building text-primary me-2"></i>PT Metrodata Electronics Tbk</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                        <div class="d-flex mb-3">
-                                            <a href="" class="btn btn-sm btn-info me-2">Detail</a>
-                                            <div class="btn btn-sm btn-primary">PROCESSED</div>
-                                        </div>
-                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Applicant Date: 01 Jan, 2045</small>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Applicant Date: <span th:text="${applicant.applicantDate}"></span></small>
                                     </div>
                                 </div>
                             </div>

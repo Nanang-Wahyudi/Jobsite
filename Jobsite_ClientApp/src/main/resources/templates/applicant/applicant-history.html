@@ -30,57 +30,21 @@
                 <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
                     <div class="tab-content">
                         <div class="tab-pane fade show p-0 active">
-                            <div class="job-item p-4 mb-4">
+                            <div th:each="applicantHistory : ${applicantHistory}" class="job-item p-4 mb-4">
                                 <div class="row g-4">
                                     <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
+                                        <img class="flex-shrink-0 img-fluid rounded" th:src="${applicantHistory.urlPicture}" alt="" width="100">
                                         <div class="text-start ps-4">
-                                            <h5>Software Engineering</h5>
-                                            <p>PT Metrodata Electronics Tbk</p>
-                                            <span class="text-truncate me-3"><i class="bi bi-person text-primary me-2"></i>Nona Swanson</span>
+                                            <h5 th:text="${applicantHistory.titleJob}"></h5>
+                                            <p th:text="${applicantHistory.companyName}"></p>
+                                            <span class="text-truncate me-3"><i class="bi bi-person text-primary me-2"></i><span th:text="${applicantHistory.nameUser}"></span></span>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
-                                            <div class="btn btn-sm btn-primary pe-none">PROCESSED</div>
+                                            <div class="btn btn-sm btn-primary pe-none" th:text="${applicantHistory.status}"></div>
                                         </div>
-                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Applicant Date: 01 Jan, 2045</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-item p-4 mb-4">
-                                <div class="row g-4">
-                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
-                                        <div class="text-start ps-4">
-                                            <h5>Software Engineering</h5>
-                                            <p>PT Metrodata Electronics Tbk</p>
-                                            <span class="text-truncate me-3"><i class="bi bi-person text-primary me-2"></i>Nona Swanson</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                        <div class="d-flex mb-3">
-                                            <div class="btn btn-sm btn-primary">PROCESSED</div>
-                                        </div>
-                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Applicant Date: 01 Jan, 2045</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-item p-4 mb-4">
-                                <div class="row g-4">
-                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718719646/tmeivyvqulxdd4moq30i.jpg" alt="" width="100">
-                                        <div class="text-start ps-4">
-                                            <h5>Software Engineering</h5>
-                                            <p>PT Metrodata Electronics Tbk</p>
-                                            <span class="text-truncate me-3"><i class="bi bi-person text-primary me-2"></i>Nona Swanson</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                        <div class="d-flex mb-3">
-                                            <div class="btn btn-sm btn-primary">PROCESSED</div>
-                                        </div>
-                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Applicant Date: 01 Jan, 2045</small>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Applicant Date: <span th:text="${applicantHistory.applicantDate}"></span></small>
                                     </div>
                                 </div>
                             </div>
