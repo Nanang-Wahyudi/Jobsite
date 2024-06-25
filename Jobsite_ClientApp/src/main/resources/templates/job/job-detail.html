@@ -45,13 +45,14 @@
                             <h4 class="mb-3">Qualifications</h4>
                             <p th:text="${jobDetail.qualification}"></p>
                         </div>
-        
-                        <div class="">
+
+                        <div sec:authorize="hasRole('ROLE_USER')">
                             <h4 class="mb-4">Apply For The Job</h4>
-                            <form>
-                                <div class="row g-3">  
+                            <form id="applyForm" enctype="multipart/form-data">
+                                <input type="hidden" id="jobId" th:value="${jobDetail.id}">
+                                <div class="row g-3">
                                     <div class="col-12">
-                                        <input type="file" class="form-control bg-white">
+                                        <input type="file" class="form-control bg-white" id="fileInput" name="file">
                                     </div>
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100" type="submit">Apply Now</button>
@@ -89,5 +90,9 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
+    <!-- JS Local -->
+    <div layout:fragment="script">
+        <script src="/js/applicant.js"></script>
+    </div>
 </body>
 </html>
