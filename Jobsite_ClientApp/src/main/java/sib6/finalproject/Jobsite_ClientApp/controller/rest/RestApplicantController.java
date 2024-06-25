@@ -3,6 +3,9 @@ package sib6.finalproject.Jobsite_ClientApp.controller.rest;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,11 @@ public class RestApplicantController {
     public ApplicantResponse createApplicant(@RequestParam("file") MultipartFile file,
             @PathVariable("id") String jobId) throws IOException {
         return applicantService.createApplicant(file, jobId);
+    }
+
+    @GetMapping("/download-cv/{id}")
+    public ResponseEntity<Resource> downloadCv(@PathVariable("id") String id) {
+        return applicantService.downloadCv(id);
     }
 
 }

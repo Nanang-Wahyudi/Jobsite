@@ -80,7 +80,7 @@
                             <h4 class="mb-4">Applicant Summary</h4>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Applicant Date: <span th:text="${applicantDetail.applicantDate}"></span></p>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Status: <span th:text="${applicantDetail.status}"></span></p>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i><a th:href="${applicantDetail.urlDownloadCv}">Download CV</a></p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><a th:href="@{'/api/client/applicant/download-cv/' + ${applicantDetail.id}}">Download CV</a></p>
                         </div>
                         <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                             <h5 class="mb-4">Update Status Applicant</h5>
