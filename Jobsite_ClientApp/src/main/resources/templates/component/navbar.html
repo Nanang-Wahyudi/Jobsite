@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-group">
+            <div class="btn-group" sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_COMPANY', 'ROLE_ADMIN')">
                 <button type="button" class="btn btn-warning text-white rounded-0 py-4 px-lg-5 d-none d-lg-block dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     Setting
                 </button>
@@ -53,7 +53,9 @@
                     </li>
                 </ul>
             </div>
-            <a th:href="@{/login}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Login<i class="fa fa-arrow-right ms-3"></i></a>
+            <div th:unless="${#authorization.expression('hasRole(''ROLE_USER'') or hasRole(''ROLE_COMPANY'') or hasRole(''ROLE_ADMIN'')')}">
+                <a th:href="@{/login}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Login<i class="fa fa-arrow-right ms-3"></i></a>
+            </div>
         </div>
     </nav>
     <!-- Navbar End -->
