@@ -30,7 +30,9 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String userProfile() {
+    public String userProfile(Model model) {
+        UserDetailResponse userDetailResponse = userService.getUserProfile();
+        model.addAttribute("userProfile", userDetailResponse);
         return "/user/user-profile";
     }
 

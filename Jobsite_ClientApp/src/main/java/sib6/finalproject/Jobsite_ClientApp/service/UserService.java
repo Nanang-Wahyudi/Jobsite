@@ -11,4 +11,6 @@ public interface UserService {
 
     UserDetailResponse getUserById(String id);
 
+    UserDetailResponse getUserProfile();
+
 }

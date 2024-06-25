@@ -56,4 +56,20 @@ public class CompanyServiceImpl implements CompanyService {
         }
     }
 
+    @Override
+    public CompanyDetailResponse getCompanyProfile() {
+        ResponseEntity<CompanyDetailResponse> response = restTemplate
+                .exchange(url.concat("/profile"),
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<CompanyDetailResponse>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Get Company Profile");
+        }
+    }
+
 }

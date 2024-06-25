@@ -11,4 +11,6 @@ public interface CompanyService {
 
     CompanyDetailResponse getCompanyById(String id);
 
+    CompanyDetailResponse getCompanyProfile();
+
 }

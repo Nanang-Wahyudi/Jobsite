@@ -30,7 +30,9 @@ public class CompanyController {
     }
 
     @GetMapping("/profile")
-    public String companyProfile() {
+    public String companyProfile(Model model) {
+        CompanyDetailResponse companyDetailResponse = companyService.getCompanyProfile();
+        model.addAttribute("companyProfile", companyDetailResponse);
         return "/company/company-profile";
     }
 
