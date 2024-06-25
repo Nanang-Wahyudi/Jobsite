@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -105,6 +106,30 @@ public class ApplicantServiceImpl implements ApplicantService {
             return response.getBody();
         } else {
             throw new RuntimeException("Failed to create applicant");
+        }
+    }
+
+    @Override
+    public ResponseEntity<Resource> downloadCv(String id) {
+        ResponseEntity<ByteArrayResource> response = restTemplate
+                .exchange(url.concat("/file-download/" + id),
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<ByteArrayResource>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            ByteArrayResource resource = response.getBody();
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=cv_" + id + ".pdf");
+
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentLength(resource.contentLength())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(resource);
+        } else {
+            throw new RuntimeException("Failed to Download CV");
         }
     }
 
