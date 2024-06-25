@@ -56,4 +56,20 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public UserDetailResponse getUserProfile() {
+        ResponseEntity<UserDetailResponse> response = restTemplate
+                .exchange(url.concat("/profile"),
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<UserDetailResponse>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Get User Profile");
+        }
+    }
+
 }
