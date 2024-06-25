@@ -30,76 +30,18 @@
                         <div class="tab-pane fade show p-0 active">
                             <div class="job-item p-4 mb-5">
                                 <div style="overflow-x: auto;">
-                                    <table class="table table-responsive-sm table-responsive-md table-hover table-bordered mb-0 text-center" style="font-size: 14px;">
+                                    <table id="table-talent" class="table table-responsive-sm table-responsive-md table-hover table-bordered mb-0 text-center" style="font-size: 14px;">
                                         <thead class="table-success">
                                             <tr>
-                                                <th scope="col" width="50">No</th>
-                                                <th scope="col" width="150">Profile Picture</th>
-                                                <th scope="col" width="180">Username</th>
-                                                <th scope="col" width="300">Name</th>
-                                                <th scope="col" width="300">Email</th>
-                                                <th scope="col" width="500">Address</th>
-                                                <th scope="col" width="200">Action</th>
+                                                <th scope="col">No</th>
+                                                <th scope="col">Profile Picture</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Address</th>
+                                                <th scope="col">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>
-                                                    <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="60">
-                                                </td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-outline-primary" th:href="@{/talent/detail}">Detail</a>
-                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>
-                                                    <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="60">
-                                                </td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-outline-primary" th:href="@{/talent/detail}">Detail</a>
-                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>
-                                                    <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="60">
-                                                </td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-outline-primary" th:href="@{/talent/detail}">Detail</a>
-                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>
-                                                    <img src="https://res.cloudinary.com/dn0tsmrvb/image/upload/v1718711880/vx3ka11h3wyevgtji01v.jpg" alt="" width="60">
-                                                </td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-outline-primary" th:href="@{/talent/detail}">Detail</a>
-                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -110,5 +52,9 @@
         </div>
     </div>     
 
+    <!-- JS Local -->
+    <div layout:fragment="script">
+        <script th:src="@{/js/admin.js}"></script>
+    </div>
 </body>
 </html>
