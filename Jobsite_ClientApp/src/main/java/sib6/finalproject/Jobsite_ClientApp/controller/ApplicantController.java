@@ -14,7 +14,6 @@ import sib6.finalproject.Jobsite_ClientApp.model.response.ApplicantResponse;
 import sib6.finalproject.Jobsite_ClientApp.service.ApplicantService;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
 @Controller
 public class ApplicantController {
 
@@ -43,15 +42,18 @@ public class ApplicantController {
     public String applicantDetail(Model model, @PathVariable("id") String id) {
         ApplicantDetailResponse detailResponse = applicantService.getApplicantDetailById(id);
         model.addAttribute("applicantDetail", detailResponse);
-        model.addAttribute("statusApplicantRequest", new UpdateStatusApplicantRequest()); // For updating applicant status
+
+        // For updating applicant status
+        model.addAttribute("statusApplicantRequest", new UpdateStatusApplicantRequest());
 
         return "/applicant/applicant-detail";
     }
 
     @PutMapping("/applicant-status/{id}")
-    public String updateApplicantStatus(@PathVariable("id") String id, UpdateStatusApplicantRequest statusApplicantRequest) {
+    public String updateApplicantStatus(@PathVariable("id") String id,
+            UpdateStatusApplicantRequest statusApplicantRequest) {
+
         applicantService.updateApplicantStatus(id, statusApplicantRequest);
-        
         return "redirect:/applicant/detail/" + id;
     }
 }
