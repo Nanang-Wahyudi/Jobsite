@@ -84,13 +84,18 @@
                         </div>
                         <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                             <h5 class="mb-4">Update Status Applicant</h5>
-                            <select class="form-select mb-3" aria-label="Default select example">
-                                <option selected>Status Applicant</option>
-                                <option value="PROCESSED">Processed</option>
-                                <option value="ACCEPTED">Accepted</option>
-                                <option value="REJECTED">Rejected</option>
-                            </select>
-                            <button type="submit" class="btn btn-sm btn-outline-success mb-0">Save</button>
+                            <form th:action="@{/applicant-status/{id} (id=${applicantDetail.id})}" th:method="PUT" th:object="${statusApplicantRequest}"> 
+                                <input type="hidden" id="applicant-id" th:value="${applicantDetail.id}">
+                                
+                                <select class="form-select mb-3" aria-label="Select Applicant Status"
+                                    th:field="*{status}" id="applicant-status">
+                                    <option selected value="">Status Applicant</option>
+                                    <option value="PROCESSED">Processed</option>
+                                    <option value="ACCEPTED">Accepted</option>
+                                    <option value="REJECTED">Rejected</option>
+                                </select>
+                                <button type="submit" id="update-applicant-status" class="btn btn-sm btn-outline-success mb-0">Save</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -102,5 +107,9 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
+    <!-- JS Local -->
+    <div layout:fragment="script">
+        <script src="/js/applicant.js"></script>
+    </div>
 </body>
 </html>

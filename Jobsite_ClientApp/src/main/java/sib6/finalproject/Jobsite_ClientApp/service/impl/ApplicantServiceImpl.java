@@ -20,6 +20,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import sib6.finalproject.Jobsite_ClientApp.model.request.UpdateStatusApplicantRequest;
 import sib6.finalproject.Jobsite_ClientApp.model.response.ApplicantDetailResponse;
 import sib6.finalproject.Jobsite_ClientApp.model.response.ApplicantResponse;
 import sib6.finalproject.Jobsite_ClientApp.service.ApplicantService;
@@ -130,6 +131,23 @@ public class ApplicantServiceImpl implements ApplicantService {
                     .body(resource);
         } else {
             throw new RuntimeException("Failed to Download CV");
+        }
+    }
+
+    @Override
+    public ApplicantDetailResponse updateApplicantStatus(String id, UpdateStatusApplicantRequest statusApplicantRequest) {
+        HttpEntity<UpdateStatusApplicantRequest> request =  new HttpEntity<UpdateStatusApplicantRequest>(statusApplicantRequest);
+
+        ResponseEntity<ApplicantDetailResponse> response =  restTemplate.
+            exchange(url.concat("/update-status/" + id),
+                    HttpMethod.PUT,
+                    request,
+                    new ParameterizedTypeReference<ApplicantDetailResponse>() {   
+                    });
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Update Applicant Status");
         }
     }
 

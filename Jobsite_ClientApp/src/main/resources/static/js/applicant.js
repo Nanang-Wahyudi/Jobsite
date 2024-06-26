@@ -60,3 +60,50 @@ $(document).ready(function() {
         });
     });
 });
+
+//Update Applicant Status
+$("#update-applicant-status").click((event) => {
+    event.preventDefault();
+
+    let valueStatus= $("#applicant-status").val();
+    let valueId = $("#applicant-id").val();
+    console.log(valueId);
+
+    if (!valueStatus) {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Please fill all fields!",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    } else {
+        $.ajax({
+            method: "PUT",
+            url: "/api/client/applicant/status/" + valueId,
+            dataType: "JSON",
+            beforeSend: addCSRF(),
+            contentType: "application/json",
+            data: JSON.stringify({
+                status: valueStatus,
+            }),
+            success: (res) => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Applicant Status Updated!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                $("#applicant-status").val("");
+                
+                setTimeout(() => {
+                    location.reload();
+                }, 2000); 
+            },
+            error: (err) => {
+                console.error(err);
+            },
+        });
+    }
+});

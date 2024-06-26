@@ -8,9 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import sib6.finalproject.Jobsite_ClientApp.model.request.UpdateStatusApplicantRequest;
 import sib6.finalproject.Jobsite_ClientApp.model.response.ApplicantDetailResponse;
 import sib6.finalproject.Jobsite_ClientApp.model.response.ApplicantResponse;
 import sib6.finalproject.Jobsite_ClientApp.service.ApplicantService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @Controller
 public class ApplicantController {
@@ -40,8 +43,15 @@ public class ApplicantController {
     public String applicantDetail(Model model, @PathVariable("id") String id) {
         ApplicantDetailResponse detailResponse = applicantService.getApplicantDetailById(id);
         model.addAttribute("applicantDetail", detailResponse);
+        model.addAttribute("statusApplicantRequest", new UpdateStatusApplicantRequest()); // For updating applicant status
 
         return "/applicant/applicant-detail";
     }
 
+    @PutMapping("/applicant-status/{id}")
+    public String updateApplicantStatus(@PathVariable("id") String id, UpdateStatusApplicantRequest statusApplicantRequest) {
+        applicantService.updateApplicantStatus(id, statusApplicantRequest);
+        
+        return "redirect:/applicant/detail/" + id;
+    }
 }
