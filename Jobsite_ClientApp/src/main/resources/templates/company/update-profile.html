@@ -6,7 +6,7 @@
 <head>
     <title>Dream Job - Update Profile</title>
 </head>
-<body>
+<body id="company-update-page">
     
     <div layout:fragment="content" class="container-xxl bg-white p-0">
         <!-- Header Start -->
@@ -35,24 +35,24 @@
                                 <div class="job-item p-4 mb-4">
                                     <form>
                                         <label class="form-label" for="name">Name</label>
-                                        <input class="form-control mb-3" type="text" id="name">
+                                        <input class="form-control mb-3" type="text" id="name" required>
 
                                         <label class="form-label" for="email">Email</label>
-                                        <input class="form-control mb-3" type="email" id="email">
+                                        <input class="form-control mb-3" type="email" id="email" required>
 
                                         <label class="form-label" for="picture">Picture Profile</label>
-                                        <input class="form-control mb-3" type="file" id="picture">
+                                        <input class="form-control mb-3" type="file" accept="image/*" id="picture">
 
                                         <label class="form-label" for="banner">Banner</label>
-                                        <input class="form-control mb-3" type="file" id="banner">
+                                        <input class="form-control mb-3" type="file" accept="image/*" id="banner">
 
                                         <label class="form-label" for="address">Address</label>
-                                        <input class="form-control mb-3" type="text" id="address">
+                                        <input class="form-control mb-3" type="text" id="address" required>
 
                                         <label class="form-label" for="description">Description</label>
-                                        <textarea class="form-control mb-4" id="description"></textarea>
+                                        <textarea class="form-control mb-4" id="description" style="height: 150px"></textarea>
             
-                                        <button type="submit" class="btn btn-outline-primary">Save</button>
+                                        <button id="update-company" type="submit" class="btn btn-outline-primary">Save</button>
                                         <input type="reset" value="Reset" class="btn btn-outline-warning">
                                     </form>
                                 </div>
@@ -66,5 +66,9 @@
 
     </div>
 
+    <!-- JS Local -->
+    <div layout:fragment="script">
+        <script src="/js/company.js"></script>
+    </div>
 </body>
 </html>         
