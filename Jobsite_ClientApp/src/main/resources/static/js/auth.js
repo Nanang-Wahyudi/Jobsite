@@ -149,3 +149,51 @@ $("#register-admin").click((event) => {
         });
     }
 });
+
+
+// Forgot Password
+$("#forgot-password").click((event) => {
+    event.preventDefault();
+
+    let valueUsername = $("#username").val();
+    let valuePassword = $("#password").val();
+    let valueRepeatPassword = $("#repeatPassword").val();
+
+    if (!valueUsername || !valuePassword || !valueRepeatPassword) {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Please fill all fields!",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    } else {
+        $.ajax({
+            method: "PUT",
+            url: "https://dev.ezcoder.my.id/api/auth/forgot-password",
+            dataType: "JSON",
+            contentType: "application/json",
+            data: JSON.stringify({
+                username: valueUsername,
+                newPassword: valuePassword,
+                repeatNewPassword: valueRepeatPassword,
+            }),
+            success: (res) => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Password Successfully Updated",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                $("#username").val("");
+                $("#password").val("");
+                $("#repeatPassword").val("");
+                
+            },
+            error: (err) => {
+                console.error(err);
+            },
+        });
+    }
+});
