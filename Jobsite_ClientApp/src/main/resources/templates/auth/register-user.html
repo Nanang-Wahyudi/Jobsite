@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="row mb-3 px-3">
-                            <button type="submit" class="btn btn-outline-success text-center">Register</button>
+                            <button id="register-user" type="submit" class="btn btn-outline-success text-center">Register</button>
                         </div>
                         <div class="row px-3 mb-4 d-flex justify-content-between">
                             <small class="font-weight-bold">Register your Company? <a class="text-danger" th:href="@{/register-company}">Register</a></small>
@@ -75,8 +75,11 @@
     <!-- CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- JS Local -->
     <script src="/js/showPassword.js"></script>
+    <script src="/js/auth.js"></script>
 </body>
 </html>
