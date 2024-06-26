@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import sib6.finalproject.Jobsite_ClientApp.model.request.UpdateJobRequest;
 import sib6.finalproject.Jobsite_ClientApp.model.response.JobDetailResponse;
 import sib6.finalproject.Jobsite_ClientApp.model.response.JobResponse;
 import sib6.finalproject.Jobsite_ClientApp.service.JobService;
@@ -41,9 +44,22 @@ public class JobController {
         return "/job/job-add";
     }
 
-    @GetMapping("/update")
-    public String updateJob() {
+    @GetMapping("/update/{id}")
+    public String updateJob(Model model, @PathVariable("id") String id, UpdateJobRequest jobRequest) {
+        model.addAttribute("job", jobService.getJobDetailById(id));
         return "/job/job-update";
+    }
+
+    @PutMapping("/update/status/{id}")
+    public String updateStatusJob(@PathVariable("id") String id){
+        jobService.updateStatusJob(id);
+        return "redirect:/company/profile";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteJob(@PathVariable("id") String id){
+        jobService.deleteJob(id);
+        return "redirect:/company/profile";
     }
 
 }

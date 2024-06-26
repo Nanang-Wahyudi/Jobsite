@@ -80,9 +80,13 @@
                                 </div>
                                 <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                     <div class="d-flex mb-3">
-                                        <a class="btn btn-light btn-square me-3" th:href="@{/job/update}" title="Update Job"><i class="bi bi-pencil-square text-primary"></i></a>
-                                        <button class="btn btn-light btn-square me-3" title="Update Status Job"><i class="bi bi-power text-warning"></i></button>
-                                        <button class="btn btn-light btn-square me-3" title="Delete Job"><i class="bi bi-x-square text-danger"></i></button>
+                                        <a class="btn btn-light btn-square me-3" th:href="@{/job/update/{id} (id=${job.id})}" 
+                                            title="Update Job"><i class="bi bi-pencil-square text-primary"></i></a>
+                                        <button class="btn btn-square me-3" th:classappend="${job.isActive} ? 'btn-light' : 'btn-danger'"
+                                            th:title="'Job Status: ' + (${job.isActive} ? 'Active' : 'Inactive')"  th:onclick="updateStatusJob([[${job.id}]], [[${job.isActive}]])">
+                                            <i class="bi bi-power" th:classappend="${job.isActive} ? 'text-info' : 'text-dark'"></i></button>
+                                        <button type="submit" class="btn btn-light btn-square me-3" title="Delete Job" th:onclick="deleteJob([[${job.id}]], [[${job.title}]])">
+                                            <i class="bi bi-x-square text-danger"></i></button>
                                     </div>
                                     <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Post Date: <span th:text="${job.postDate}"></span></small>
                                 </div>
@@ -123,5 +127,9 @@
         <!-- Profile End -->
     </div>    
 
+    <!-- JS Local -->
+    <div layout:fragment="script">
+        <script src="/js/job.js"></script>
+    </div>
 </body>
 </html>
