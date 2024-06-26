@@ -6,7 +6,7 @@
 <head>
     <title>Dream Job - Update Profile</title>
 </head>
-<body>
+<body id="user-update-page">
     
     <div layout:fragment="content" class="container-xxl bg-white p-0">
         <!-- Header Start -->
@@ -34,19 +34,44 @@
                             <div class="tab-pane fade show p-0 active">
                                 <div class="job-item p-4 mb-4">
                                     <form>
-                                        <input class="form-control mb-3" type="text" id="name" placeholder="Name">
-                                        <input class="form-control mb-3" type="email" id="email" placeholder="Email">
-                                        <input class="form-control mb-3" type="file" id="picture">
-                                        <input class="form-control mb-3" type="text" id="address" placeholder="Address">
-                                        <textarea class="form-control mb-4" id="description" placeholder="Description"></textarea>
+                                        <label class="form-label" for="name">Name</label>
+                                        <input class="form-control mb-3" type="text" id="name" required>
+
+                                        <label class="form-label" for="email">Email</label>
+                                        <input class="form-control mb-3" type="email" id="email" required>
+
+                                        <label class="form-label" for="picture">Picture Profile</label>
+                                        <input class="form-control mb-3" type="file" accept="image/*" id="picture">
+
+                                        <label class="form-label" for="address">Address</label>
+                                        <input class="form-control mb-3" type="text" id="address" required>
+
+                                        <label class="form-label" for="description">Description</label>
+                                        <textarea class="form-control mb-4" id="description" style="height: 120px"></textarea>
+                                        
                                         <h6>Add Education</h6>
-                                        <input class="form-control mb-3" type="text" id="instansiName" placeholder="Instansi Name">
-                                        <input class="form-control mb-3" type="text" id="major" placeholder="Major">
-                                        <input class="form-control mb-4" type="text" id="avgScore" placeholder="Average Score">
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control mb-3" type="text" id="instansiName">
+                                            <label class="form-label" for="instansiName">Institution Name</label>
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control mb-3" type="text" id="major">
+                                            <label class="form-label" for="major">Major</label>
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control mb-3" type="text" id="avgScore">
+                                            <label class="form-label" for="avgScore">Average Score</label>
+                                        </div>
+
                                         <h6>Add Skill</h6>
-                                        <input class="form-control mb-4" type="text" id="skillName" placeholder="Skill Name">
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control mb-3" type="text" id="skillName">
+                                            <label class="form-label" for="skillName">Skill Name</label>
+                                        </div>
             
-                                        <button type="submit" class="btn btn-outline-primary">Save</button>
+                                        <button id="update-user" type="submit" class="btn btn-outline-primary">Save</button>
                                         <input type="reset" value="Reset" class="btn btn-outline-warning">
                                     </form>
                                 </div>
@@ -60,5 +85,9 @@
 
     </div>
 
+    <!-- JS Local -->
+    <div layout:fragment="script">
+        <script src="/js/user.js"></script>
+    </div>
 </body>
 </html>         
