@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
-                                            <a th:href="@{'/applicant/detail/' + ${applicant.id}}" class="btn btn-sm btn-info me-2">Detail</a>
+                                            <a th:href="@{'/applicant/detail/' + ${applicant.id}}" class="text-white btn btn-sm btn-info me-2">Detail</a>
                                             <div class="btn btn-sm btn-primary pe-none" th:text="${applicant.status}"></div>
                                         </div>
                                         <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Applicant Date: <span th:text="${applicant.applicantDate}"></span></small>

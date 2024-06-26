@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/main}"
+>
+<head>
+    <title>Dream Job - Create Feedback</title>
+</head>
+<body>
+    
+    <div layout:fragment="content" class="container-xxl bg-white p-0">
+        <!-- Header Start -->
+        <div class="container-xxl py-5 bg-dark page-header mb-5">
+            <div class="container my-5 pt-5 pb-4">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Create Feedback</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb text-uppercase">
+                        <li class="breadcrumb-item"><a th:href="@{/applicant-history}">Applicant History</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Create Feedback</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Header End -->
+
+
+        <!-- Create Feedback Start -->
+        <div class="container mt-5 pb-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-7 col-sm-12">
+                    <h3 class="wow fadeInUp mb-4 text-center" data-wow-delay="0.1s">FORM CREATE FEEDBACK</h3>
+                    <div class="tab-class wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show p-0 active">
+                                <div class="job-item p-4 mb-4">
+                                    <form>
+                                         <select id="rating" class="form-select mb-3" aria-label="Default select example">
+                                            <option selected>Choose a Rating</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                        <input class="form-control mb-3" type="text" id="comment" placeholder="Comment">
+
+                                        <button type="submit" id="add-feedback" class="btn btn-outline-primary">Save</button>
+                                        <input type="reset" value="Reset" class="btn btn-outline-warning">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Create Feedback End -->
+
+    </div>
+
+     <!-- JS Local -->
+    <div layout:fragment="script">
+        <script src="/js/feedback.js"></script>
+    </div>
+</body>
+</html>
