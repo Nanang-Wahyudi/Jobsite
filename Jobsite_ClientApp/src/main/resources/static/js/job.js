@@ -52,3 +52,54 @@ $("#add-job").click((event) => {
         });
     }
 });
+
+function deleteJob(id, title){;
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger me-3"
+        },
+        buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                method: "DELETE",
+                url: "/api/client/job/delete/" + id,
+                dataType: "JSON",
+                beforeSend: addCSRF(),
+                contentType: "application/json",
+            })
+            .done((res) => {
+                swalWithBootstrapButtons.fire({
+                    title: "Deleted!",
+                    text: title +" has been deleted",
+                    icon: "success"
+                });
+
+                setTimeout(() => {
+                    location.reload();
+                }, 2000); 
+            })
+            .fail((err) => {
+                console.log(err);
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Job deletion has been cancelled",
+                icon: "error"
+            });
+        }
+    });
+}

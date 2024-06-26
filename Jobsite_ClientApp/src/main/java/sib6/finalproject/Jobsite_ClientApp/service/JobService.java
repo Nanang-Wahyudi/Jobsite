@@ -14,4 +14,5 @@ public interface JobService {
 
     JobResponse addJob(CreateJobRequest jobRequest);
 
+    JobResponse deleteJob(String id);
 }

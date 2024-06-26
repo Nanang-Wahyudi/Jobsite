@@ -73,4 +73,20 @@ public class JobServiceImpl implements JobService {
         }
     }
 
+    @Override
+    public JobResponse deleteJob(String id) {
+        ResponseEntity<JobResponse> response = restTemplate
+                .exchange(url.concat("/delete/" + id),
+                        HttpMethod.DELETE,
+                        null,
+                        new ParameterizedTypeReference<JobResponse>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Delete Job");
+        }
+    }
+
 }
