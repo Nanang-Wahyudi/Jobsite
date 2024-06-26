@@ -1,3 +1,10 @@
+$(document).ready(function() {
+    if ($("#job-update-page").length) {
+        let jobId = $("#job-id").val();
+        beforeUpdate(jobId);
+    }
+});
+
 // Add Job
 $("#add-job").click((event) => {
     event.preventDefault();
@@ -45,6 +52,86 @@ $("#add-job").click((event) => {
                 $("#qualification").val("");
                 
                 window.location.href = "/company/profile";
+            },
+            error: (err) => {
+                console.error(err);
+            },
+        });
+    }
+});
+
+
+//Get last job values to show when the page is opened
+function beforeUpdate(id){
+    $.ajax({
+        method: "GET",
+        url: "/api/client/job/detail/" + id,
+        dataType: "JSON",
+        contentType: "application/json"
+    })
+    .done((res) => {
+        $("#title").val(res.title);
+        $("#type").val(res.type);
+        $("#salary").val(res.salary);
+        $("#description").val(res.description);
+        $("#qualification").val(res.qualification);
+    })
+    .fail((err) => {
+        console.log(err);
+    }); 
+}
+
+// Update Job
+$("#update-job").click((event) => {
+    event.preventDefault();
+
+    let valueId = $("#job-id").val();
+    let valueTitle = $("#title").val();
+    let valueType = $("#type").val();
+    let valueSalary = $("#salary").val();
+    let valueDescription = $("#description").val();
+    let valueQualification = $("#qualification").val();
+
+    if (!valueTitle || !valueType || !valueSalary || !valueDescription || !valueQualification) {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Please fill all fields!",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    } else {
+        $.ajax({
+            method: "PUT",
+            url: "/api/client/job/update/" + valueId,
+            dataType: "JSON",
+            beforeSend: addCSRF(),
+            contentType: "application/json",
+            data: JSON.stringify({
+                title: valueTitle,
+                type: valueType,
+                salary: valueSalary,
+                description: valueDescription,
+                qualification: valueQualification,
+            }),
+            success: (res) => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Job has been Updated!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                $("#job-id").val("");
+                $("#title").val("");
+                $("#type").val("");
+                $("#salary").val("");
+                $("#description").val("");
+                $("#qualification").val("");
+                
+                setTimeout(() => {
+                    window.location.href = "/company/profile";
+                }, 2000); 
             },
             error: (err) => {
                 console.error(err);

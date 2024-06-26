@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import sib6.finalproject.Jobsite_ClientApp.model.request.CreateJobRequest;
+import sib6.finalproject.Jobsite_ClientApp.model.request.UpdateJobRequest;
 import sib6.finalproject.Jobsite_ClientApp.model.response.JobDetailResponse;
 import sib6.finalproject.Jobsite_ClientApp.model.response.JobResponse;
 import sib6.finalproject.Jobsite_ClientApp.service.JobService;
@@ -73,6 +74,24 @@ public class JobServiceImpl implements JobService {
         }
     }
     
+    @Override
+    public JobResponse updateJob(String id, UpdateJobRequest jobRequest) {
+        HttpEntity<UpdateJobRequest> request = new HttpEntity<UpdateJobRequest>(jobRequest);
+
+        ResponseEntity<JobResponse> response = restTemplate
+                .exchange(url.concat("/update/" + id),
+                        HttpMethod.PUT,
+                        request,
+                        new ParameterizedTypeReference<JobResponse>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Update Job");
+        }
+    }
+
     @Override
     public JobResponse updateStatusJob(String id) {
         ResponseEntity<JobResponse> response = restTemplate
