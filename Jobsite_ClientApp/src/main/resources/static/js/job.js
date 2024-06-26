@@ -53,6 +53,60 @@ $("#add-job").click((event) => {
     }
 });
 
+// Update status job
+function updateStatusJob(id, isActive){
+    let jobStatus = !isActive ? "Active" : "Inactive";
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger me-3"
+        },
+        buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "Change Job Status to " + jobStatus,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, change it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                method: "PUT",
+                url: "/api/client/job/update/status/" + id,
+                dataType: "JSON",
+                beforeSend: addCSRF(),
+                contentType: "application/json",
+            })
+            .done((res) => {
+                swalWithBootstrapButtons.fire({
+                    title: "Changed!",
+                    text: "Job status is now " + jobStatus,
+                    icon: "success"
+                });
+
+                setTimeout(() => {
+                    location.reload();
+                }, 2000); 
+            })
+            .fail((err) => {
+                console.log(err);
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Job status change has been cancelled",
+                icon: "error"
+            });
+        }
+    });
+}
+
+// Delete job
 function deleteJob(id, title){;
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {

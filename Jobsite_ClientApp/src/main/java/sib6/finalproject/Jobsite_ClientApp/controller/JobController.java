@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sib6.finalproject.Jobsite_ClientApp.model.response.JobDetailResponse;
@@ -45,6 +46,12 @@ public class JobController {
     @GetMapping("/update")
     public String updateJob() {
         return "/job/job-update";
+    }
+
+    @PutMapping("/update/status/{id}")
+    public String updateStatusJob(@PathVariable("id") String id){
+        jobService.updateStatusJob(id);
+        return "redirect:/company/profile";
     }
 
     @DeleteMapping("/delete/{id}")

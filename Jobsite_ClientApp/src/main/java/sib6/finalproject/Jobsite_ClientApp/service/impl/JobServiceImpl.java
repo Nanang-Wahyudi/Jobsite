@@ -72,6 +72,22 @@ public class JobServiceImpl implements JobService {
             throw new RuntimeException("Failed to add Job");
         }
     }
+    
+    @Override
+    public JobResponse updateStatusJob(String id) {
+        ResponseEntity<JobResponse> response = restTemplate
+                .exchange(url.concat("/update/status-job/" + id),
+                        HttpMethod.PUT,
+                        null,
+                        new ParameterizedTypeReference<JobResponse>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Update Job Status");
+        }
+    }
 
     @Override
     public JobResponse deleteJob(String id) {
