@@ -43,7 +43,11 @@
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
                                             <a th:href="@{/create-feedback(applicantId=${applicantHistory.id})}" class="btn btn-sm btn-info text-white me-2">Give Feedback</a>
-                                            <div class="btn btn-sm btn-primary pe-none" th:text="${applicantHistory.status}"></div>
+                                            <div th:class="${applicantHistory.status == 'PROCESSED' ? 'btn btn-sm btn-warning' :
+                                                    applicantHistory.status == 'REJECTED' ? 'btn btn-sm btn-danger' :
+                                                    applicantHistory.status == 'ACCEPTED' ? 'btn btn-sm btn-primary' :
+                                                    'btn btn-sm btn-secondary'}"
+                                            th:text="${applicantHistory.status}"></div>
                                         </div>
                                         <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Applicant Date: <span th:text="${applicantHistory.applicantDate}"></span></small>
                                     </div>
