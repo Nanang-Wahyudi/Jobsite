@@ -73,8 +73,9 @@
                                 </div>
                                 <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                     <div class="d-flex mb-3">
-                                        <a class="btn btn-light btn-square me-3" th:href="@{/talent/profile/update-education}" title="Update Education"><i class="bi bi-pencil-square text-primary"></i></a>
-                                        <a class="btn btn-light btn-square me-3" href="" title="Delete Education"><i class="bi bi-x-square text-danger"></i></a>
+                                        <a class="btn btn-light btn-square me-3" th:href="@{/talent/profile/update-education/{id} (id=${education.id})}" title="Update Education"><i class="bi bi-pencil-square text-primary"></i></a>
+                                        <a class="btn btn-light btn-square me-3" th:attr="title='Delete ' + ${education.instansiName}" 
+                                            th:onclick="deleteEducation([[${education.id}]])"><i class="bi bi-x-square text-danger"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -97,5 +98,9 @@
         <!-- Profile End -->
     </div>    
 
+    <!-- JS Local -->
+    <div layout:fragment="script">
+        <script src="/js/education.js"></script>
+    </div>
 </body>
 </html>
