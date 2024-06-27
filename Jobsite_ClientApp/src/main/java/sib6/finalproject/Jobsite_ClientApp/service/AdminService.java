@@ -11,4 +11,8 @@ public interface AdminService {
 
     List<CompanyAdminResponse> getAllCompanyAdmin();
 
+    UserAdminResponse deleteUserByAdmin(String id);
+
+    CompanyAdminResponse deleteCompanyByAdmin(String id);
+
 }

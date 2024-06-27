@@ -56,4 +56,36 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+    @Override
+    public UserAdminResponse deleteUserByAdmin(String id) {
+        ResponseEntity<UserAdminResponse> response = restTemplate
+                .exchange(url.concat("/user/delete/" + id),
+                        HttpMethod.DELETE,
+                        null,
+                        new ParameterizedTypeReference<UserAdminResponse>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Delete User by Admin");
+        }
+    }
+
+    @Override
+    public CompanyAdminResponse deleteCompanyByAdmin(String id) {
+        ResponseEntity<CompanyAdminResponse> response = restTemplate
+                .exchange(url.concat("/company/delete/" + id),
+                        HttpMethod.DELETE,
+                        null,
+                        new ParameterizedTypeReference<CompanyAdminResponse>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Delete Company by Admin");
+        }
+    }
+
 }
