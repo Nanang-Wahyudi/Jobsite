@@ -89,7 +89,13 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show p-0 active">
                         <div class="job-item p-4 mb-4">
-                            <div th:each="skill : ${userProfile.skillResponses}" class="btn btn-primary me-2 mt-2"><span th:text="${skill.name}"></span><button type="button" class="btn btn-primary btn-sm" title="Delete Skill"><i class="bi bi-x"></i></button></div>
+                            <div th:each="skill : ${userProfile.skillResponses}" class="btn btn-primary me-2 mt-2">
+                                <span th:text="${skill.name}"></span>
+                                <button type="button" class="btn btn-primary btn-sm" 
+                                    th:attr="title='Delete ' + ${skill.name} + ' Skill'" th:onclick="deleteSkill([[${skill.id}]], [[${skill.name}]])">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,6 +107,7 @@
     <!-- JS Local -->
     <div layout:fragment="script">
         <script src="/js/education.js"></script>
+        <script src="/js/skill.js"></script>
     </div>
 </body>
 </html>
