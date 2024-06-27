@@ -1,7 +1,6 @@
 $(document).ready(function () {
     if ($("#education-update-page").length) {
         let id = getIdFromUrl();
-        console.log(id);
         beforeUpdate(id)
     }
     
@@ -59,7 +58,7 @@ $("#update-education").click((event) => {
     if(!valueMajor) missingFields.push('Major')
     if(!valueAvgScore) missingFields.push('Average Score')
     
-        if (missingFields.length > 0) {
+    if (missingFields.length > 0) {
         Swal.fire({
             position: "center",
             icon: "error",
@@ -139,7 +138,7 @@ function deleteEducation(valueId){
 
                 setTimeout(() => {
                     location.reload();
-                }, 2000); 
+                }, 1750); 
             })
             .fail((err) => {
                 console.log(err);

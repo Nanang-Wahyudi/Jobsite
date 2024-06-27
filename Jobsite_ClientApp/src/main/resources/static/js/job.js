@@ -15,11 +15,20 @@ $("#add-job").click((event) => {
     let valueDescription = $("#description").val();
     let valueQualification = $("#qualification").val();
 
-    if (!valueTitle || !valueType || !valueSalary || !valueDescription || !valueQualification) {
+    let missingFields = [];
+
+    if (!valueTitle) missingFields.push('Title');
+    if (!valueType) missingFields.push('Type');
+    if (!valueSalary) missingFields.push('Salary');
+    if (!valueDescription) missingFields.push('Description');
+    if (!valueQualification) missingFields.push('Address');
+
+    if (missingFields.length > 0) {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "Please fill all fields!",
+            title: "Please fill these required fields!",
+            html: missingFields.join('<br>'),
             showConfirmButton: false,
             timer: 1500,
         });
@@ -92,11 +101,20 @@ $("#update-job").click((event) => {
     let valueDescription = $("#description").val();
     let valueQualification = $("#qualification").val();
 
-    if (!valueTitle || !valueType || !valueSalary || !valueDescription || !valueQualification) {
+    let missingFields = [];
+
+    if (!valueTitle) missingFields.push('Title');
+    if (!valueType) missingFields.push('Type');
+    if (!valueSalary) missingFields.push('Salary');
+    if (!valueDescription) missingFields.push('Description');
+    if (!valueQualification) missingFields.push('Address');
+
+    if (missingFields.length > 0) {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "Please fill all fields!",
+            title: "Please fill these required fields!",
+            html: missingFields.join('<br>'),
             showConfirmButton: false,
             timer: 1500,
         });
@@ -131,7 +149,7 @@ $("#update-job").click((event) => {
                 
                 setTimeout(() => {
                     window.location.href = "/company/profile";
-                }, 2000); 
+                }, 1750); 
             },
             error: (err) => {
                 console.error(err);
@@ -176,7 +194,7 @@ function updateStatusJob(id, isActive){
 
                 setTimeout(() => {
                     location.reload();
-                }, 2000); 
+                }, 1750); 
             })
             .fail((err) => {
                 console.log(err);
@@ -228,7 +246,7 @@ function deleteJob(id, title){;
 
                 setTimeout(() => {
                     location.reload();
-                }, 2000); 
+                }, 1750); 
             })
             .fail((err) => {
                 console.log(err);

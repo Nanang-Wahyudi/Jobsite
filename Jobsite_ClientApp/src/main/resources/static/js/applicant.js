@@ -67,13 +67,12 @@ $("#update-applicant-status").click((event) => {
 
     let valueStatus= $("#applicant-status").val();
     let valueId = $("#applicant-id").val();
-    console.log(valueId);
 
     if (!valueStatus) {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "Please fill all fields!",
+            title: "Please choose a status for the applicant!",
             showConfirmButton: false,
             timer: 1500,
         });
@@ -99,7 +98,7 @@ $("#update-applicant-status").click((event) => {
                 
                 setTimeout(() => {
                     location.reload();
-                }, 2000); 
+                }, 1750); 
             },
             error: (err) => {
                 console.error(err);
