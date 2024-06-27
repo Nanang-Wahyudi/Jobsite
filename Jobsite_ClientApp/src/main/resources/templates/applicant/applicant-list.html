@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
-                                            <a th:href="@{'/applicant/detail/' + ${applicant.id}}" class="btn btn-sm btn-info me-2">Detail</a>
+                                            <a th:href="@{'/applicant/detail/' + ${applicant.id}}" class="text-white btn btn-sm btn-info me-2">Detail</a>
                                             <div th:class="${applicant.status == 'PROCESSED' ? 'btn btn-sm btn-warning' :
                                                             applicant.status == 'REJECTED' ? 'btn btn-sm btn-danger' :
                                                             applicant.status == 'ACCEPTED' ? 'btn btn-sm btn-primary' :

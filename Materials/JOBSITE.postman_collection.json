@@ -1,0 +1,1013 @@
+{
+	"info": {
+		"_postman_id": "f3fd536e-a7d4-4e0a-8dcb-a2668ec35d81",
+		"name": "JOBSITE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25756166",
+		"_collection_link": "https://nanang-teams.postman.co/workspace/Team-Workspaces~ab03c698-bd4d-4509-8d64-8ae9fb0db3eb/collection/25756166-f3fd536e-a7d4-4e0a-8dcb-a2668ec35d81?action=share&source=collection_link&creator=25756166"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"user\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"username\": \"user\",\r\n    \"password\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"company\",\r\n    \"email\": \"company@gmail.com\",\r\n    \"username\": \"company\",\r\n    \"password\": \"company\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register/company",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"user\",\r\n  \"newPassword\": \"user123\",\r\n  \"repeatNewPassword\": \"user123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/update-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"user\",\r\n  \"newPassword\": \"user\",\r\n  \"repeatNewPassword\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/forgot-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Job",
+			"item": [
+				{
+					"name": "Create Job for Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Database Engineer\",\r\n    \"type\": \"fulltime\",\r\n    \"salary\": \"8.000.000\",\r\n    \"description\": \"Ini description untuk job dengan title Database Engineer di Sinergi\",\r\n    \"qualification\": \"Ini qualification untuk job dengan title Database Engineer di Sinergi\",\r\n    \"username\": \"company\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/job/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Job for Company",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"UI & UX\",\r\n    \"type\": \"parttime\",\r\n    \"salary\": \"5.000.000\",\r\n    \"description\": \"Description job Title UI & UX\",\r\n    \"qualification\": \"Qualification job Title UI & UX\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/job/update/014e6815-3baf-4b32-874b-43138803ed6c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job",
+								"update",
+								"014e6815-3baf-4b32-874b-43138803ed6c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Job for Company",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/job/delete/f25f87f6-d333-424a-82cf-7758922caef3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job",
+								"delete",
+								"f25f87f6-d333-424a-82cf-7758922caef3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status Job for Company",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/job/update/status-job/014e6815-3baf-4b32-874b-43138803ed6c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job",
+								"update",
+								"status-job",
+								"014e6815-3baf-4b32-874b-43138803ed6c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Job",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/job",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Job Detail By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/job/014e6815-3baf-4b32-874b-43138803ed6c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job",
+								"014e6815-3baf-4b32-874b-43138803ed6c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Applicant",
+			"item": [
+				{
+					"name": "Create Applicant for User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/D:/Codings/Java/[ SIB6 x Metrodata ] - Fullstack Java Programming/Dokument/Certificate/Exam-Transcript.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/applicant/create/014e6815-3baf-4b32-874b-43138803ed6c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"applicant",
+								"create",
+								"014e6815-3baf-4b32-874b-43138803ed6c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Applicant Status for Company",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"ACCEPTED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/applicant/update-status/126f9162-7e94-476f-97ef-d7179979b51d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"applicant",
+								"update-status",
+								"126f9162-7e94-476f-97ef-d7179979b51d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Applicant History for User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/applicant/history",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"applicant",
+								"history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Applicant for Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/applicant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"applicant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Applicant By ID for Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/applicant/126f9162-7e94-476f-97ef-d7179979b51d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"applicant",
+								"126f9162-7e94-476f-97ef-d7179979b51d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download CV  for Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/applicant/file-download/126f9162-7e94-476f-97ef-d7179979b51d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"applicant",
+								"file-download",
+								"126f9162-7e94-476f-97ef-d7179979b51d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Detail",
+			"item": [
+				{
+					"name": "Update User Detail",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Indonesia",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "postman-cloud:///1ef1e531-de85-4920-b04c-1a1cb08d3ee5"
+								},
+								{
+									"key": "description",
+									"value": "Ini Description Username: user",
+									"type": "text"
+								},
+								{
+									"key": "instansiName",
+									"value": "Example University",
+									"type": "text"
+								},
+								{
+									"key": "major",
+									"value": "Teknik Informatika",
+									"type": "text"
+								},
+								{
+									"key": "avgScore",
+									"value": "3.50 / 4.00",
+									"type": "text"
+								},
+								{
+									"key": "skillName",
+									"value": "Java",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Detail By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/4b1caf98-1b3b-478b-a62b-0f27307a9677",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"4b1caf98-1b3b-478b-a62b-0f27307a9677"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Detail Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User by Username Login",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User by ID for Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/delete/f6ed1dc2-a573-4b81-a36c-74c6778ad0eb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"delete",
+								"f6ed1dc2-a573-4b81-a36c-74c6778ad0eb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User for Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Feedback",
+			"item": [
+				{
+					"name": "Create Feedback for User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 3,\r\n    \"comment\": \"Very Good\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/feedback/create/126f9162-7e94-476f-97ef-d7179979b51d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"feedback",
+								"create",
+								"126f9162-7e94-476f-97ef-d7179979b51d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Update Company Detail",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "metrodata@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porta elit vitae finibus mattis. Maecenas id hendrerit ligula, eu cursus neque. Pellentesque finibus massa at elementum lobortis.",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Jakarta Barat, Indonesia",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "banner",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/company/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"company",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/company",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company Detail By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/company/6cfef964-72b4-4717-8634-89d38c0a7796",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"company",
+								"6cfef964-72b4-4717-8634-89d38c0a7796"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company Detail Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/company/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"company",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Company for Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/company/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"company",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Company by ID for Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/company/delete/6cfef964-72b4-4717-8634-89d38c0a7796",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"company",
+								"delete",
+								"6cfef964-72b4-4717-8634-89d38c0a7796"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Company by Company Login",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/company/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"company",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Education",
+			"item": [
+				{
+					"name": "Update Education by ID for User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"instansiName\": \"string\",\r\n  \"major\": \"string\",\r\n  \"avgScore\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/education/update/6d7f3451-4630-430f-9fa5-17dab937a05b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"education",
+								"update",
+								"6d7f3451-4630-430f-9fa5-17dab937a05b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Education by ID for User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/education/delete/6d7f3451-4630-430f-9fa5-17dab937a05b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"education",
+								"delete",
+								"6d7f3451-4630-430f-9fa5-17dab937a05b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skill",
+			"item": [
+				{
+					"name": "Delete Skill by ID for User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/skill/delete/10c2c30a-2064-4080-a2a6-71d45106ccb5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"skill",
+								"delete",
+								"10c2c30a-2064-4080-a2a6-71d45106ccb5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
