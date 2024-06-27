@@ -22,11 +22,17 @@ $(document).ready(function() {
         let valueRating = $("#rating").val();
         let valueComment = $("#comment").val();
 
-        if (!valueRating || !valueComment) {
+        let missingFields = [];
+        
+        if (!valueRating) missingFields.push('Rating');
+        if (!valueComment) missingFields.push('Comment');
+
+        if (missingFields.length > 0) {
             Swal.fire({
                 position: "center",
                 icon: "error",
-                title: "Please fill all fields!",
+                title: "Please fill these required fields!",
+                html: missingFields.join('<br>'),
                 showConfirmButton: false,
                 timer: 1500,
             });

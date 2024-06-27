@@ -7,11 +7,19 @@ $("#register-user").click((event) => {
     let valueUsername = $("#username").val();
     let valuePassword = $("#password").val();
 
-    if (!valueName || !valueEmail || !valueUsername || !valuePassword) {
+    let missingFields = [];
+
+    if(!valueName) missingFields.push('Name')
+    if(!valueEmail) missingFields.push('Email')
+    if(!valueUsername) missingFields.push('Username')
+    if(!valuePassword) missingFields.push('Password')
+    
+    if (missingFields.length > 0) {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "Please fill all fields!",
+            title: "Please fill these required fields!",
+            html: missingFields.join('<br>'),
             showConfirmButton: false,
             timer: 1500,
         });
@@ -58,11 +66,19 @@ $("#register-company").click((event) => {
     let valueUsername = $("#username").val();
     let valuePassword = $("#password").val();
 
-    if (!valueName || !valueEmail || !valueUsername || !valuePassword) {
+    let missingFields = [];
+
+    if(!valueName) missingFields.push('Name')
+    if(!valueEmail) missingFields.push('Email')
+    if(!valueUsername) missingFields.push('Username')
+    if(!valuePassword) missingFields.push('Password')
+    
+    if (missingFields.length > 0) {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "Please fill all fields!",
+            title: "Please fill these required fields!",
+            html: missingFields.join('<br>'),
             showConfirmButton: false,
             timer: 1500,
         });
@@ -109,11 +125,19 @@ $("#register-admin").click((event) => {
     let valueUsername = $("#username").val();
     let valuePassword = $("#password").val();
 
-    if (!valueName || !valueEmail || !valueUsername || !valuePassword) {
+    let missingFields = [];
+
+    if(!valueName) missingFields.push('Name')
+    if(!valueEmail) missingFields.push('Email')
+    if(!valueUsername) missingFields.push('Username')
+    if(!valuePassword) missingFields.push('Password')
+    
+    if (missingFields.length > 0) {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "Please fill all fields!",
+            title: "Please fill these required fields!",
+            html: missingFields.join('<br>'),
             showConfirmButton: false,
             timer: 1500,
         });
@@ -159,11 +183,18 @@ $("#forgot-password").click((event) => {
     let valuePassword = $("#password").val();
     let valueRepeatPassword = $("#repeatPassword").val();
 
-    if (!valueUsername || !valuePassword || !valueRepeatPassword) {
+    let missingFields = [];
+
+    if(!valueUsername) missingFields.push('Username')
+    if(!valuePassword) missingFields.push('Password')
+    if(!valueRepeatPassword) missingFields.push('Repeat Password')
+    
+    if (missingFields.length > 0) {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "Please fill all fields!",
+            title: "Please fill these required fields!",
+            html: missingFields.join('<br>'),
             showConfirmButton: false,
             timer: 1500,
         });
