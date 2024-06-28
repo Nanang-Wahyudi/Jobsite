@@ -17,4 +17,6 @@ public interface CompanyService {
 
     CompanyDetailResponse updateCompanyDetail(UpdateCompanyDetailRequest companyDetailRequest) throws IOException;
 
+    CompanyDetailResponse deleteAccount();
+
 }

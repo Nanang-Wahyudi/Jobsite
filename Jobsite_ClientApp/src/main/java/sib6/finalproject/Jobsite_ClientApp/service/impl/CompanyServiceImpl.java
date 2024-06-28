@@ -124,4 +124,19 @@ public class CompanyServiceImpl implements CompanyService {
         }
     }
 
+    @Override
+    public CompanyDetailResponse deleteAccount() {
+        ResponseEntity<CompanyDetailResponse> response = restTemplate
+                .exchange(url.concat("/delete"),
+                        HttpMethod.DELETE,
+                        null,
+                        new ParameterizedTypeReference<CompanyDetailResponse>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Delete Account");
+        }
+    }
 }

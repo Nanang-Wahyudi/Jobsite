@@ -118,4 +118,20 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Failed to Update User Profile");
         }
     }
+
+    @Override
+    public UserDetailResponse deleteAccount() {
+        ResponseEntity<UserDetailResponse> response = restTemplate
+                .exchange(url.concat("/delete"),
+                        HttpMethod.DELETE,
+                        null,
+                        new ParameterizedTypeReference<UserDetailResponse>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Delete Account");
+        }
+    }
 }
