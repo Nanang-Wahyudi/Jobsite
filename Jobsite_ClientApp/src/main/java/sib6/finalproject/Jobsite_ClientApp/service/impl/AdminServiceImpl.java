@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import sib6.finalproject.Jobsite_ClientApp.model.response.CompanyAdminResponse;
 import sib6.finalproject.Jobsite_ClientApp.model.response.UserAdminResponse;
+import sib6.finalproject.Jobsite_ClientApp.model.response.UserDetailResponse;
 import sib6.finalproject.Jobsite_ClientApp.service.AdminService;
 
 @Service
@@ -88,4 +89,19 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+    @Override
+    public UserDetailResponse deleteAdminAccount() {
+        ResponseEntity<UserDetailResponse> response = restTemplate
+                .exchange(url.concat("/user/delete"),
+                        HttpMethod.DELETE,
+                        null,
+                        new ParameterizedTypeReference<UserDetailResponse>() {
+                        });
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed to Delete Account");
+        }
+    }
 }

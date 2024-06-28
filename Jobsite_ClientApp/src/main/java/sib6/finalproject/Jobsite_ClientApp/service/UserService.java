@@ -17,4 +17,5 @@ public interface UserService {
 
     UserDetailResponse updateUserDetail(UpdateUserDetailRequest userDetailRequest) throws IOException ;
 
+    UserDetailResponse deleteAccount();
 }
