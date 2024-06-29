@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import sib6.finalproject.Jobsite_ServerApp.model.enums.RoleEnum;
 import sib6.finalproject.Jobsite_ServerApp.model.request.ForgotPasswordRequest;
 import sib6.finalproject.Jobsite_ServerApp.model.request.LoginRequest;
@@ -74,13 +76,24 @@ public class AuthController {
     @PutMapping("/update-password")
     public ResponseEntity<?> updatePassword(HttpServletRequest servletRequest, @Valid @RequestBody UpdatePasswordRequest updatePasswordRequest) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Response response = Response.builder()
+        try {
+            String message = authService.updatePassword(username, updatePasswordRequest);
+            Response response = Response.builder()
+                    .url(servletRequest.getRequestURL().toString())
+                    .status(HttpStatus.OK.toString())
+                    .message(message)
+                    .build();
+            response.setTimestamp(new Date());
+            return ResponseEntity.ok(response);
+        } catch (ResponseStatusException e) {
+            Response response = Response.builder()
                 .url(servletRequest.getRequestURL().toString())
-                .status(HttpStatus.OK.toString())
-                .message(authService.updatePassword(username, updatePasswordRequest))
+                .status(e.getStatus().toString())
+                .message(e.getReason())
                 .build();
-        response.setTimestamp(new Date());
-        return ResponseEntity.ok(response);
+            response.setTimestamp(new Date());
+            return ResponseEntity.status(e.getStatus()).body(response);
+        }
     }
 
     @Operation(summary = "Forgot password")

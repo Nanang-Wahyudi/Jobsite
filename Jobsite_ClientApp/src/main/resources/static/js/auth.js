@@ -48,9 +48,20 @@ $("#register-user").click((event) => {
                 $("#username").val("");
                 $("#password").val("");
 
+                setTimeout(() => {
+                    window.location.href = "/login";
+                }, 1750); 
             },
             error: (err) => {
                 console.error(err);
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Failed to register account",
+                    text: err.responseJSON.details,
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
             },
         });
     }
@@ -107,9 +118,20 @@ $("#register-company").click((event) => {
                 $("#username").val("");
                 $("#password").val("");
 
+                setTimeout(() => {
+                    window.location.href = "/login";
+                }, 1750); 
             },
             error: (err) => {
                 console.error(err);
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Failed to register account",
+                    text: err.responseJSON.details,
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
             },
         });
     }
@@ -166,9 +188,20 @@ $("#register-admin").click((event) => {
                 $("#username").val("");
                 $("#password").val("");
 
+                setTimeout(() => {
+                    window.location.href = "/login";
+                }, 1750); 
             },
             error: (err) => {
                 console.error(err);
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Failed to register account",
+                    text: err.responseJSON.details,
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
             },
         });
     }
@@ -220,10 +253,88 @@ $("#forgot-password").click((event) => {
                 $("#username").val("");
                 $("#password").val("");
                 $("#repeatPassword").val("");
-                
+
+                setTimeout(() => {
+                    window.location.href = "/login";
+                }, 1750); 
             },
             error: (err) => {
                 console.error(err);
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Failed to update password",
+                    text: err.responseJSON.details,
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+            },
+        });
+    }
+});
+
+
+// Update Password
+$("#update-password").click((event) => {
+    event.preventDefault();
+
+    let valuePassword = $("#password").val();
+    let valueNewPassword = $("#newPassword").val();
+    let valueRepeatPassword = $("#repeatPassword").val();
+
+    let missingFields = [];
+
+    if(!valuePassword) missingFields.push('Old Password')
+    if(!valueNewPassword) missingFields.push('New Password')
+    if(!valueRepeatPassword) missingFields.push('Repeat Password')
+
+    if (missingFields.length > 0) {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Please fill these required fields!",
+            html: missingFields.join('<br>'),
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    } else {
+        $.ajax({
+            method: "PUT",
+            url: "/api/client/auth/update-password",
+            dataType: "JSON",
+            beforeSend: addCSRF(),
+            contentType: "application/json",
+            data: JSON.stringify({
+                password: valuePassword,
+                newPassword: valueNewPassword,
+                repeatNewPassword: valueRepeatPassword,
+            }),
+            success: (res) => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Password Successfully Updated",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                $("#password").val("");
+                $("#newPassword").val("");
+                $("#repeatPassword").val("");
+                
+                setTimeout(() => {
+                    location.reload();
+                }, 1750); 
+            },
+            error: (err) => {
+                console.error(err);
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Failed to Update Password",
+                    text: err.responseJSON.message,
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
             },
         });
     }
