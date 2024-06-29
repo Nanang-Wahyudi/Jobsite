@@ -32,31 +32,65 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-group" sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_COMPANY', 'ROLE_ADMIN')">
-                <button type="button" class="btn btn-warning text-white rounded-0 py-4 px-lg-5 d-none d-lg-block dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+
+            <!-- Setting button for larger screens -->
+            <div class="btn-group d-none d-lg-block" sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_COMPANY', 'ROLE_ADMIN')">
+                <button type="button" class="btn btn-warning text-white rounded-0 py-4 px-lg-5 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     Setting
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-end text-center p-2">
                     <li><a class="dropdown-item" th:href="@{/talent/profile}" sec:authorize="hasRole('ROLE_USER')">Profile</a></li>
                     <li><a class="dropdown-item" th:href="@{/company/profile}" sec:authorize="hasRole('ROLE_COMPANY')">Profile</a></li>
                     <li><a class="dropdown-item" th:href="@{/update-password}">Update Password</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form th:action="@{/logout}" th:method="POST">
-                            <button class="btn btn-warning text-white btn-sm ms-3 mt-2" type="submit">Logout</button>
+                            <button class="btn btn-outline-warning btn-sm w-100 mt-2" type="submit">Logout</button>
                         </form>
                     </li>
                     <li>
-                        <button type="button" class="btn btn-danger btn-sm ms-3 mt-2" 
+                        <button type="button" class="btn btn-outline-danger btn-sm w-100 mt-2" 
                             data-bs-toggle="modal" data-bs-target="#deleteModal">
                             <span class="material-symbols-rounded"> Delete Account </span>
                         </button>
                     </li>
                 </ul>
             </div>
-            <div th:unless="${#authorization.expression('hasRole(''ROLE_USER'') or hasRole(''ROLE_COMPANY'') or hasRole(''ROLE_ADMIN'')')}">
-                <a th:href="@{/login}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Login<i class="fa fa-arrow-right ms-3"></i></a>
+
+            <!-- Setting button for smaller screens -->
+            <div class="btn-group d-lg-none mx-auto w-100" sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_COMPANY', 'ROLE_ADMIN')">
+                <button type="button" class="btn btn-warning text-white py-4 px-lg-5 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Setting
+                </button>
+                <ul class="dropdown-menu text-center p-2 w-100">
+                    <li><a class="dropdown-item" th:href="@{/talent/profile}" sec:authorize="hasRole('ROLE_USER')">Profile</a></li>
+                    <li><a class="dropdown-item" th:href="@{/company/profile}" sec:authorize="hasRole('ROLE_COMPANY')">Profile</a></li>
+                    <li><a class="dropdown-item" th:href="@{/update-password}">Update Password</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form th:action="@{/logout}" th:method="POST">
+                            <button class="btn btn-outline-warning btn-sm w-100 mt-2" type="submit">Logout</button>
+                        </form>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-outline-danger btn-sm w-100 mt-2" 
+                            data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            <span class="material-symbols-rounded"> Delete Account </span>
+                        </button>
+                    </li>
+                </ul>
             </div>
+
+            <!-- Login button for larger screens -->
+            <div th:unless="${#authorization.expression('hasRole(''ROLE_USER'') or hasRole(''ROLE_COMPANY'') or hasRole(''ROLE_ADMIN'')')}" class="d-none d-lg-block">
+                <a th:href="@{/login}" class="btn btn-primary py-4 px-lg-5 w-100">Login<i class="fa fa-arrow-right ms-3"></i></a>
+            </div>
+
+            <!-- Login button for smaller screens -->
+            <div th:unless="${#authorization.expression('hasRole(''ROLE_USER'') or hasRole(''ROLE_COMPANY'') or hasRole(''ROLE_ADMIN'')')}" class="d-lg-none mx-auto w-100">
+                <a th:href="@{/login}" class="btn btn-primary py-4 px-lg-5 w-100">Login<i class="fa fa-arrow-right ms-3"></i></a>
+            </div>
+
         </div>
     </nav>
     <!-- Navbar End -->
