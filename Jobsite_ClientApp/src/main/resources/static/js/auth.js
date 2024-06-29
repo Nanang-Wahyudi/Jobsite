@@ -228,3 +228,70 @@ $("#forgot-password").click((event) => {
         });
     }
 });
+
+
+// Update Password
+$("#update-password").click((event) => {
+    event.preventDefault();
+
+    let valuePassword = $("#password").val();
+    let valueNewPassword = $("#newPassword").val();
+    let valueRepeatPassword = $("#repeatPassword").val();
+
+    let missingFields = [];
+
+    if(!valuePassword) missingFields.push('Old Password')
+    if(!valueNewPassword) missingFields.push('New Password')
+    if(!valueRepeatPassword) missingFields.push('Repeat Password')
+
+    if (missingFields.length > 0) {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Please fill these required fields!",
+            html: missingFields.join('<br>'),
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    } else {
+        $.ajax({
+            method: "PUT",
+            url: "/api/client/auth/update-password",
+            dataType: "JSON",
+            beforeSend: addCSRF(),
+            contentType: "application/json",
+            data: JSON.stringify({
+                password: valuePassword,
+                newPassword: valueNewPassword,
+                repeatNewPassword: valueRepeatPassword,
+            }),
+            success: (res) => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Password Successfully Updated",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                $("#password").val("");
+                $("#newPassword").val("");
+                $("#repeatPassword").val("");
+                
+                setTimeout(() => {
+                    location.reload();
+                }, 1750); 
+            },
+            error: (err) => {
+                console.error(err);
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Failed to Update Password",
+                    text: err.responseJSON.message,
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            },
+        });
+    }
+});

@@ -14,10 +14,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.extern.slf4j.Slf4j;
 import sib6.finalproject.Jobsite_ClientApp.model.request.LoginRequest;
+import sib6.finalproject.Jobsite_ClientApp.model.request.UpdatePasswordRequest;
 import sib6.finalproject.Jobsite_ClientApp.model.response.LoginResponse;
 import sib6.finalproject.Jobsite_ClientApp.service.AuthService;
 import sib6.finalproject.Jobsite_ClientApp.util.security.AuthSessionUtil;
@@ -26,7 +28,7 @@ import sib6.finalproject.Jobsite_ClientApp.util.security.AuthSessionUtil;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    @Value("${server.base.url}/auth/login")
+    @Value("${server.base.url}/auth")
     private String url;
 
     @Autowired
@@ -37,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
         try {
             ResponseEntity<LoginResponse> response = restTemplate
                     .exchange(
-                            url,
+                            url.concat("/login"),
                             HttpMethod.POST,
                             new HttpEntity<>(loginRequest),
                             LoginResponse.class);
@@ -73,5 +75,21 @@ public class AuthServiceImpl implements AuthService {
 
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
     }
+
+    @Override
+    public ResponseEntity<String> updatePassword(UpdatePasswordRequest passwordRequest) {
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url.concat("/update-password"),
+                    HttpMethod.PUT,
+                    new HttpEntity<>(passwordRequest),
+                    String.class);
+
+            return response;
+        } catch (HttpClientErrorException e) {
+            return ResponseEntity.status(e.getStatusCode()).body(e.getResponseBodyAsString());
+        }
+    }
+
 
 }

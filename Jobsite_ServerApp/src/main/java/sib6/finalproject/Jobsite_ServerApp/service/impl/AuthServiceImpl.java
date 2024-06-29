@@ -166,6 +166,9 @@ public class AuthServiceImpl implements AuthService {
         if (!Objects.equals(updatePasswordRequest.getNewPassword(), updatePasswordRequest.getRepeatNewPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New Passwords Do Not Match");
         }
+        if (passwordEncoder.matches(updatePasswordRequest.getNewPassword(), user.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New Password Cannot Be the Same as the Current Password");
+        }
 
         user.setPassword(passwordEncoder.encode(updatePasswordRequest.getNewPassword()));
         userRepository.save(user);
