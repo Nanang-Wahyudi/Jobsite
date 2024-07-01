@@ -21,7 +21,7 @@ public class HomeController {
     @Autowired
     private CompanyService companyService;
 
-    @GetMapping
+    @GetMapping("/")
     public String home(Model model) {
         List<CompanyResponse> companyResponses = companyService.getAllCompany();
         model.addAttribute("companies", companyResponses);
